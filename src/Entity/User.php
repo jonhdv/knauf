@@ -191,19 +191,32 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getUserIdentifier(): String {
-        return $this->email;
+    public function getUserIdentifier(): String
+    {
+        return (string) $this->email;
+    }
+
+    public function getUsername(): string
+    {
+        return (string) $this->email;
     }
 
 
-    public function serialize()
+    public function serialize(): ?string
     {
-        // TODO: Implement serialize() method.
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->password,
+        ]);
     }
 
     public function unserialize($data)
     {
-        // TODO: Implement unserialize() method.
+        list(
+            $this->id,
+            $this->email,
+            $this->password) = unserialize($data);
     }
 
     public function getSalt()
@@ -214,16 +227,6 @@ class User implements UserInterface, \Serializable
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
-    }
-
-    public function getUsername()
-    {
-        // TODO: Implement getUsername() method.
-    }
-
-    public function __call(string $name, array $arguments)
-    {
-        // TODO: Implement @method string getUserIdentifier()
     }
 
     public function setInitialRole(): self

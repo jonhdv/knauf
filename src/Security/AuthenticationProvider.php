@@ -105,7 +105,7 @@ class AuthenticationProvider extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('internal_home'));
+        return new RedirectResponse($this->urlGenerator->generate('admin_users_management'));
     }
 
     protected function getLoginUrl()

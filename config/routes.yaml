@@ -4,3 +4,7 @@ index:
 login:
     path: /login
     controller: App\Controller\SecurityController::login
+
+admin:
+    resource: routes/admin.yaml
+    prefix: /admin
