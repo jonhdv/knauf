@@ -32,7 +32,7 @@ class IndexController extends AbstractRenderController
         RouterInterface $router,
         UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $session,
-        EntityManagerInterface $entityManager,
+        EntityManagerInterface $entityManager
 
     ) {
         parent::__construct($template);
@@ -61,6 +61,7 @@ class IndexController extends AbstractRenderController
             $user = $form->getData();
             $user
                 ->setInitialRole()
+                ->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()))
                 ->setEnabled(false);
             ;
 

@@ -179,6 +179,22 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): User
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getUserIdentifier(): String {
+        return $this->email;
+    }
+
 
     public function serialize()
     {
@@ -188,11 +204,6 @@ class User implements UserInterface, \Serializable
     public function unserialize($data)
     {
         // TODO: Implement unserialize() method.
-    }
-
-    public function getRoles()
-    {
-        // TODO: Implement getRoles() method.
     }
 
     public function getSalt()
