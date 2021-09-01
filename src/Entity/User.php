@@ -2,40 +2,222 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="`user`")
- */
-class User
+use Symfony\Component\Security\Core\User\UserInterface;
+
+class User implements UserInterface, \Serializable
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use TimestampableTrait;
+
+    const ROLE_DEFAULT = 'ROLE_USER';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+    const RESET_TOKEN_TTL = 60 * 60 * 12;
+
+    public static array $labels = [
+        self::ROLE_DEFAULT => 'Usuario',
+        self::ROLE_ADMIN => 'Administrador',
+    ];
+
+    private ?int $id = null;
+    private string $email;
+    private string $name;
+    private string $phone;
+    private array $roles = [];
+    private ?string $password;
+    private string $country;
+    private string $city;
+    private string $postalCode;
+    private string $companyName;
+    private ?string $commentary;
+    private bool $enabled;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @return int|null
      */
-    private $name;
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function setId(?int $id): User
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): User
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name): User
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): User
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): User
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): User
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getPostalCode(): string
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode(string $postalCode): User
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    public function getContactPerson(): string
+    {
+        return $this->contactPerson;
+    }
+
+    public function setContactPerson(string $contactPerson): User
+    {
+        $this->contactPerson = $contactPerson;
+
+        return $this;
+    }
+
+    public function getCompanyName(): string
+    {
+        return $this->companyName;
+    }
+
+    public function setCompanyName(string $companyName): User
+    {
+        $this->companyName = $companyName;
+
+        return $this;
+    }
+
+
+    public function getCommentary(): ?string
+    {
+        return $this->commentary;
+    }
+
+    public function setCommentary(?string $commentary): User
+    {
+        $this->commentary = $commentary;
+
+        return $this;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): User
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): User
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+
+    public function serialize()
+    {
+        // TODO: Implement serialize() method.
+    }
+
+    public function unserialize($data)
+    {
+        // TODO: Implement unserialize() method.
+    }
+
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
+    }
+
+    public function __call(string $name, array $arguments)
+    {
+        // TODO: Implement @method string getUserIdentifier()
+    }
+
+    public function setInitialRole(): self
+    {
+        $this->roles = [static::ROLE_DEFAULT];
 
         return $this;
     }

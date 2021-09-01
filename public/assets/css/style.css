@@ -1,0 +1,652 @@
+/* :root {
+    --primary: #009DE0 !important;
+} */
+
+@font-face {
+    font-family: FuturaStd-Book;
+    src: url("../fonts/FuturaStd-Book.otf");
+}
+
+@font-face {
+    font-family: FuturaStd-Heavy;
+    src: url("../fonts/FuturaStd-Heavy.otf");
+}
+
+@font-face {
+    font-family: FuturaStd-Light;
+    src: url("../fonts/FuturaStd-Light.otf");
+}
+
+
+/*@font-face {
+    font-family: FuturaLT-Bold;
+    src: url(FuturaLT-Bold.ttf);
+  }*/
+
+html,
+body {
+    font-family: 'FuturaStd-Light' !important;
+    /*estilos de test para mantener el footer abajo*/
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    /*fin estilos*/
+}
+
+.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show>.nav-link {
+    color: white !important;
+}
+
+.gris {
+    background-color: #F4F4F4 !important;
+}
+
+.gris1 {
+    background-color: #FBFBFB !important;
+}
+
+.btn-primary {
+    border-radius: 50px !important;
+    color: white !important;
+    font-weight: 400 !important;
+    font-size: 1.1rem !important;
+    line-height: 1.65rem !important;
+    font-family: FuturaStd-Book;
+    background-color: #009DE0;
+}
+
+
+/* .nav-item a {
+     color: white; 
+} */
+
+.btniniciarsesion {
+    background-color: white;
+    padding: 0.2rem 0.9rem;
+    border-radius: 50px;
+    color: #009DE0 !important;
+    font-weight: 700;
+}
+
+.btnlogin {
+    background-color: #009DE0 !important;
+    padding: 0.3rem 1.4rem !important;
+    border-radius: 50px !important;
+    color: white !important;
+    font-weight: 700 !important;
+    font-size: 1.25rem !important;
+}
+
+nav {
+    padding: 1rem 4rem !important;
+}
+
+.nav-item a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+
+/*css para el menu*/
+
+.colorspecial {
+    background-color: #009DE0;
+}
+
+
+/*fin css*/
+
+
+/*css para el boton darse de baja*/
+
+.btnbaja {
+    background-color: #b4b4b4 !important;
+    border-color: #b4b4b4 !important;
+    font-size: 0.9rem !important;
+    color: white !important;
+}
+
+
+/*fin css*/
+
+
+/*css para cuando me menu haga scroll en la home*/
+
+.fixed-top.scrolled {
+    background-color: #009DE0 !important;
+    transition: background-color 250ms linear;
+}
+
+.fixed-top.scrolled .nav-link {
+    color: #555;
+}
+
+
+/*fin css*/
+
+
+/*css para el textarea de la home*/
+
+textarea.form-control {
+    padding: 1rem;
+}
+
+
+/*fin css texarea*/
+
+
+/*css para el baner de index*/
+
+.principal {
+    background-image: url("../img/Headerfondo.png");
+    background-color: #009DE0;
+    color: white;
+    /* min-height: 60vh; */
+    padding: 5rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.imgprincipal {
+    padding-top: 3rem;
+}
+
+.hometit {
+    font-size: 1.875rem;
+    line-height: 2.125rem;
+    max-width: 350px;
+    margin: auto;
+    padding-top: 1rem;
+}
+
+
+/*fin css*/
+
+
+/*segunda fila*/
+
+.segundafila {
+    padding: 4rem 3rem;
+}
+
+.segundafila p {
+    font-size: 1.375rem;
+    line-height: 2.25rem;
+    color: #009DE0;
+    max-width: 415px;
+    margin: auto;
+}
+
+
+/*fin segunda*/
+
+
+/*tercera fila*/
+
+.tercera {
+    background-color: #009DE0;
+    padding: 2rem 0rem;
+    text-align: center;
+    font-size: 2.5rem;
+    /* font-weight: 600; */
+    line-height: 3.12rem;
+    color: white;
+    font-family: FuturaStd-Heavy;
+}
+
+
+/*fin tercera*/
+
+
+/*cuarta fila*/
+
+.cuarto {
+    padding: 4rem 1rem;
+}
+
+
+/*css para quitar el border de las cajas de los bloques*/
+
+.list-group-item {
+    border: none !important;
+}
+
+
+/*css para mostrar/ocultar una tabla u otra en responsive*/
+
+.pctabla {
+    width: 85% !important;
+    margin: auto;
+}
+
+.moviltabla {
+    display: none;
+    width: 90% !important;
+    margin: auto;
+}
+
+
+/*fin css*/
+
+
+/*fin css*/
+
+
+/*fin cuarta*/
+
+
+/*quinto*/
+
+.quinto {
+    padding: 2rem 1rem;
+}
+
+.textoquinto {
+    max-width: 820px;
+    margin: auto;
+    text-align: center;
+    font-size: 1.56rem;
+    line-height: 1.87rem;
+}
+
+
+/*fin quinto*/
+
+
+/*sexto*/
+
+.sexto {
+    padding: 3rem 1rem;
+}
+
+.btnsexto {
+    background-color: #009DE0 !important;
+    border-radius: 50px !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 1.56rem !important;
+    line-height: 1.75rem !important;
+    padding: 1rem 2rem !important;
+    font-family: FuturaStd-Heavy;
+}
+
+
+/*fin secto*/
+
+
+/*septimo*/
+
+.septimo {
+    padding: 3rem 1rem;
+}
+
+.aparece {
+    display: block!important;
+    animation-name: aparece;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+}
+
+#desaparecer {
+    display: none;
+}
+
+
+/*fin septimo*/
+
+.titulocursos {
+    text-align: center;
+    font-family: FuturaStd-Heavy;
+    font-size: 2.5rem;
+    line-height: 3.12rem;
+    color: #009DE0;
+    max-width: 750px;
+    margin: auto;
+    padding: 3rem;
+}
+
+.textoinformativo {
+    text-align: center;
+    font-size: 1.25rem;
+    line-height: 1.87rem;
+    color: #858686;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.login {
+    padding: 3rem 1rem;
+}
+
+.siguientecajas {
+    background-color: #009DE0 !important;
+    padding: 1rem 2rem !important;
+    border-radius: 50px !important;
+    color: white !important;
+    font-weight: 900 !important;
+    font-size: 1.5rem !important;
+    font-family: FuturaStd-Heavy;
+}
+
+
+/*clase para el btn-success*/
+
+.btn-success,
+.btn-danger {
+    border-radius: 50px !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 1.2rem !important;
+    line-height: 1.75rem !important;
+    font-family: FuturaStd-Book;
+}
+
+input[type=text] {
+    border: 1px solid #009DE0 !important;
+    box-sizing: border-box;
+    border-radius: 50px !important;
+}
+
+
+/*fin btn*/
+
+
+/*css para las cajas de formacion que selecciona el usuario*/
+
+
+/* .cajasformacion {
+    display: flex !important; 
+} */
+
+.tamimgcajas {
+    width: 250px !important;
+}
+
+
+/*fin css*/
+
+
+/*tamaño para las tarjetas de usuario donde sale su informacio*/
+
+.card>.list-group {
+    font-size: 1.2rem;
+}
+
+
+/*fin tamaño*/
+
+.footer {
+    background-color: #009DE0;
+    /* min-height: 100px;
+     left: 0;
+    position: fixed; */
+    /* bottom: 0; */
+    text-align: center;
+    color: white;
+    width: 100%;
+    padding: 20px 0px;
+}
+
+.footerhastag {
+    font-weight: 600;
+    font-size: 2.1rem;
+    line-height: 2.8rem;
+}
+
+.footerLinkWeb {
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 3.22rem;
+}
+
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+}
+
+.paginacion a {
+    color: black;
+}
+
+.form-control {
+    border: 1px solid #009DE0 !important;
+    box-sizing: border-box;
+    border-radius: 50px !important;
+}
+
+select {
+    border: 1px solid #009DE0 !important;
+    box-sizing: border-box;
+    border-radius: 50px !important;
+}
+
+
+/*style caja+imagen*/
+
+.imgcaja {
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+
+/*fin*/
+
+
+/*css para que los modulos estan en gris solo los de enmedio*/
+
+.tablaspecial td:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
+/*fin css*/
+
+.table {
+    margin-bottom: 0rem !important;
+}
+
+
+/*stylos para la barra progresiva*/
+
+.progress {
+    height: 3rem !important;
+    border-radius: 1.25rem !important;
+    border: 1px solid #1559cf;
+    font-size: 1.3rem !important;
+    z-index: 2;
+    background-color: #ffffff !important;
+}
+
+.progress-bar {
+    z-index: 1;
+}
+
+.progress .ref {
+    position: absolute;
+    left: 38%;
+    top: 1.1rem;
+    width: 1px;
+    height: 2.85rem;
+    background-color: #1559cf;
+    z-index: 0;
+}
+
+.progress .ref:before {
+    content: attr(data-ref);
+    position: absolute;
+    width: 50px;
+    /* left: 0.5rem; */
+    top: 1.5rem;
+    color: #1559cf;
+    text-align: center;
+}
+
+.progress .ref2 {
+    position: absolute;
+    left: 90%;
+    top: 1.1rem;
+    width: 0px;
+    height: 2.85rem;
+    background-color: #1559cf;
+    z-index: 0;
+}
+
+.progress .ref2:before {
+    content: attr(data-ref);
+    position: absolute;
+    width: 50px;
+    /* left: 0.5rem; */
+    top: 1.5rem;
+    color: #1559cf;
+    text-align: center;
+}
+
+
+/* fin */
+
+.pagination {
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+
+/*css para los checkbox*/
+
+.especialcheck {
+    height: 1.7em;
+    width: 15%;
+    position: relative !important;
+}
+
+
+/*fin css*/
+
+.espacios {
+    padding: 3rem 1rem;
+}
+
+.button {
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #ddd;
+    padding: 8px 16px;
+    margin: 8px;
+}
+
+.button:hover {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, .1);
+}
+
+@media screen and (max-width: 1024px) {
+    .progress .ref2 {
+        left: 87%;
+    }
+    .tamimgcajas {
+        width: 200px !important;
+    }
+    .pctabla {
+        width: 95% !important;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .list-group-item {
+        display: flex !important;
+    }
+    .pctabla {
+        width: 95% !important;
+    }
+    .cuarto {
+        padding: 3rem 1rem;
+    }
+    .progress .ref2 {
+        left: 84%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .imgcaja {
+        height: 300px;
+    }
+    .principal {
+        padding: 2rem;
+    }
+    nav {
+        padding: 1rem 2rem !important;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    /*css para el tamaño de las imagenes de los cursos*/
+    .tamimgcajas {
+        width: 100%!important;
+        padding-left: 1rem;
+    }
+    /*fin css*/
+    /*css para las cajas de info de los usuario*/
+    .card {
+        max-width: 90%;
+        margin: auto;
+    }
+    .quitarpadding {
+        padding: 0px;
+    }
+    .quitarmargin {
+        margin: 0px;
+    }
+    /*fin css*/
+    .imgprincipal {
+        padding-top: 7rem;
+    }
+    .pctabla {
+        display: none;
+    }
+    .moviltabla {
+        display: block;
+        width: 85% !important;
+    }
+    /*css para que la tabla se muestre en una sola linea en responsive*/
+    table {
+        width: 100%;
+    }
+    thead {
+        display: none;
+    }
+    /* tr:nth-of-type(2n) {
+         background-color: inherit; 
+    } */
+    /* tr td:first-child {
+         background: #f0f0f0;
+        font-weight: bold;
+        font-size: 1.3em; 
+    } */
+    tbody td {
+        display: block;
+        /* text-align: center; */
+    }
+    /* tbody td:before {
+         content: attr(data-th);
+        display: block;
+        text-align: center; 
+    } */
+    /*fin tabla*/
+}
+
+@media screen and (max-width: 380px) {
+    .progress .ref2 {
+        left: 80%;
+    }
+}

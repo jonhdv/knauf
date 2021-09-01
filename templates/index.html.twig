@@ -1,10 +1,593 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    hola
-</body>
-</html>
+{% extends "base.external.html.twig" %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row justify-content-center principal">
+            <div class="col-md-12 text-center">
+                <p class="imgprincipal"><img src="{{ asset('assets/img/Knauf_logo_Grande.svg') }}" alt="" class="img-fluid" class="img-responsive"></p>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-8 text-center">
+                <p class="hometit">Te presentamos un nuevo concepto de <span style="font-family:FuturaStd-Heavy;">formación online y networking</span></p>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row segundafila">
+            <div class="col-md-6" style="text-align: center;">
+                <img src="{{ asset('assets/img/KnaufBreakfast.png') }}" alt="" class="img-fluid" class="img-fluid">
+            </div>
+            <div class="col-md-6" style="align-self: center;">
+                <p>Un nuevo concepto de <span style="font-family:FuturaStd-Heavy;">formación especializada,</span> a la carta y centrada en las necesidades de proyecto. Elige entre los bloques disponibles y configura la sesión según tus intereses. Además, la iniciativa va acompañada de un <span style="font-family:FuturaStd-Heavy;">exclusivo desayuno sostenible, saludable y personalizado</span> que te ayudará a sacar el máximo partido a cada una de las sesiones modulares.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid tercera">
+
+        <div class="col-md-12">
+            <p style="max-width: 37.5rem;margin: auto;">Elige los módulos que mejor se adapten a la actividad del estudio</p>
+        </div>
+
+    </div>
+    <div class="container-fluid cuarto">
+        <div class="row justify-content-center">
+            <div class="col-md-12 ">
+
+                <table class="table table-borderless pctabla">
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque1.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque8.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque15.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque2.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque9.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque16.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque3.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque10.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque17.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque4.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque11.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque18.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque5.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque12.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque19.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque6.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque13.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque20.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque7.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque14.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque21.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- la tabla de abajo se mostrara en responsive -->
+                <table class="table table-borderless moviltabla">
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <label><img src="{{ asset('assets/img/bloque1.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque2.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque3.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque4.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque5.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque6.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque7.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque8.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque9.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque10.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque11.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque12.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque13.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque14.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque15.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque16.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque17.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque18.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque19.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td class=" ">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque20.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+
+                                    <label><img src="{{ asset('assets/img/bloque21.svg') }}" width="" height="" alt="" class="img-fluid"></label>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container quinto">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <p class="textoquinto">Y, además, disfruta del desayuno de trabajo que enviaremos a tu oficina para acompañarnos mientras <span style="font-weight: 900;color:#009DE0;font-family: FuturaStd-Heavy;"> conectamos </span></p>
+            </div>
+        </div>
+    </div>
+    <div class="container sexto">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <p style="text-align: center;"><button class="btn btnsexto" id="botone" onclick="abrir()" data-text="QUIERO RECIBIR MÁS INFORMACIÓN">QUIERO RECIBIR MÁS INFORMACIÓN</button></p>
+            </div>
+        </div>
+    </div>
+    <div class="container septimo" id="desaparecer">
+        <div class="row justify-content-center">
+
+
+            <div class="col-md-10 col-md-offset-2">
+                {% form_theme form with [_self, 'bootstrap_4_layout.html.twig'] %}
+                {{ form_errors(form) }}
+                {{ form_start(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        // function ValidateEmail(inputText) {
+        //     var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        //     if (inputText.value.match(mailformat)) {
+        //         alert("Valid email address!");
+        //         document.form1.text1.focus();
+
+        //         return true;
+        //     } else {
+        //         alert("You have entered an invalid email address!");
+        //         document.getElementById("validationCustom02").focus();
+
+
+        //         return false;
+        //     }
+        // }
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            //js para las valdiciones
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            // var nombre = document.getElementById("validationCustom01");
+                            // var mail = document.getElementById("validationCustom02");
+                            //  alert(mail.value);
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+
+            //js para el date
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var maxDate = year + '-' + month + '-' + day;
+
+            // or instead:
+            // var maxDate = dtToday.toISOString().substr(0, 10);
+
+            // alert(maxDate);
+            $('#txtDate').attr('min', maxDate);
+        })();
+    </script>
+    <script>
+        //js para rellenar los campos de pais-provincia
+        var diction = {
+            B: [""],
+            ES: ["Albacete", "Alicante", "Almería", "Araba", "Asturias", "Ávila", "Provincia de Badajoz", "Baleares", "Barcelona", "Bizkaia", "Burgos",
+                "Provincia de Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "A Coruña", "Provincia de Cuenca", "Gipúzkoa", "Girona", "Granada", "Provincia de Guadalajara", "Huelva", "Huesca", "Jaén", "Provincia de León", "Lleida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Ourense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Santa Cruz de Tenerife", "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia/València", "Valladolid", "Zamora", "Zaragoza", "Ceuta", "Melilla"
+            ],
+            PT: ["Santarem", "Portoalegre", "Beja", "Lisboa", "Faro", "Setúbal", "Evora", "Funchal", "Leiria", "Sao Miguel", "Viana do Castelo", "Braga", "Porto", "Vila Real", "Bragança", "Aveiro", "Viseu", "Guarda", "Coimbra", "Castelo Branco"]
+        }
+
+        // bind change event handler
+        $('#A').change(function() {
+            // get the second dropdown
+            $('#B').html(
+                // get array by the selected value
+                diction[this.value]
+                    // iterate  and generate options
+                    .map(function(v) {
+                        // generate options with the array element
+                        return $('<option/>', {
+                            value: v,
+                            text: v
+                        })
+                    })
+            )
+            // trigger change event to generate second select tag initially
+        }).change()
+        // changing progressbar when button is clicked
+        $(".button").click(function() {
+            animateProgress(parseInt($(this).data('diff')));
+        });
+
+        // animate progress by a step indicated by diff
+        function animateProgress(diff) {
+            var currValue = $("#progress").val();
+            var toValue = currValue + diff;
+
+            toValue = toValue < 0 ? 0 : toValue;
+            toValue = toValue > 100 ? 100 : toValue;
+
+            $("#progress").animate({
+                'value': toValue
+            }, 500);
+        }
+
+        $( document ).ready(function() {
+            /* cosas para el menu superior */
+            $("#menu").removeClass("colorspecial");
+            $("#menu").addClass("fixed-top");
+            $(document).scroll(function () {
+                var $nav = $(".fixed-top");
+                $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+            });
+
+            if($(window).width()<993){
+                $("#menu").addClass("colorspecial");
+
+            }
+
+            function jqueryResize() {
+                if($(window).width()<993){
+                    $("#menu").addClass("colorspecial");
+
+                }
+            }
+            $(window).on('resize', jqueryResize);
+
+
+        });
+
+
+    </script>
+    <script type="text/javascript">
+        pulsado = 0;
+
+        function abrir() {
+            if (pulsado == 0) {
+                document.getElementById('desaparecer').classList.remove('desaparece');
+                document.getElementById('desaparecer').classList.add('aparece');
+                document.getElementById('botone').setAttribute("data-text", "QUIERO RECIBIR MÁS INFORMACIÓN");
+                document.getElementById('botone').innerHTML = "QUIERO RECIBIR MÁS INFORMACIÓN";
+                pulsado = 1;
+                return;
+            } else if (pulsado == 1) {
+                document.getElementById('desaparecer').classList.remove('aparece');
+                document.getElementById('desaparecer').classList.add('desaparece');
+                document.getElementById('botone').setAttribute("data-text", "QUIERO RECIBIR MÁS INFORMACIÓN");
+                document.getElementById('botone').innerHTML = "QUIERO RECIBIR MÁS INFORMACIÓN";
+                pulsado = 0;
+            }
+
+        }
+    </script>
+{% endblock %}

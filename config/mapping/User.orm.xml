@@ -9,7 +9,23 @@
             <generator/>
         </id>
 
+        <field name="email" length="250" unique="true" />
         <field name="name" length="250" />
+        <field name="phone" length="12" />
+        <field name="roles" type="json" />
+        <field name="password" length="100" nullable="true"/>
+        <field name="country" length="250" />
+        <field name="city" length="250" />
+        <field name="postalCode" length="250" />
+        <field name="companyName" length="250" />
+        <field name="commentary" type="text" length="250" nullable="true" />
+        <field name="enabled" type="boolean" />
 
+        <field name="updatedAt" type="datetime">
+            <gedmo:timestampable on="update"/>
+        </field>
+        <field name="createdAt" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
     </entity>
 </doctrine-mapping>
