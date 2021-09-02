@@ -1,0 +1,183 @@
+/* Header */
+header, main, footer {
+    max-width: 1300px;
+    margin: 0 auto 0 auto;
+}
+
+header, footer {
+    background-color: #009de0;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+header {
+    margin-bottom: 50px;
+}
+
+/* Main */
+
+.main-title {
+    color: #009de0;
+    max-width: 800px;
+}
+
+.time-bar {
+    max-width: 800px;
+    height: 60px;
+    border: 2px solid #009de0;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.time-bar > label {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #009de0;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.time-bar-fixed {
+    position: absolute;
+    width: 37%;
+    height: 100%;
+    background-color: #e5e5e5;
+    border-right: 1px solid #009de0;
+}
+
+.time-bar-fixed > label {
+    position: absolute;
+    right: -35px;
+    top: 15px;
+    color: #009de0;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.time-bar-progress {
+    position: absolute;
+    height: 100%;
+    background-color: #009de0;
+    transition: width .5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time-bar-progress > label {
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.main-info {
+    font-size: 19px;
+    color: #858686;
+}
+
+.block-image {
+    width: 80%;
+    margin-right: auto;
+}
+
+.block-image img {
+    height: 100%;
+    width: 100%;
+}
+
+.block-container {
+    padding: 40px 30px 40px 20px;
+    max-width: 500px;
+    min-height: 200px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .block-image img {
+        height: auto;
+    }
+
+    .block-container {
+        min-height: 0;
+    }
+}
+
+.block-checker {
+    width: 20%;
+    cursor: pointer;
+    position: relative;
+}
+
+.block-checker input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.block-checker .checkmark {
+    position: absolute;
+    top: -15px;
+    left: 18px;
+    border: 1px #009de0 solid;
+    width: 35px;
+    height: 35px;
+    border-radius: 30px;
+}
+
+.block-checker input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.block-column.white .block-container {
+    background-color: #fbfbfb;
+}
+
+.block-column.gray .block-container {
+    background-color: #f4f4f4;
+}
+
+.block-send {
+    background-color: #009de0;
+    border-radius: 32px;
+    padding: 10px 40px 10px 40px;
+    color: white;
+    font-size: 27px;
+    border: none;
+}
+
+/* Footer */
+footer {
+    padding: 60px 0 60px 0;
+    margin-top: 60px;
+}
+
+.footer-content > div {
+    text-align: center;
+}
+
+.footer-content > div:nth-of-type(1) {
+    font-size: 30px;
+    color: white;
+}
+
+.footer-content > div:nth-of-type(2) {
+    font-size: 23px;
+    color: white;
+}
+
+.footer-content > div:nth-of-type(3) {
+    font-size: 30px;
+    color: white;
+}
+
+
+

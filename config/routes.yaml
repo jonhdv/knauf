@@ -4,7 +4,14 @@ index:
 login:
     path: /login
     controller: App\Controller\SecurityController::login
+logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
 
 admin:
     resource: routes/admin.yaml
     prefix: /admin
+
+users:
+    resource: routes/users.yaml
+    prefix: /users

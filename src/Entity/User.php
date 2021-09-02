@@ -235,4 +235,13 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
+
+    public function isAdmin(): bool
+    {
+        if (in_array(self::ROLE_ADMIN, $this->getRoles())) {
+            return true;
+        }
+
+        return false;
+    }
 }

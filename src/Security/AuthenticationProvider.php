@@ -30,13 +30,15 @@ class AuthenticationProvider extends AbstractFormLoginAuthenticator implements P
 
     private EntityManagerInterface $entityManager;
     private UrlGeneratorInterface $urlGenerator;
+    private Security $security;
     private CsrfTokenManagerInterface $csrfTokenManager;
     private UserPasswordEncoderInterface $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(Security $security, EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
+        $this->security = $security;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
     }
@@ -105,7 +107,12 @@ class AuthenticationProvider extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('admin_users_management'));
+        if ($this->security->getUser()->isAdmin()) {
+            return new RedirectResponse($this->urlGenerator->generate('admin_users_management'));
+        }
+
+        return new RedirectResponse($this->urlGenerator->generate('users_training'));
+
     }
 
     protected function getLoginUrl()

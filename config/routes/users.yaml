@@ -1,0 +1,3 @@
+users_training:
+    path: /formacion
+    controller: App\Controller\Users\TrainingController::training

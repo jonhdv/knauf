@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Admin;
+namespace App\Controller\Users;
 
 use App\Controller\AbstractRenderController;
+use App\Entity\Block;
 use App\Entity\User;
 use App\Form\UserSignupType;
 use App\Repository\UserRepository;
@@ -20,7 +21,7 @@ use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
 use Symfony\Component\HttpFoundation\Request;
 
-class UsersManagementController extends AbstractRenderController
+class TrainingController extends AbstractRenderController
 {
 
     private UserRepository $userRepository;
@@ -55,10 +56,12 @@ class UsersManagementController extends AbstractRenderController
         $this->security = $security;
     }
 
-    public function list(Request $httpRequest): Response
+    public function training(Request $httpRequest): Response
     {
-        return $this->render('admin/users-management.html.twig', [
-            'role' => $this->security->getUser()->isAdmin()
+        $blocks = $this->entityManager->getRepository(Block::class)->findAll();
+
+        return $this->render('users/training.html.twig', [
+            'blocks' => $blocks
         ]);
     }
 
