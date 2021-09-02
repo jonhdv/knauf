@@ -29,7 +29,6 @@ body {
     /*estilos de test para mantener el footer abajo*/
     min-height: 100vh;
     margin: 0;
-    display: grid;
     grid-template-rows: auto 1fr auto;
     /*fin estilos*/
 }

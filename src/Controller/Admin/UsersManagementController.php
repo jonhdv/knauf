@@ -57,8 +57,17 @@ class UsersManagementController extends AbstractRenderController
 
     public function list(Request $httpRequest): Response
     {
+        $userRepository = $this->entityManager->getRepository(User::class);
+
+        $queryBuilder = $userRepository->createQueryBuilder('u')
+            ->select('u')
+            ->where('u.roles = :roles')
+            ->setParameter('roles', '["ROLE_USER"]');
+
+        $users = $queryBuilder->getQuery()->getResult();
+
         return $this->render('admin/users-management.html.twig', [
-            'role' => $this->security->getUser()->isAdmin()
+            'users' => $users
         ]);
     }
 

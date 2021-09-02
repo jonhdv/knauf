@@ -1,23 +1,9 @@
-/* Header */
-header, main, footer {
+/* Main */
+
+main {
     max-width: 1300px;
     margin: 0 auto 0 auto;
 }
-
-header, footer {
-    background-color: #009de0;
-}
-
-.icon {
-    width: 30px;
-    height: 30px;
-}
-
-header {
-    margin-bottom: 50px;
-}
-
-/* Main */
 
 .main-title {
     color: #009de0;
@@ -179,5 +165,64 @@ footer {
     color: white;
 }
 
+/* Steps bar */
+
+.steps-bar {
+    max-width: 1000px;
+    min-width: 700px;
+}
+
+.step {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border: #009de0 solid 1px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.step.active {
+    background-color: #009de0;
+}
+
+.step span {
+    color: black;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.step.active span {
+    color: white;
+}
+
+.training-date {
+    border: 1px solid #009DE0 !important;
+    box-sizing: border-box;
+    border-radius: 50px !important;
+    padding: 12px;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.training-date:focus-visible {
+    box-shadow: 0 0 0 1px #009de0;
+    outline: none;
+}
+
+/* Studio data */
+.studio-data-form {
+    max-width: 800px;
+    margin: 0 auto 0 auto;
+}
+
+/* Competitors list */
+
+.competitors-list {
+    width: fit-content;
+    width: -moz-fit-content;
+}
 
 

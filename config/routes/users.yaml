@@ -1,3 +1,15 @@
-users_training:
-    path: /formacion
-    controller: App\Controller\Users\TrainingController::training
+users_training_studio:
+    path: /formacion/estudio
+    controller: App\Controller\Users\TrainingController::studio
+
+users_training_blocks:
+    path: /formacion/bloques
+    controller: App\Controller\Users\TrainingController::blocks
+
+users_training_date:
+    path: /formacion/fecha
+    controller: App\Controller\Users\TrainingController::date
+
+users_training_competitors_list:
+    path: /formacion/participantes
+    controller: App\Controller\Users\CompetitorsController::list

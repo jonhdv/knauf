@@ -21,11 +21,13 @@ class User implements UserInterface, \Serializable
     private ?int $id = null;
     private string $email;
     private string $name;
+    private string $address;
     private string $phone;
     private array $roles = [];
     private ?string $password;
     private string $country;
     private string $city;
+    private string $municipality;
     private string $postalCode;
     private string $companyName;
     private ?string $commentary;
@@ -66,6 +68,30 @@ class User implements UserInterface, \Serializable
     public function setName(string $name): User
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): User
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getMunicipality(): string
+    {
+        return $this->municipality;
+    }
+
+    public function setMunicipality(string $municipality): User
+    {
+        $this->municipality = $municipality;
 
         return $this;
     }

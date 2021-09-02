@@ -1,6 +1,42 @@
 {% extends "admin/layout.html.twig" %}
 
 {% block body %}
-    {{ role }}
-    gestion de usuarios
+    <div class="container">
+        <h3 class="text-center mb-3 mt-4">Gestión de usuarios</h3>
+
+        <table class="table table-responsive">
+            <tr>
+                <th>Habilitado</th>
+                <th>Estudio</th>
+                <th>Dirección</th>
+                <th>País</th>
+                <th>Ciudad</th>
+                <th>Código postal</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Alta</th>
+                <th>Acciones</th>
+            </tr>
+
+            {% for user in users %}
+                <tr>
+                    <td><input type="checkbox"{{ user.enabled? ' checked' }}></td>
+                    <td>{{ user.companyName }}</td>
+                    <td>{{ user.address }}</td>
+                    <td>{{ user.country }}</td>
+                    <td>{{ user.city }}</td>
+                    <td>{{ user.postalCode }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.createdAt|date('d/m/Y') }}</td>
+                    <td>
+                        <a href="#">Editar</a>
+                        <a href="#" class="text-danger">Borrar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

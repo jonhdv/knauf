@@ -6,6 +6,7 @@ namespace App\Controller\Users;
 
 use App\Controller\AbstractRenderController;
 use App\Entity\Block;
+use App\Entity\Competitor;
 use App\Entity\User;
 use App\Form\UserSignupType;
 use App\Repository\UserRepository;
@@ -21,7 +22,7 @@ use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
 use Symfony\Component\HttpFoundation\Request;
 
-class TrainingController extends AbstractRenderController
+class CompetitorsController extends AbstractRenderController
 {
 
     private UserRepository $userRepository;
@@ -56,26 +57,12 @@ class TrainingController extends AbstractRenderController
         $this->security = $security;
     }
 
-    public function studio(Request $httpRequest): Response
+    public function list(Request $httpRequest): Response
     {
-        $studio = $this->security->getUser();
+        $competitors = $this->entityManager->getRepository(Competitor::class)->findBy(['user' => $this->security->getUser()->getId()]);
 
-        return $this->render('users/studio.html.twig', [
-            'studio' => $studio
+        return $this->render('users/competitors.html.twig', [
+            'competitors' => $competitors
         ]);
-    }
-
-    public function blocks(Request $httpRequest): Response
-    {
-        $blocks = $this->entityManager->getRepository(Block::class)->findAll();
-
-        return $this->render('users/blocks.html.twig', [
-            'blocks' => $blocks
-        ]);
-    }
-
-    public function date(Request $httpRequest): Response
-    {
-        return $this->render('users/date.html.twig');
     }
 }

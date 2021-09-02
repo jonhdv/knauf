@@ -15,26 +15,60 @@
 </head>
 <body>
 <!-- Menú -->
-<nav class="navbar navbar-expand-lg navbar-light colorspecial" id="menu">
-    <a class="navbar-brand" href="{{ path('index') }}">
-        <img src="https://heyav.com/knaufcrm/img/Knauf_logo.svg" width="97" height="80" alt="">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light colorspecial" id="menu">
+        <a class="navbar-brand" href="{{ path('index') }}">
+            <img src="https://heyav.com/knaufcrm/img/Knauf_logo.svg" width="97" height="80" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav navbar-nav ml-auto">
+
+                <li class="nav-item active m-1  ">
+                    <a href="{{ path('logout') }}" class="btniniciarsesion">Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+<!-- Steps bar -->
+<div class="steps-bar mb-4 mt-5 d-flex justify-content-between mx-auto">
+    <a href="{{ path('users_training_studio') }}">
+        <div class="step{% if curPage == 'studio' %} active{% endif %}">
+            <span>1</span>
+        </div>
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="nav navbar-nav ml-auto">
 
-            <li class="nav-item active m-1  ">
-                <a href="{{ path('logout') }}" class="btniniciarsesion">Cerrar sesión</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+    <a href="{{ path('users_training_blocks') }}">
+        <div class="step{% if curPage == 'blocks' %} active{% endif %}">
+            <span>2</span>
+        </div>
+    </a>
 
-{% block body %}
+    <a href="{{ path('users_training_date') }}">
+        <div class="step{% if curPage == 'date' %} active{% endif %}">
+            <span>3</span>
+        </div>
+    </a>
 
-{% endblock %}
+    <a href="{{ path('users_training_competitors_list') }}">
+        <div class="step{% if curPage == 'competitors' %} active{% endif %}">
+            <span>4</span>
+        </div>
+    </a>
+</div>
+
+<!-- Main -->
+<main>
+    {% block body %}
+
+    {% endblock %}
+</main>
+
 
 <!-- Footer -->
 <footer class="footer">
@@ -66,6 +100,7 @@
 {% block javascripts %}
     <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}" ></script>
     <script src="{{ asset('assets/js/bootstrap/bootstrap.bundle.min.js') }}" ></script>
+    <script src="{{ asset('assets/js/main.js') }}" ></script>
 {% endblock %}
 </body>
 </html>

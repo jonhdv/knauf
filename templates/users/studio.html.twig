@@ -1,0 +1,259 @@
+{% extends "users/layout.html.twig" %}
+
+{% set curPage = 'studio' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('assets/css/training.css') }}" />
+{% endblock %}
+
+{% block body %}
+    <div class="text-center main-title mx-auto mx-3 pt-3">
+        <h3 class="text-center mt-4 mb-3">CONFIRMA LOS DATOS DEL ESTUDIO</h3>
+    </div>
+
+    <div class="col-md-12 col-md-offset-2">
+        <form class="needs-validation studio-data-form" novalidate="" action="gracias.php" method="POST">
+
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+
+                    <input type="text" class="form-control" id="validationCustom01" value="{{ studio.companyName }}" name="nombre"
+                           required="" placeholder="*NOMBRE DEL ESTUDIO">
+                    <div class="invalid-feedback">
+                        Por favor rellene este campo
+                    </div>
+                    <div class="valid-feedback">
+                        campo rellenado correctamente!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+
+                    <input type="text" class="form-control" id="validationCustom02" value="{{ studio.address }}" name="direccion"
+                           required="" placeholder="*DIRECCIÓN">
+                    <div class="invalid-feedback">
+                        Por favor rellene este campo
+                    </div>
+                    <div class="valid-feedback">
+                        campo rellenado correctamente!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3 mt-2">
+                    <label for="validationCustom03">PAÍS</label>
+                    <select id="A" class="custom-select mb-3" name="pais" required="">
+                        <option value="ES"{{ studio.country == "España" ? ' selected' }}>España</option>
+                        <option value="PT"{{ studio.country == "Portugal" ? ' selected' }}>Portugal</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3 mt-2">
+                    <label for="validationCustom04" class="">PROVINCIA</label>
+                    <select id="B" class="custom-select mb-3" name="provincia" required="">
+                        <option value="Albacete"{{ studio.city == "Albacete" ? ' selected' }}>Albacete</option>
+                        <option value="Alicante"{{ studio.city == "Alicante" ? ' selected' }}>Alicante</option>
+                        <option value="Almería"{{ studio.city == "Almería" ? ' selected' }}>Almería</option>
+                        <option value="Araba"{{ studio.city == "Araba" ? ' selected' }}>Araba</option>
+                        <option value="Asturias"{{ studio.city == "Asturias" ? ' selected' }}>Asturias</option>
+                        <option value="Ávila"{{ studio.city == "Ávila" ? ' selected' }}>Ávila</option>
+                        <option value="Provincia de Badajoz"{{ studio.city == "Provincia de Badajoz" ? ' selected' }}>Provincia de Badajoz</option>
+                        <option value="Baleares"{{ studio.city == "Baleares" ? ' selected' }}>Baleares</option>
+                        <option value="Barcelona"{{ studio.city == "Barcelona" ? ' selected' }}>Barcelona</option>
+                        <option value="Bizkaia"{{ studio.city == "Bizkaia" ? ' selected' }}>Bizkaia</option>
+                        <option value="Burgos"{{ studio.city == "Burgos" ? ' selected' }}>Burgos</option>
+                        <option value="Provincia de Cáceres"{{ studio.city == "Provincia de Cáceres" ? ' selected' }}>Provincia de Cáceres</option>
+                        <option value="Cádiz"{{ studio.city == "Cádiz" ? ' selected' }}>Cádiz</option>
+                        <option value="Cantabria"{{ studio.city == "Cantabria" ? ' selected' }}>Cantabria</option>
+                        <option value="Castellón"{{ studio.city == "Castellón" ? ' selected' }}>Castellón</option>
+                        <option value="Ciudad Real"{{ studio.city == "Ciudad Real" ? ' selected' }}>Ciudad Real</option>
+                        <option value="Córdoba"{{ studio.city == "Córdoba" ? ' selected' }}>Córdoba</option>
+                        <option value="A Coruña"{{ studio.city == "A Coruña" ? ' selected' }}>A Coruña</option>
+                        <option value="Provincia de Cuenca"{{ studio.city == "Provincia de Cuenca" ? ' selected' }}>Provincia de Cuenca</option>
+                        <option value="Gipúzkoa"{{ studio.city == "Gipúzkoa" ? ' selected' }}>Gipúzkoa</option>
+                        <option value="Girona"{{ studio.city == "Girona" ? ' selected' }}>Girona</option>
+                        <option value="Granada"{{ studio.city == "Granada" ? ' selected' }}>Granada</option>
+                        <option value="Provincia de Guadalajara"{{ studio.city == "Provincia de Guadalajara" ? ' selected' }}>Provincia de Guadalajara</option>
+                        <option value="Huelva"{{ studio.city == "Huelva" ? ' selected' }}>Huelva</option>
+                        <option value="Huesca"{{ studio.city == "Huesca" ? ' selected' }}>Huesca</option>
+                        <option value="Jaén"{{ studio.city == "Jaén" ? ' selected' }}>Jaén</option>
+                        <option value="Provincia de León"{{ studio.city == "Provincia de León" ? ' selected' }}>Provincia de León</option>
+                        <option value="Lleida"{{ studio.city == "Lleida" ? ' selected' }}>Lleida</option>
+                        <option value="Lugo"{{ studio.city == "Lugo" ? ' selected' }}>Lugo</option>
+                        <option value="Madrid"{{ studio.city == "Madrid" ? ' selected' }}>Madrid</option>
+                        <option value="Málaga"{{ studio.city == "Málaga" ? ' selected' }}>Málaga</option>
+                        <option value="Murcia"{{ studio.city == "Murcia" ? ' selected' }}>Murcia</option>
+                        <option value="Navarra"{{ studio.city == "Navarra" ? ' selected' }}>Navarra</option>
+                        <option value="Ourense"{{ studio.city == "Ourense" ? ' selected' }}>Ourense</option>
+                        <option value="Palencia"{{ studio.city == "Palencia" ? ' selected' }}>Palencia</option>
+                        <option value="Las Palmas"{{ studio.city == "Las Palmas" ? ' selected' }}>Las Palmas</option>
+                        <option value="Pontevedra"{{ studio.city == "Pontevedra" ? ' selected' }}>Pontevedra</option>
+                        <option value="La Rioja"{{ studio.city == "La Rioja" ? ' selected' }}>La Rioja</option>
+                        <option value="Salamanca"{{ studio.city == "Salamanca" ? ' selected' }}>Salamanca</option>
+                        <option value="Santa Cruz de Tenerife"{{ studio.city == "Santa Cruz de Tenerife" ? ' selected' }}>Santa Cruz de Tenerife</option>
+                        <option value="Segovia"{{ studio.city == "Segovia" ? ' selected' }}>Segovia</option>
+                        <option value="Sevilla"{{ studio.city == "Sevilla" ? ' selected' }}>Sevilla</option>
+                        <option value="Soria"{{ studio.city == "Soria" ? ' selected' }}>Soria</option>
+                        <option value="Tarragona"{{ studio.city == "Tarragona" ? ' selected' }}>Tarragona</option>
+                        <option value="Teruel"{{ studio.city == "Teruel" ? ' selected' }}>Teruel</option>
+                        <option value="Toledo"{{ studio.city == "Toledo" ? ' selected' }}>Toledo</option>
+                        <option value="Valencia/València"{{ studio.city == "Valencia/València" ? ' selected' }}>Valencia/València</option>
+                        <option value="Valladolid"{{ studio.city == "Valladolid" ? ' selected' }}>Valladolid</option>
+                        <option value="Zamora"{{ studio.city == "Zamora" ? ' selected' }}>Zamora</option>
+                        <option value="Zaragoza"{{ studio.city == "Zaragoza" ? ' selected' }}>Zaragoza</option>
+                        <option value="Ceuta"{{ studio.city == "Ceuta" ? ' selected' }}>Ceuta</option>
+                        <option value="Melilla"{{ studio.city == "Melilla" ? ' selected' }}>Melilla</option>
+                    </select>
+
+                    <div class="invalid-feedback">
+                        Por favor rellene este campo
+                    </div>
+                    <div class="valid-feedback">
+                        campo rellenado correctamente!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+
+                    <input type="number" class="form-control" id="validationCustom05" value="{{ studio.postalCode }}" name="cp" required=""
+                           placeholder="*CP">
+                    <div class="invalid-feedback">
+                        Por favor rellene este campo
+                    </div>
+                    <div class="valid-feedback">
+                        campo rellenado correctamente!
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+
+                    <input type="text" class="form-control" id="validationCustom06" value="{{ studio.municipality }}" name="municipio"
+                           required="" placeholder="*MUNICIPIO">
+                    <div class="invalid-feedback">
+                        Por favor rellene este campo
+                    </div>
+                    <div class="valid-feedback">
+                        campo rellenado correctamente!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+
+                    <input type="text" class="form-control" id="validationCustom07" value="{{ studio.name }}" name="persona_contacto"
+                           required="" placeholder="*PERSONA DE CONTACTO">
+                    <div class="invalid-feedback">
+                        Por favor rellene este campo
+                    </div>
+                    <div class="valid-feedback">
+                        campo rellenado correctamente!
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+
+                    <input type="text" class="form-control" id="validationCustom08" value="{{ studio.phone }}"
+                           name="telefono_persona_contacto" required=""
+                           placeholder="*TELÉFONO DE LA PERSONA DE CONTACTO">
+                    <div class="invalid-feedback">
+                        Por favor rellene este campo
+                    </div>
+                    <div class="valid-feedback">
+                        campo rellenado correctamente!
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+
+                    <input type="mail" class="form-control" id="validationCustom09" value="{{ studio.email }}" name="email"
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required=""
+                           placeholder="*EMAIL DE LA PERSONA DE CONTACTO">
+                    <div class="invalid-feedback">
+                        Por favor rellene este campo
+                    </div>
+                    <div class="valid-feedback">
+                        campo rellenado correctamente!
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+
+                    <textarea class="form-control" id="validationCustom10" value="" name="comentarios" pattern=""
+                              rows="4" cols="50" placeholder="COMENTARIOS">{{ studio.commentary }}</textarea>
+                    <div class="invalid-feedback">
+                        Por favor rellene este campo
+                    </div>
+                    <div class="valid-feedback">
+                        campo rellenado correctamente!
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center;">
+                <a class="btn btnsexto" href="{{ path('users_training_blocks') }}">Siguiente</a>
+            </p>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        let totalTime = 0;
+
+        (function($) {
+            'use strict';
+
+            //Acción cuando se pulsa para enviar los resultados
+            $('.block-send').click(function (event) {
+                if (totalTime < 40) {
+                    event.preventDefault();
+                    alert('¡No has alcanzado el tiempo mínimo de 40 minutos!');
+                }
+            });
+
+            //Acción cada vez que se pulsa el block-checker
+            $('.block-checker input[type=checkbox]').change(function() {
+                console.log('funciona');
+                changetime($(this).data('value-time'), $(this).prop('checked'), $(this));
+            });
+
+            function changetime(time, checked, checkbox) {
+                if (checked) {
+                    totalTime = totalTime + time;
+                } else {
+                    totalTime = totalTime - time;
+                }
+
+                if (totalTime > 120) {
+                    alert('Has superado el límite de 120 minutos');
+                    totalTime = totalTime - time;
+                    checkbox.prop('checked', false);
+                    return;
+                }
+
+                $('.time-bar-progress').css('width', (totalTime / 120 * 100) + '%');
+
+                let $timeBarProgressLabel = $('.time-bar-progress label');
+
+                if (totalTime > 0) {
+                    $timeBarProgressLabel.show();
+                    $timeBarProgressLabel.text(totalTime + "'");
+                } else {
+                    $timeBarProgressLabel.hide();
+                }
+            }
+        })(jQuery);
+    </script>
+{% endblock %}
