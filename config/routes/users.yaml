@@ -13,3 +13,19 @@ users_training_date:
 users_training_competitors_list:
     path: /formacion/participantes
     controller: App\Controller\Users\CompetitorsController::list
+
+users_training_studio_update:
+    path: /formacion/estudio/update
+    controller: App\Controller\Users\TrainingController::updateStudio
+
+users_training_blocks_update:
+    path: /formacion/bloques/update
+    controller: App\Controller\Users\TrainingController::updateBlocks
+
+users_training_date_update:
+    path: /formacion/fecha/update
+    controller: App\Controller\Users\TrainingController::updateDate
+
+users_training_competitors_update:
+    path: /formacion/participantes/update
+    controller: App\Controller\Users\CompetitorsController::updateCompetitors

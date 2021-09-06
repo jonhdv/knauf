@@ -14,12 +14,12 @@
     </div>
 
     <div class="col-md-12 col-md-offset-2">
-        <form class="needs-validation studio-data-form" novalidate="" action="gracias.php" method="POST">
+        <form class="needs-validation studio-data-form" novalidate="" action="{{ path('users_training_studio_update') }}" method="POST">
 
             <div class="form-row">
                 <div class="col-md-12 mb-3">
 
-                    <input type="text" class="form-control" id="validationCustom01" value="{{ studio.companyName }}" name="nombre"
+                    <input type="text" class="form-control" id="validationCustom01" value="{{ studio.companyName }}" name="companyName"
                            required="" placeholder="*NOMBRE DEL ESTUDIO">
                     <div class="invalid-feedback">
                         Por favor rellene este campo
@@ -33,7 +33,7 @@
             <div class="form-row">
                 <div class="col-md-12 mb-3">
 
-                    <input type="text" class="form-control" id="validationCustom02" value="{{ studio.address }}" name="direccion"
+                    <input type="text" class="form-control" id="validationCustom02" value="{{ studio.address }}" name="address"
                            required="" placeholder="*DIRECCIÓN">
                     <div class="invalid-feedback">
                         Por favor rellene este campo
@@ -47,7 +47,7 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3 mt-2">
                     <label for="validationCustom03">PAÍS</label>
-                    <select id="A" class="custom-select mb-3" name="pais" required="">
+                    <select id="A" class="custom-select mb-3" name="country" required="">
                         <option value="ES"{{ studio.country == "España" ? ' selected' }}>España</option>
                         <option value="PT"{{ studio.country == "Portugal" ? ' selected' }}>Portugal</option>
                     </select>
@@ -55,7 +55,7 @@
 
                 <div class="col-md-6 mb-3 mt-2">
                     <label for="validationCustom04" class="">PROVINCIA</label>
-                    <select id="B" class="custom-select mb-3" name="provincia" required="">
+                    <select id="B" class="custom-select mb-3" name="city" required="">
                         <option value="Albacete"{{ studio.city == "Albacete" ? ' selected' }}>Albacete</option>
                         <option value="Alicante"{{ studio.city == "Alicante" ? ' selected' }}>Alicante</option>
                         <option value="Almería"{{ studio.city == "Almería" ? ' selected' }}>Almería</option>
@@ -122,7 +122,7 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
 
-                    <input type="number" class="form-control" id="validationCustom05" value="{{ studio.postalCode }}" name="cp" required=""
+                    <input type="number" class="form-control" id="validationCustom05" value="{{ studio.postalCode }}" name="postalCode" required=""
                            placeholder="*CP">
                     <div class="invalid-feedback">
                         Por favor rellene este campo
@@ -133,7 +133,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
 
-                    <input type="text" class="form-control" id="validationCustom06" value="{{ studio.municipality }}" name="municipio"
+                    <input type="text" class="form-control" id="validationCustom06" value="{{ studio.municipality }}" name="municipality"
                            required="" placeholder="*MUNICIPIO">
                     <div class="invalid-feedback">
                         Por favor rellene este campo
@@ -147,7 +147,7 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
 
-                    <input type="text" class="form-control" id="validationCustom07" value="{{ studio.name }}" name="persona_contacto"
+                    <input type="text" class="form-control" id="validationCustom07" value="{{ studio.name }}" name="name"
                            required="" placeholder="*PERSONA DE CONTACTO">
                     <div class="invalid-feedback">
                         Por favor rellene este campo
@@ -159,7 +159,7 @@
                 <div class="col-md-6 mb-3">
 
                     <input type="text" class="form-control" id="validationCustom08" value="{{ studio.phone }}"
-                           name="telefono_persona_contacto" required=""
+                           name="phone" required=""
                            placeholder="*TELÉFONO DE LA PERSONA DE CONTACTO">
                     <div class="invalid-feedback">
                         Por favor rellene este campo
@@ -189,7 +189,7 @@
             <div class="form-row">
                 <div class="col-md-12 mb-3">
 
-                    <textarea class="form-control" id="validationCustom10" value="" name="comentarios" pattern=""
+                    <textarea class="form-control" id="validationCustom10" value="" name="commentary" pattern=""
                               rows="4" cols="50" placeholder="COMENTARIOS">{{ studio.commentary }}</textarea>
                     <div class="invalid-feedback">
                         Por favor rellene este campo
@@ -200,7 +200,7 @@
                 </div>
             </div>
             <p style="text-align: center;">
-                <a class="btn btnsexto" href="{{ path('users_training_blocks') }}">Siguiente</a>
+                <input class="btn btnsexto" value="Guadar" type="submit">
             </p>
         </form>
     </div>

@@ -4,7 +4,7 @@ namespace App\Entity;
 
 
 use DateTime;
-use Symfony\Component\Validator\Constraints\Collection;
+use Doctrine\Common\Collections\Collection;
 
 class Training
 {
@@ -12,10 +12,19 @@ class Training
 
     private ?int $id = null;
     private user $user;
-    private Collection $blocks;
-    private Collection $users;
-    private Datetime $datetime;
+    private bool $studioConfirmed;
+    private ?array $blocks = [];
+    private ?Collection $competitors;
+    private ?Datetime $datetime;
     private bool $enabled;
+
+    public function __construct(user $user)
+    {
+        $this->user = $user;
+        $this->studioConfirmed = false;
+        $this->enabled = false;
+        $this->competitors = null;
+    }
 
 
     public function getId(): ?int
@@ -42,36 +51,52 @@ class Training
         return $this;
     }
 
-    public function getBlocks(): Collection
+    public function getStudioConfirmed(): bool
+    {
+        return $this->studioConfirmed;
+    }
+
+    public function setStudioConfirmed(bool $studioConfirmed): Training
+    {
+        $this->studioConfirmed = $studioConfirmed;
+
+        return $this;
+    }
+
+    public function getBlocks(): ?array
     {
         return $this->blocks;
     }
 
-    public function setBlocks(Collection $blocks): Training
+    public function setBlocks(?array $blocks): Training
     {
         $this->blocks = $blocks;
 
         return $this;
     }
 
-    public function getUsers(): Collection
+    public function getcompetitors(): ?Collection
     {
-        return $this->users;
+        return $this->competitors;
     }
 
-    public function setUsers(Collection $users): Training
+    public function setcompetitors(?array $competitors): Training
     {
-        $this->users = $users;
+        $this->competitors = $competitors;
 
         return $this;
     }
 
-    public function getDatetime(): DateTime
+    public function addCompetitor (Competitor $competitor) {
+        $this->competitors[] = $competitor;
+    }
+
+    public function getDatetime(): ?DateTime
     {
         return $this->datetime;
     }
 
-    public function setDatetime(DateTime $datetime): Training
+    public function setDatetime(?DateTime $datetime): Training
     {
         $this->datetime = $datetime;
 
@@ -89,6 +114,4 @@ class Training
 
         return $this;
     }
-    
-    
 }
