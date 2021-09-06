@@ -168,7 +168,7 @@ footer {
 /* Steps bar */
 
 .steps-bar {
-    max-width: 1000px;
+    max-width: 800px;
     min-width: 700px;
 }
 
@@ -208,10 +208,23 @@ footer {
     border: 3px solid;
     background-color: white;
     border-color: grey;
+    background-image: url("/knauf/public/assets/icon/incompleted.svg");
+    background-size: 54%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
 
 .step-state.completed {
     border-color: green;
+    background-image: url("/knauf/public/assets/icon/ok.svg");
+    background-size: 86%;
+    background-repeat: no-repeat;
+    background-position: 51% 61%;
+}
+
+.step-state.waiting {
+    border-color: #ffc82e;
+    background-image: url("/knauf/public/assets/icon/wait.svg");
 }
 
 .training-date {
@@ -239,6 +252,21 @@ footer {
 .competitors-list {
     width: fit-content;
     width: -moz-fit-content;
+}
+
+.add-competitor {
+    color: #009de0;
+    font-size: 17px;
+    font-weight: bold;
+    border: 2px solid #009de0;
+    padding: 5px 10px 5px 10px;
+    border-radius: 23px;
+    width: fit-content;
+}
+
+.add-competitor:hover {
+    color: #009de0;
+    text-decoration: none;
 }
 
 

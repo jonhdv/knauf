@@ -11,6 +11,8 @@ use App\Entity\Training;
 use App\Entity\User;
 use App\Form\UserSignupType;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -81,7 +83,8 @@ class CompetitorsController extends AbstractRenderController
         ]);
     }
 
-    public function updateCompetitors(Request $httpRequest): Response {
+    public function addCompetitors(Request $httpRequest): Response
+    {
         $user = $this->entityManager->getRepository(User::class)
             ->findOneBy(['id' => $this->security->getUser()->getId()]);
         ;
@@ -90,8 +93,8 @@ class CompetitorsController extends AbstractRenderController
         }
 
         $training = $this->session->get('training');
-        $competitors = array_keys($httpRequest->request->get('competitor'));
 
+        $httpRequest->request->get('competitor') == null ? $competitors = null : $competitors = array_keys($httpRequest->request->get('competitor'));
 
         if ($training === null) {
             $training = new Training($user);
@@ -103,33 +106,58 @@ class CompetitorsController extends AbstractRenderController
             ;
         }
 
-        foreach ($competitors as $competitor) {
-            $result = $this->entityManager->getRepository(Competitor::class)->findOneBy(['id' => $competitor]);
-            $training->addCompetitor($result);
+        $training->setCompetitors(new ArrayCollection());
+
+        if ($competitors != null) {
+            foreach ($competitors as $competitor) {
+                $result = $this->entityManager->getRepository(Competitor::class)->findOneBy(['id' => $competitor]);
+                $training->getCompetitors()->add($result);
+            }
         }
 
         $this->session->set('training', $training);
         $this->entityManager->flush();
 
-        //return new RedirectResponse($this->router->generate('users_training_competitors_list'));
+        return new RedirectResponse($this->router->generate('users_training_studio'));
+    }
 
-        $competitors = $this->entityManager->getRepository(Competitor::class)->findBy(['user' => $this->security->getUser()->getId()]);
-
-        //En caso de que haya presentacion en la sesión, llenamos un array con los ids de los participantes que ya se habían seleccionado
-        $seletedcompetitorsIds = [];
-        $training = $this->session->get('training');
-
-        if (null !== $training  && null !== $training->getCompetitors()) {
-            $seletedcompetitors = $training->getCompetitors()->toArray();
-
-            foreach ($seletedcompetitors as $seletedcompetitor) {
-                array_push($seletedcompetitorsIds, $seletedcompetitor->getId());
-            }
+    public function createCompetitors(Request $httpRequest): Response
+    {
+        $user = $this->entityManager->getRepository(User::class)
+            ->findOneBy(['id' => $this->security->getUser()->getId()]);
+        ;
+        if (empty($user)) {
+            return new JsonResponse('No se pudo encontrar el usuario', Response::HTTP_BAD_REQUEST);
         }
 
-        return $this->render('users/competitors.html.twig', [
-            'competitors' => $competitors,
-            'seletedcompetitorsIds' => $seletedcompetitorsIds
-        ]);
+        $competitor = new Competitor();
+
+        $competitor->setUser($user);
+        $competitor->setEmail($httpRequest->request->get('email'));
+        $competitor->setName($httpRequest->request->get('name'));
+        $competitor->setSurname($httpRequest->request->get('surname'));
+        $competitor->setPosition($httpRequest->request->get('position'));
+        $competitor->setFoodIntolerances($httpRequest->request->get('foodIntolerances'));
+
+        $this->entityManager->persist($competitor);
+        $this->entityManager->flush();
+
+        return new RedirectResponse($this->router->generate('users_training_competitors_list'));
+    }
+
+    public function deleteCompetitors(int $idCompetitor): Response
+    {
+        $competitor = $this->entityManager->getRepository(Competitor::class)
+            ->findOneBy(['id' => $idCompetitor, 'user' => $this->security->getUser()]);
+        ;
+
+        if (empty($competitor)) {
+            return new JsonResponse('Error al borrar. No se pudo encontrar al participante', Response::HTTP_BAD_REQUEST);
+        }
+
+        $this->entityManager->remove($competitor);
+        $this->entityManager->flush();
+
+        return new RedirectResponse($this->router->generate('users_training_competitors_list'));
     }
 }

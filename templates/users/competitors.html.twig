@@ -14,7 +14,7 @@
     </div>
 
     <div class="d-flex mt-4 justify-content-center">
-        <form action="{{ path('users_training_competitors_update') }}" method="post">
+        <form action="{{ path('users_training_competitors_add') }}" method="post">
             <table class="table table-responsive competitors-list mx-auto">
                 <tr>
                     <th></th>
@@ -29,22 +29,58 @@
                 {% for competitor in competitors %}
                     <tr>
                         <td><input name="competitor[{{ competitor.id }}]" type="checkbox"{{ competitor.id in seletedcompetitorsIds ? ' checked' }}></td>
-                        <td>{{ competitor.name }}</td>
-                        <td>{{ competitor.surname }}</td>
-                        <td>{{ competitor.email }}</td>
-                        <td>{{ competitor.position }}</td>
-                        <td>{{ competitor.foodIntolerances }}</td>
+                        <td class="competitor-name">{{ competitor.name }}</td>
+                        <td class="competitor-surname">{{ competitor.surname }}</td>
+                        <td class="competitor-email">{{ competitor.email }}</td>
+                        <td class="competitor-position">{{ competitor.position }}</td>
+                        <td class="competitor-intolerances">{{ competitor.foodIntolerances }}</td>
                         <td>
-                            <a href="#">Editar</a>
-                            <a href="#" class="text-danger">Borrar</a>
+                            <a href="{{ path('users_training_competitors_delete', { idCompetitor : competitor.id }) }}" class="text-danger">Borrar</a>
                         </td>
                     </tr>
                 {% endfor %}
             </table>
 
+            <div role="button" class="add-competitor mt-3">
+                + Añadir participantes
+            </div>
+
             <div class="col-12 d-flex justify-content-center my-5">
-                <input class="btn btnsexto block-send" value="Guadar" type="submit">
+                <input class="btn btnsexto block-send" value="Guardar" type="submit">
             </div>
         </form>
     </div>
+
+    <table class="add-competitor-row d-none">
+        <tr>
+            <td><form id="createCompetitor" action="{{ path('users_training_competitors_create') }}" method="post"></form></td>
+            <td><input form="createCompetitor" name="name" placeholder="Nombre" required></td>
+            <td><input form="createCompetitor" name="surname" placeholder="Apellido" required></td>
+            <td><input form="createCompetitor" name="email" placeholder="Email" required></td>
+            <td><input form="createCompetitor" name="position" placeholder="Puesto" required></td>
+            <td><input form="createCompetitor" name="foodIntolerances" placeholder="Intolerancias alimentarias"></td>
+            <td><input form="createCompetitor" type="submit" value="Añadir"> | <a href="#" class="cancel-add-competitor text-danger">Cancelar</a></td>
+        </tr>
+    </table>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        (function($) {
+            'use strict';
+
+            $('.add-competitor').click(function(e) {
+                e.preventDefault();
+                $($(".add-competitor-row tr")).insertAfter($('.competitors-list tr').last());
+            });
+
+            $('.cancel-add-competitor').click(function (e) {
+                e.preventDefault();
+                $(".add-competitor-row").append($('.competitors-list tr').last());
+            });
+        })(jQuery);
+    </script>
 {% endblock %}

@@ -26,6 +26,20 @@ users_training_date_update:
     path: /formacion/fecha/update
     controller: App\Controller\Users\TrainingController::updateDate
 
+users_training_competitors_add:
+    path: /formacion/participantes/add
+    controller: App\Controller\Users\CompetitorsController::addCompetitors
+
+
 users_training_competitors_update:
     path: /formacion/participantes/update
     controller: App\Controller\Users\CompetitorsController::updateCompetitors
+
+users_training_competitors_create:
+    path: /formacion/participantes/create
+    controller: App\Controller\Users\CompetitorsController::createCompetitors
+    methods: [POST]
+
+users_training_competitors_delete:
+    path: /formacion/participantes/delete/{idCompetitor}
+    controller: App\Controller\Users\CompetitorsController::deleteCompetitors

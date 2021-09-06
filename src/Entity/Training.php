@@ -4,6 +4,7 @@ namespace App\Entity;
 
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 class Training
@@ -23,7 +24,8 @@ class Training
         $this->user = $user;
         $this->studioConfirmed = false;
         $this->enabled = false;
-        $this->competitors = null;
+        $this->competitors = new ArrayCollection();
+        $this->datetime = null;
     }
 
 
@@ -80,7 +82,7 @@ class Training
         return $this->competitors;
     }
 
-    public function setcompetitors(?array $competitors): Training
+    public function setcompetitors(?Collection $competitors): Training
     {
         $this->competitors = $competitors;
 

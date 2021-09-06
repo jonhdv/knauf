@@ -57,7 +57,7 @@
         <div class="step{% if curPage == 'date' %} active{% endif %}">
             <span>3</span>
 
-            <div class="step-state{% if app.session.get('training') is not empty %}{{ app.session.get('training').datetime is not empty ? ' completed'}}{% endif %}"></div>
+            <div class="step-state{% if app.session.get('training') is not empty %}{% if app.session.get('training').datetime is defined and  app.session.get('training').datetime is not null %} {{ app.session.get('training').enabled == false ? ' waiting'}}{% endif %}{% endif %}"></div>
         </div>
     </a>
 
@@ -65,7 +65,7 @@
         <div class="step{% if curPage == 'competitors' %} active{% endif %}">
             <span>4</span>
 
-            <div class="step-state{% if app.session.get('competitors') is not empty %} completed{% endif %}"></div>
+            <div class="step-state{% if app.session.get('training') is not empty %}{{ app.session.get('training').competitors is not empty ? ' completed'}}{% endif %}"></div>
         </div>
     </a>
 </div>
