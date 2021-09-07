@@ -10,7 +10,7 @@
 
 {% block body %}
     <div class="text-center main-title mx-auto mx-3 pt-3">
-        <h3 class="text-center mt-4 mb-">AÑADE PARTICIPANTES AL CURSO</h3>
+        <h3 class="text-center mt-4 mb-">REGISTRA PARTICIPANTES EN LA FORMACIÓN</h3>
     </div>
 
     <div class="d-flex mt-4 justify-content-center">
@@ -42,7 +42,7 @@
             </table>
 
             <div role="button" class="add-competitor mt-3">
-                + Añadir participantes
+                + Nuevo participante
             </div>
 
             <div class="col-12 d-flex justify-content-center my-5">
@@ -51,17 +51,25 @@
         </form>
     </div>
 
-    <table class="add-competitor-row d-none">
-        <tr>
-            <td><form id="createCompetitor" action="{{ path('users_training_competitors_create') }}" method="post"></form></td>
-            <td><input form="createCompetitor" name="name" placeholder="Nombre" required></td>
-            <td><input form="createCompetitor" name="surname" placeholder="Apellido" required></td>
-            <td><input form="createCompetitor" name="email" placeholder="Email" required></td>
-            <td><input form="createCompetitor" name="position" placeholder="Puesto" required></td>
-            <td><input form="createCompetitor" name="foodIntolerances" placeholder="Intolerancias alimentarias"></td>
-            <td><input form="createCompetitor" type="submit" value="Añadir"> | <a href="#" class="cancel-add-competitor text-danger">Cancelar</a></td>
-        </tr>
-    </table>
+    <div class="popup-edit-competitor"> 
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <form class="align-self-center" id="createCompetitor" action="{{ path('users_training_competitors_create') }}" method="post">
+                <div class="title-popup-edit-competitor mb-3"><span>NUEVO</span> PARTICIPANTE</div>
+
+                <div> <input type="text" name="name" placeholder="Nombre" required></div>
+                <div><input type="text" name="surname" placeholder="Apellido" required></div>
+                <div><input type="text" name="email" placeholder="Email" required></div>
+                <div><input type="text" name="position" placeholder="Puesto" required></div>
+                <div><input type="text" name="foodIntolerances" placeholder="Intolerancias alimentarias"></div>
+
+                <div><input type="submit" value="Añadir"></div>
+            </form>
+        </div>
+
+        <div role="button" class="close-popup-edit-competitor">
+            <img src="{{ asset('assets/icon/close.svg') }}">
+        </div>
+    </div>
 
 {% endblock %}
 
@@ -73,13 +81,11 @@
             'use strict';
 
             $('.add-competitor').click(function(e) {
-                e.preventDefault();
-                $($(".add-competitor-row tr")).insertAfter($('.competitors-list tr').last());
+                $('.popup-edit-competitor').show('200');
             });
 
-            $('.cancel-add-competitor').click(function (e) {
-                e.preventDefault();
-                $(".add-competitor-row").append($('.competitors-list tr').last());
+            $('.close-popup-edit-competitor').click(function () {
+                $('.popup-edit-competitor').hide('200');
             });
         })(jQuery);
     </script>
