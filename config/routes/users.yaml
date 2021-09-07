@@ -30,6 +30,13 @@ users_training_competitors_add:
     path: /formacion/participantes/add
     controller: App\Controller\Users\CompetitorsController::addCompetitors
 
+users_training_request:
+    path: /formacion/solicitar
+    controller: App\Controller\Users\TrainingController::requestTraining
+
+users_training_cancel:
+    path: /formacion/cancelar
+    controller: App\Controller\Users\TrainingController::cancelTraining
 
 users_training_competitors_update:
     path: /formacion/participantes/update

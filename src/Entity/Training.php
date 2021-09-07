@@ -18,12 +18,14 @@ class Training
     private ?Collection $competitors;
     private ?Datetime $datetime;
     private bool $enabled;
+    private bool $sent;
 
     public function __construct(user $user)
     {
         $this->user = $user;
         $this->studioConfirmed = false;
         $this->enabled = false;
+        $this->sent = false;
         $this->competitors = new ArrayCollection();
         $this->datetime = null;
     }
@@ -113,6 +115,18 @@ class Training
     public function setEnabled(bool $enabled): Training
     {
         $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function isSent(): bool
+    {
+        return $this->sent;
+    }
+
+    public function setSent(bool $sent): Training
+    {
+        $this->sent = $sent;
 
         return $this;
     }

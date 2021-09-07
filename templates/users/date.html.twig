@@ -15,7 +15,7 @@
 
     <div class="col-md-12 col-md-offset-2 d-flex justify-content-center my-5">
         <form method="post" action="{{ path('users_training_date_update') }}">
-            <input type="datetime-local" class="training-date" name="datetime" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("Y-m-d") ~ 'T' ~ app.session.get('training').datetime|date("H:i") }}">
+            <input type="datetime-local" class="training-date" name="datetime" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("Y-m-d") ~ 'T' ~ app.session.get('training').datetime|date("H:i") }}" required>
             <div class="col-12 d-flex justify-content-center my-5">
                 <input class="block-send" type="submit" value="Guardar">
             </div>

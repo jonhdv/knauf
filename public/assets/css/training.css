@@ -38,7 +38,7 @@ main {
 
 .time-bar-fixed > label {
     position: absolute;
-    right: -35px;
+    right: -40px;
     top: 15px;
     color: #009de0;
     font-size: 19px;
@@ -140,6 +140,10 @@ main {
     border: none;
 }
 
+.cancel-training {
+    background-color: #e02a2a;
+}
+
 /* Footer */
 footer {
     padding: 60px 0 60px 0;
@@ -192,6 +196,11 @@ footer {
     color: black;
     font-size: 21px;
     font-weight: bold;
+    text-decoration: none;
+}
+
+.steps-bar a {
+    text-decoration: none;
 }
 
 .step.active span {
@@ -234,6 +243,25 @@ footer {
     padding: 12px;
     font-size: 23px;
     font-weight: bold;
+}
+
+.step-info {
+    width: auto;
+    position: absolute;
+    top: 55px;
+    color: #333333;
+    text-align: center;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+}
+
+.step-info:hover {
+    color: #737373;
 }
 
 .training-date:focus-visible {

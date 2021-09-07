@@ -46,12 +46,17 @@
             </div>
 
             <div class="col-12 d-flex justify-content-center my-5">
-                <input class="btn btnsexto block-send" value="Guardar" type="submit">
+                <input class="btn btnsexto block-send mr-3" value="Guardar" type="submit">
+                {% if app.session.get('training') is not empty and app.session.get('training').sent != true %}
+                    <button type="button" class="btn btnsexto end-training">Enviar solicitud</button>
+                {% elseif app.session.get('training') is not empty and app.session.get('training').sent == true %}
+                    <button type="button" class="btn btnsexto cancel-training bg">Cancelar solicitud</button>
+                {% endif %}
             </div>
         </form>
     </div>
 
-    <div class="popup-edit-competitor"> 
+    <div class="popup-edit-competitor">
         <div class="d-flex justify-content-center align-items-center h-100">
             <form class="align-self-center" id="createCompetitor" action="{{ path('users_training_competitors_create') }}" method="post">
                 <div class="title-popup-edit-competitor mb-3"><span>NUEVO</span> PARTICIPANTE</div>
@@ -86,6 +91,38 @@
 
             $('.close-popup-edit-competitor').click(function () {
                 $('.popup-edit-competitor').hide('200');
+            });
+
+            $('.end-training').click(function () {
+                $.ajax({
+                    context: this,
+                    url: '{{ path('users_training_request') }}',
+                    dataType: 'JSON',
+                    type: 'POST',
+                    success: function (data) {
+                        alert(data);
+                        window.location.replace(window.location.href);
+                    },
+                    error: function (err) {
+                        alert(err);
+                    }
+                });
+            });
+
+            $('.cancel-training').click(function () {
+                $.ajax({
+                    context: this,
+                    url: '{{ path('users_training_cancel') }}',
+                    dataType: 'JSON',
+                    type: 'POST',
+                    success: function (data) {
+                        alert(data);
+                        window.location.replace(window.location.href);
+                    },
+                    error: function (err) {
+                        alert(err);
+                    }
+                });
             });
         })(jQuery);
     </script>

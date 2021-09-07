@@ -8,11 +8,7 @@ use App\Controller\AbstractRenderController;
 use App\Entity\Block;
 use App\Entity\Training;
 use App\Entity\User;
-use App\Form\UserSignupType;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,16 +22,12 @@ use Symfony\Component\HttpFoundation\Request;
 class TrainingController extends AbstractRenderController
 {
     private SessionInterface $session;
-    private UserRepository $userRepository;
     private EntityManagerInterface $entityManager;
     private Security $security;
     private RouterInterface $router;
-    private UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(
         Environment $template,
-        UserRepository $userRepository,
-        FormFactoryInterface $formFactory,
         RouterInterface $router,
         UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $session,
@@ -46,14 +38,6 @@ class TrainingController extends AbstractRenderController
         parent::__construct($template);
 
         $this->router = $router;
-        $this->userRepository = $userRepository;
-        $this->formFactory = $formFactory;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->formFactory = $formFactory;
-        $this->router = $router;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->router = $router;
-        $this->userRepository = $userRepository;
         $this->session = $session;
         $this->entityManager = $entityManager;
         $this->security = $security;
@@ -187,5 +171,57 @@ class TrainingController extends AbstractRenderController
         $this->entityManager->flush();
 
         return new RedirectResponse($this->router->generate('users_training_competitors_list'));
+    }
+
+    public function requestTraining(Request $httpRequest): Response {
+        $training = $this->session->get('training');
+
+        if ($training === null) {
+            return new JsonResponse('Comienza a rellenar la formación');
+        }
+
+        $training = $this->entityManager->getRepository(Training::class)
+            ->findOneBy(['id' => $training->getId()]);
+        ;
+
+        if ($training->isSent()) {
+            return new JsonResponse('Ya has enviado la formación');
+        }
+
+        if ($training === null || !$training->getStudioConfirmed() || empty($training->getBlocks()) || $training->getDatetime() == null || $training->getcompetitors()->isEmpty()) {
+            return new JsonResponse('Completa todos los pasos para solicitar la formación');
+        }
+
+        $training->setSent(true);
+        $this->session->set('training', $training);
+        $this->entityManager->flush();
+
+        return new JsonResponse('Formación registrada correctamente a la espera de ser aprobada.');
+    }
+
+    public function cancelTraining(Request $httpRequest): Response {
+        $training = $this->session->get('training');
+
+        if ($training === null) {
+            return new JsonResponse('Comienza a rellenar la formación');
+        }
+
+        $training = $this->entityManager->getRepository(Training::class)
+            ->findOneBy(['id' => $training->getId()]);
+        ;
+
+        if (!$training->isSent()) {
+            return new JsonResponse('Todavía no has aprobado la formación');
+        }
+
+        if ($training === null || !$training->getStudioConfirmed() || empty($training->getBlocks()) || $training->getDatetime() == null || empty($training->getcompetitors())) {
+            return new JsonResponse('No has completado la formación', Response::HTTP_BAD_REQUEST);
+        }
+
+        $training->setSent(false);
+        $this->session->set('training', $training);
+        $this->entityManager->flush();
+
+        return new JsonResponse('La petición se ha cancelado correctamente');
     }
 }

@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserSignupType;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -20,32 +19,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 class IndexController extends AbstractRenderController
 {
-
-    private UserRepository $userRepository;
     private EntityManagerInterface $entityManager;
     private UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(
         Environment $template,
-        UserRepository $userRepository,
         FormFactoryInterface $formFactory,
         RouterInterface $router,
         UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $session,
         EntityManagerInterface $entityManager
-
     ) {
         parent::__construct($template);
-
         $this->router = $router;
-        $this->userRepository = $userRepository;
         $this->formFactory = $formFactory;
         $this->passwordEncoder = $passwordEncoder;
-        $this->formFactory = $formFactory;
-        $this->router = $router;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->router = $router;
-        $this->userRepository = $userRepository;
         $this->session = $session;
         $this->entityManager = $entityManager;
     }
@@ -81,6 +69,4 @@ class IndexController extends AbstractRenderController
             'form' => $form->createView(),
         ]);
     }
-
-
 }

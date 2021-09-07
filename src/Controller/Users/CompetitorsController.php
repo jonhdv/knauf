@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace App\Controller\Users;
 
 use App\Controller\AbstractRenderController;
-use App\Entity\Block;
 use App\Entity\Competitor;
 use App\Entity\Training;
 use App\Entity\User;
-use App\Form\UserSignupType;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -29,33 +25,22 @@ use Symfony\Component\HttpFoundation\Request;
 class CompetitorsController extends AbstractRenderController
 {
     private SessionInterface $session;
-    private UserRepository $userRepository;
     private EntityManagerInterface $entityManager;
     private Security $security;
     private UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(
         Environment $template,
-        UserRepository $userRepository,
-        FormFactoryInterface $formFactory,
         RouterInterface $router,
         UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $session,
         EntityManagerInterface $entityManager,
         Security $security
-
     ) {
         parent::__construct($template);
 
         $this->router = $router;
-        $this->userRepository = $userRepository;
-        $this->formFactory = $formFactory;
         $this->passwordEncoder = $passwordEncoder;
-        $this->formFactory = $formFactory;
-        $this->router = $router;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->router = $router;
-        $this->userRepository = $userRepository;
         $this->session = $session;
         $this->entityManager = $entityManager;
         $this->security = $security;
@@ -118,7 +103,7 @@ class CompetitorsController extends AbstractRenderController
         $this->session->set('training', $training);
         $this->entityManager->flush();
 
-        return new RedirectResponse($this->router->generate('users_training_studio'));
+        return new RedirectResponse($this->router->generate('users_training_competitors_list'));
     }
 
     public function createCompetitors(Request $httpRequest): Response
