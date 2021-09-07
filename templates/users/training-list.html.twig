@@ -1,0 +1,36 @@
+{% extends "users/layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('assets/css/training.css') }}" />
+{% endblock %}
+
+{% block body %}
+    <table class="table training-list mx-auto">
+        <tr>
+            <th>Fecha de inicio</th>
+            <th>Nº bloques</th>
+            <th>Nº participantes</th>
+            <th>Fecha propuesta</th>
+            <th>Estado</th>
+        </tr>
+
+        {% for training in trainings %}
+            <tr>
+                <td>{{ training.createdAt|date("d-m-Y H:i") }}</td>
+                <td>{{ training.blocks|length }} bloques</td>
+                <td>{{ training.competitors|length }} participantes</td>
+                <td>{{ training.datetime|date("d-m-Y H:i") }}</td>
+                <td class="d-flex justify-content-center">
+                    <span class="training-status{% if training.enabled %} enabled{% elseif training.isCompleted %} completed{% elseif training.isCompleted == false %} incompleted{% endif %}">{% if training.enabled %}Aprobada{% elseif training.isCompleted %}Completada{% elseif training.isCompleted == false %}Incompleta{% endif %}</span>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

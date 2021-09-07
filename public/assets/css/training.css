@@ -348,4 +348,26 @@ footer {
     text-align: center;
 }
 
+/* Training list */
+
+.training-list {
+    max-width: 1000px;
+    text-align: center;
+}
+
+.training-status {
+    font-weight: bold;
+}
+
+.training-status.enabled {
+    color: #00bb2b;
+}
+
+.training-status.completed {
+    color: #0095ff;
+}
+
+.training-status.incompleted {
+    color: #f5b400;
+}
 

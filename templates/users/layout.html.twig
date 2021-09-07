@@ -26,6 +26,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item active m-1  ">
+                    <a href="{{ path('users_training_list') }}" class="btniniciarsesion">Mis formaciones</a>
+                </li>
 
                 <li class="nav-item active m-1  ">
                     <a href="{{ path('logout') }}" class="btniniciarsesion">Cerrar sesión</a>
@@ -35,61 +38,7 @@
     </nav>
 </header>
 
-
-<!-- Steps bar -->
-<div class="steps-bar my-5 d-flex justify-content-between mx-auto">
-    <a href="{{ path('users_training_studio') }}">
-        <div class="step{% if curPage == 'studio' %} active{% endif %}">
-            <span>1</span>
-
-            <div class="step-state{{ app.session.get('training') is not empty and app.session.get('training').studioConfirmed ? ' completed' }}"></div>
-
-            <div class="step-info">
-                {{ app.session.get('training') is not empty and app.session.get('training').studioConfirmed ? 'Estudio: ' ~ app.user.companyName }}
-            </div>
-        </div>
-    </a>
-
-    <a href="{{ path('users_training_blocks') }}">
-        <div class="step{% if curPage == 'blocks' %} active{% endif %}">
-            <span>2</span>
-
-            <div class="step-state{{ app.session.get('training') is not empty and app.session.get('training').blocks is not empty ? ' completed' }}"></div>
-
-            <div class="step-info">{{ app.session.get('training') is not empty and app.session.get('training').blocks is not empty ? app.session.get('training').blocks|length ~ ' bloques seleccionados' }}</div>
-        </div>
-    </a>
-
-    <a href="{{ path('users_training_date') }}">
-        <div class="step{% if curPage == 'date' %} active{% endif %}">
-            <span>3</span>
-
-            <div class="step-state{{ app.session.get('training') is not empty and app.session.get('training').datetime is not empty and app.session.get('training').enabled == false ? ' waiting'}}"></div>
-
-            <div class="step-info">
-                {% if app.session.get('training') is not empty and app.session.get('training').datetime is not empty %}
-                    {{ app.session.get('training').datetime|date("d-m-Y H:i") }} <br>
-                    {{ app.session.get('training').enabled ? '(confirmado)' : '(pendiente de confirmación)' }}
-                {% endif %}
-            </div>
-        </div>
-    </a>
-
-    <a href="{{ path('users_training_competitors_list') }}">
-        <div class="step{% if curPage == 'competitors' %} active{% endif %}">
-            <span>4</span>
-
-            <div class="step-state{{ app.session.get('training') is not empty and app.session.get('training').competitors is not empty ? ' completed' }}"></div>
-
-            <div class="step-info">
-                {% if app.session.get('training') is not empty %}
-                    {{ app.session.get('training').competitors|length }}
-                    participante{{ app.session.get('training').competitors|length > 1 ? 's' }}
-                {% endif %}
-            </div>
-        </div>
-    </a>
-</div>
+{% block steps %}{% endblock %}
 
 <!-- Main -->
 <main>

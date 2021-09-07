@@ -43,6 +43,17 @@ class TrainingController extends AbstractRenderController
         $this->security = $security;
     }
 
+    public function list(): Response
+    {
+        $user = $this->security->getUser();
+
+        $trainings = $this->entityManager->getRepository(Training::class)->findBy(['user' => $user->getId()]);
+
+        return $this->render('users/training-list.html.twig', [
+            'trainings' => $trainings
+        ]);
+    }
+
     public function studio(Request $httpRequest): Response
     {
         $studio = $this->security->getUser();

@@ -50,3 +50,7 @@ users_training_competitors_create:
 users_training_competitors_delete:
     path: /formacion/participantes/delete/{idCompetitor}
     controller: App\Controller\Users\CompetitorsController::deleteCompetitors
+
+users_training_list:
+    path: /formacion/mis-formaciones
+    controller: App\Controller\Users\TrainingController::list

@@ -130,4 +130,13 @@ class Training
 
         return $this;
     }
+
+    public function isCompleted(): bool
+    {
+        if ($this->getStudioConfirmed() and !empty($this->getBlocks() and $this->getDatetime() != null and !$this->getcompetitors()->isEmpty())) {
+            return true;
+        }
+
+        return false;
+    }
 }
