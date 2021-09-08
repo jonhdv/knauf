@@ -111,7 +111,7 @@ class AuthenticationProvider extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($this->urlGenerator->generate('admin_users_management'));
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('users_training_studio'));
+        return new RedirectResponse($this->urlGenerator->generate('users_training_list'));
 
     }
 

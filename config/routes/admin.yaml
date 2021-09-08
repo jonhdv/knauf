@@ -1,3 +1,7 @@
 admin_users_management:
-    path: /management/list
+    path: /usuarios
     controller: App\Controller\Admin\UsersManagementController::list
+
+admin_trainings:
+    path: /formaciones
+    controller: App\Controller\Admin\TrainingManagementController::list

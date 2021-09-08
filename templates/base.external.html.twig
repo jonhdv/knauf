@@ -25,9 +25,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
+                {% if app.user is not empty %}
+                    <li class="nav-item active m-1">
+                        <a href="{{ path('users_training_list') }}" class="btniniciarsesion">Mis formaciones</a>
+                    </li>
+                {% endif %}
 
-                <li class="nav-item active m-1  ">
-                    <a href="{{ path('login') }}" class="btniniciarsesion">Iniciar sesión</a>
+                <li class="nav-item active m-1">
+                    {% if app.user is not empty %}
+                        <a href="{{ path('logout') }}" class="btniniciarsesion">Cerrar sesión</a>
+                    {% else %}
+                        <a href="{{ path('login') }}" class="btniniciarsesion">Iniciar sesión</a>
+                    {% endif %}
                 </li>
             </ul>
         </div>

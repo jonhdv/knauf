@@ -47,7 +47,7 @@ class TrainingController extends AbstractRenderController
     {
         $user = $this->security->getUser();
 
-        $trainings = $this->entityManager->getRepository(Training::class)->findBy(['user' => $user->getId()]);
+        $trainings = $this->entityManager->getRepository(Training::class)->findBy(['user' => $user->getId()], ['updatedAt' => 'DESC']);
 
         return $this->render('users/training-list.html.twig', [
             'trainings' => $trainings
@@ -234,5 +234,40 @@ class TrainingController extends AbstractRenderController
         $this->entityManager->flush();
 
         return new JsonResponse('La petición se ha cancelado correctamente');
+    }
+
+    public function delete(int $idTraining): Response {
+        $training = $this->entityManager->getRepository(Training::class)
+            ->findOneBy(['id' => $idTraining, 'user' => $this->security->getUser()->getId()]);
+        ;
+
+        if (!$training) {
+            return new JsonResponse('No se ha encontrado la formación', Response::HTTP_BAD_REQUEST);
+        }
+
+        $this->entityManager->remove($training);
+        $this->entityManager->flush();
+
+        return new RedirectResponse($this->router->generate('users_training_list'));
+    }
+
+    public function edit(int $idTraining): Response {
+        $training = $this->entityManager->getRepository(Training::class)
+            ->findOneBy(['id' => $idTraining, 'user' => $this->security->getUser()->getId()]);
+        ;
+
+        if (!$training) {
+            return new JsonResponse('No se ha encontrado la formación', Response::HTTP_BAD_REQUEST);
+        }
+
+        $this->session->set('training', $training);
+
+        return new RedirectResponse($this->router->generate('users_training_studio'));
+    }
+
+    public function new(): Response {
+        $this->session->set('training', null);
+
+        return new RedirectResponse($this->router->generate('users_training_studio'));
     }
 }

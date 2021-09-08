@@ -653,3 +653,10 @@ select {
         left: 80%;
     }
 }
+
+/* General */
+
+.main-title {
+    color: #009de0;
+    max-width: 800px;
+}

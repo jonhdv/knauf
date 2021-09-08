@@ -26,11 +26,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item active m-1  ">
+                <li class="nav-item active m-1">
+                    <a href="{{ path('users_training_new') }}" class="btniniciarsesion">Nueva formación</a>
+                </li>
+
+                <li class="nav-item active m-1">
                     <a href="{{ path('users_training_list') }}" class="btniniciarsesion">Mis formaciones</a>
                 </li>
 
-                <li class="nav-item active m-1  ">
+                <li class="nav-item active m-1">
                     <a href="{{ path('logout') }}" class="btniniciarsesion">Cerrar sesión</a>
                 </li>
             </ul>

@@ -2,11 +2,12 @@
 
 {% block body %}
     <div class="container">
-        <h3 class="text-center mb-3 mt-4">Gestión de usuarios</h3>
+        <div class="text-center main-title mx-auto my-5">
+            <h3 class="text-center mt-4 mb-3">GESTIÓN DE USUARIOS</h3>
+        </div>
 
-        <table class="table table-responsive">
+        <table class="table table-responsive users-list">
             <tr>
-                <th>Habilitado</th>
                 <th>Estudio</th>
                 <th>Dirección</th>
                 <th>País</th>
@@ -16,27 +17,36 @@
                 <th>Teléfono</th>
                 <th>Email</th>
                 <th>Alta</th>
+                <th>Habilitado</th>
                 <th>Acciones</th>
             </tr>
 
             {% for user in users %}
                 <tr>
-                    <td><input type="checkbox"{{ user.enabled? ' checked' }}></td>
-                    <td>{{ user.companyName }}</td>
-                    <td>{{ user.address }}</td>
-                    <td>{{ user.country }}</td>
-                    <td>{{ user.city }}</td>
-                    <td>{{ user.postalCode }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.phone }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.createdAt|date('d/m/Y') }}</td>
-                    <td>
-                        <a href="#">Editar</a>
+                    <td title="{{ user.companyName }}">{{ user.companyName }}</td>
+                    <td title="{{ user.address }}">{{ user.address }}</td>
+                    <td title="{{ user.country }}">{{ user.country }}</td>
+                    <td title="{{ user.city }}">{{ user.city }}</td>
+                    <td title="{{ user.postalCode }}">{{ user.postalCode }}</td>
+                    <td title="{{ user.name }}">{{ user.name }}</td>
+                    <td title="{{ user.phone }}">{{ user.phone }}</td>
+                    <td title="{{ user.email }}">{{ user.email }}</td>
+                    <td title="{{ user.createdAt|date('d/m/Y') }}">{{ user.createdAt|date('d/m/Y') }}</td>
+                    <td class="enabled-user-column">
+                        {% if user.enabled %}
+                            <img src="{{ asset('assets/icon/ok.svg') }}">
+                        {% endif %}
+                    </td>
+                    <td class="edit-user-column">
+                        <a href="#">Aprobar</a> |
                         <a href="#" class="text-danger">Borrar</a>
                     </td>
                 </tr>
             {% endfor %}
         </table>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
 {% endblock %}

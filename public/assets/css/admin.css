@@ -1,0 +1,43 @@
+/* Users administration */
+
+.users-list {
+    text-align: center;
+}
+
+.users-list td:not(.edit-user-column) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+
+.enabled-user-column img {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+/* Training list */
+
+.training-list {
+    max-width: 1000px;
+    text-align: center;
+}
+
+.training-status {
+    font-weight: bold;
+}
+
+.training-status.enabled {
+    color: #00bb2b;
+}
+
+.training-status.completed {
+    color: #0095ff;
+}
+
+.training-status.incompleted {
+    color: #f5b400;
+}
