@@ -155,27 +155,27 @@ class TrainingController extends AbstractRenderController
             return new JsonResponse('No se pudo encontrar el usuario', Response::HTTP_BAD_REQUEST);
         }
 
-        $training = $this->session->get('training');
-        $date = $httpRequest->request->get('datetime');
+        $date = $httpRequest->request->get('date');
+        $time = $httpRequest->request->get('time');
 
-        if (!empty($date)) {
-            $date = \DateTime::createFromFormat('Y-m-d\TH:i', $date);
+        $datetime = \DateTime::createFromFormat('Y-m-d H:i', $date . ' ' . $time);
 
-            if (!$date) {
-                return new JsonResponse('Fecha no valida', Response::HTTP_BAD_REQUEST);
-            }
+        if (!$datetime) {
+            return new JsonResponse('Fecha no valida', Response::HTTP_BAD_REQUEST);
         }
+
+        $training = $this->session->get('training');
 
         if ($training === null) {
             $training = new Training($user);
-            $training->setDatetime($date);
+            $training->setDatetime($datetime);
 
             $this->entityManager->persist($training);
         } else {
             $training = $this->entityManager->getRepository(Training::class)
                 ->findOneBy(['id' => $training->getId()]);
             ;
-            $training->setDatetime($date);
+            $training->setDatetime($datetime);
         }
 
         $this->session->set('training', $training);

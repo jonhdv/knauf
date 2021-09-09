@@ -1,5 +1,9 @@
 {% extends "users/layout.html.twig" %}
 
+{% block title %}
+    Mis formaciones {{ parent() }}
+{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
 
@@ -28,8 +32,8 @@
                 <td>{{ training.competitors|length }} participantes</td>
                 <td>{{ training.datetime|date("d-m-Y H:i") }}</td>
                 <td class="d-flex justify-content-center">
-                    <span class="training-status{% if training.enabled %} enabled{% elseif training.isCompleted %} completed{% elseif training.isCompleted == false %} incompleted{% endif %}">
-                        {% if training.enabled %}Aprobada{% elseif training.isCompleted %}Completada{{ training.sent? ' y enviada' }}{% elseif training.isCompleted == false %}Incompleta{% endif %}
+                    <span class="training-status {{ training.getStatus()['color'] }}">
+                        {{ training.getStatus()['label'] }}
                     </span>
                 </td>
                 <td>

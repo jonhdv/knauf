@@ -1,5 +1,9 @@
 {% extends "admin/layout.html.twig" %}
 
+{% block title %}
+    Gestión de formaciones {{ parent() }}
+{% endblock %}
+
 {% block body %}
     <div class="container">
         <div class="text-center main-title mx-auto my-5">
@@ -9,27 +13,34 @@
         <table class="table training-list mx-auto">
             <tr>
                 <th>Última edición</th>
+                <th>Usuario</th>
                 <th>Nº bloques</th>
                 <th>Nº participantes</th>
-                <th>Fecha propuesta</th>
                 <th>Estado</th>
+                <th>Fecha propuesta</th>
                 <th>Acciones</th>
             </tr>
 
             {% for training in trainings %}
                 <tr>
                     <td>{{ training.updatedAt|date("d-m-Y H:i") }}</td>
+                    <td>{{ training.user.name }} - {{ training.user.companyName }}</td>
                     <td>{{ training.blocks|length }} bloques</td>
                     <td>{{ training.competitors|length }} participantes</td>
-                    <td>{{ training.datetime|date("d-m-Y H:i") }}</td>
                     <td class="d-flex justify-content-center">
-                    <span class="training-status{% if training.enabled %} enabled{% elseif training.isCompleted %} completed{% elseif training.isCompleted == false %} incompleted{% endif %}">
-                        {% if training.enabled %}Aprobada{% elseif training.isCompleted %}Completada{{ training.sent? ' y enviada' }}{% elseif training.isCompleted == false %}Incompleta{% endif %}
-                    </span>
+                        <span class="training-status {{ training.getStatus()['color'] }}">
+                            {{ training.getStatus()['label'] }}
+                        </span>
                     </td>
+                    <td>{{ training.datetime is not empty ? training.datetime|date("d-m-Y H:i") }}</td>
                     <td>
-                        <a href="{{ path('users_training_edit', {idTraining : training.id}) }}">Editar</a> |
-                        <a class="text-danger" href="{{ path('users_training_delete', {idTraining : training.id}) }}">Borrar</a>
+                        {% if training.enabled %}
+                            <a class="text-secondary" href="{{ path('admin_training_disable', {idTraining : training.id}) }}">Desaprobar</a> |
+                        {% else %}
+                            <a class="text-success" href="{{ path('admin_training_enable', {idTraining : training.id}) }}">Aprobar</a> |
+                        {% endif %}
+
+                        <a class="text-danger" href="{{ path('admin_training_delete', {idTraining : training.id}) }}">Borrar</a>
                     </td>
                 </tr>
             {% endfor %}

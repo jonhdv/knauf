@@ -139,4 +139,40 @@ class Training
 
         return false;
     }
+
+    public function isOutOfDate(): string
+    {
+        if ($this->datetime == null) {
+            return false;
+        }
+
+        $now = new DateTime('now');
+        $secs = $this->datetime->getTimestamp() - $now->getTimestamp();
+        $days = $secs / 86400;
+
+        if ($days < 11) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getStatus(): array
+    {
+        if ($this->isOutOfDate() and !$this->isEnabled()) {
+            return ['label' => 'Fuera de fecha', 'color' => 'red'];
+        } elseif ($this->isCompleted() and $this->isEnabled()) {
+            return ['label' => 'Aprobada', 'color' => 'green'];
+        } elseif ($this->isCompleted() and !$this->isEnabled() and !$this->isSent()) {
+            return ['label' => 'Completa y no enviada', 'color' => 'blue'];
+        } elseif (!$this->isCompleted() and $this->isEnabled()) {
+            return ['label' => 'Aprobada pero incompleta', 'color' => 'yellow'];
+        } elseif ($this->isCompleted() and $this->isSent() and !$this->isEnabled()) {
+            return ['label' => 'Enviada esperando confirmación', 'color' => 'blue'];
+        } elseif (!$this->isCompleted() and !$this->isEnabled()) {
+            return ['label' => 'Incompleta', 'color' => 'yellow'];
+        } else {
+            return ['label' => 'Sin estado', 'color' => 'grey'];
+        }
+    }
 }

@@ -1,5 +1,9 @@
 {% extends "users/steps-bar.html.twig" %}
 
+{% block title %}
+    Nueva formación {{ parent() }}
+{% endblock %}
+
 {% set curPage = 'date' %}
 
 {% block stylesheets %}
@@ -15,10 +19,41 @@
 
     <div class="col-md-12 col-md-offset-2 d-flex justify-content-center my-5">
         <form method="post" action="{{ path('users_training_date_update') }}">
-            <input type="datetime-local" class="training-date" name="datetime" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("Y-m-d") ~ 'T' ~ app.session.get('training').datetime|date("H:i") }}" required>
+            <input type="date" class="training-date mr-3" name="date" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("Y-m-d") }}" required>
+            <input type="time" class="training-date" name="time" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("H:i") }}" required>
             <div class="col-12 d-flex justify-content-center my-5">
                 <input class="block-send" type="submit" value="Guardar">
             </div>
         </form>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        (function($) {
+            'use strict';
+
+            $('input[name=date]').change(function () {
+                let selectedDate = new Date($(this).val());
+                let currentDate = new Date();
+
+                let dayDiff = ((selectedDate.getTime() - currentDate.getTime()) / 86400000).toFixed(0);
+                let dayOfYear =  Math.floor((selectedDate - new Date(selectedDate.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+                let selectedDay = selectedDate.getDay();
+                let publicHolidays = [285, 305, 340, 342, 358, 365, 6];
+
+                if (dayDiff < 13) {
+                    $(this).val("");
+                    alert('La fecha se debe fijar con un margen de 12 días naturales posteriores a hoy');
+                }
+
+                if (selectedDay === 0 || selectedDay === 6 || selectedDay === 1 || publicHolidays.includes(dayOfYear)) {
+                    $(this).val("");
+                    alert('No se pueden seleccionar lunes, sábado, domingo ni festivos.');
+                }
+            });
+        })(jQuery);
+    </script>
 {% endblock %}

@@ -30,14 +30,22 @@
     font-weight: bold;
 }
 
-.training-status.enabled {
+.training-status.green {
     color: #00bb2b;
 }
 
-.training-status.completed {
+.training-status.blue {
     color: #0095ff;
 }
 
-.training-status.incompleted {
+.training-status.yellow {
     color: #f5b400;
+}
+
+.training-status.grey {
+    color: #8a8a8a;
+}
+
+.training-status.red {
+    color: #e80000;
 }

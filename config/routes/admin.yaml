@@ -5,3 +5,15 @@ admin_users_management:
 admin_trainings:
     path: /formaciones
     controller: App\Controller\Admin\TrainingManagementController::list
+
+admin_training_delete:
+    path: /formaciones/{idTraining}/delete
+    controller: App\Controller\Admin\TrainingManagementController::delete
+
+admin_training_enable:
+    path: /formaciones/{idTraining}/enable
+    controller: App\Controller\Admin\TrainingManagementController::enable
+
+admin_training_disable:
+    path: /formaciones/{idTraining}/disable
+    controller: App\Controller\Admin\TrainingManagementController::disable
