@@ -50,7 +50,7 @@ class IndexController extends AbstractRenderController
             $user
                 ->setInitialRole()
                 ->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()))
-                ->setEnabled(false);
+                ->setEnabled(true);
             ;
 
                 $this->entityManager->persist($user);

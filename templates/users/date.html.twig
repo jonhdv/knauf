@@ -9,6 +9,7 @@
 {% block stylesheets %}
     {{ parent() }}
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{{ asset('assets/css/training.css') }}" />
 {% endblock %}
 
@@ -17,10 +18,12 @@
         <h3 class="text-center mt-4 mb-3">SELECCIONA FECHA Y HORA</h3>
     </div>
 
+    <div class="datepicker d-none justify-content-center mx-auto"></div>
+
     <div class="col-md-12 col-md-offset-2 d-flex justify-content-center my-5">
         <form method="post" action="{{ path('users_training_date_update') }}">
             <input type="date" class="training-date mr-3" name="date" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("Y-m-d") }}" required>
-            <input type="time" class="training-date" name="time" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("H:i") }}" required>
+            <input type="time" min="08:00" max="13:00" class="training-date" name="time" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("H:i") }}" required>
             <div class="col-12 d-flex justify-content-center my-5">
                 <input class="block-send" type="submit" value="Guardar">
             </div>
@@ -32,10 +35,36 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script>
         (function($) {
             'use strict';
+
+            $('.datepicker').datepicker({
+                minDate: 0,
+                maxDate: "+5M",
+                firstDay: 1,
+                closeText: 'Cerrar',
+                prevText: '< Ant',
+                nextText: 'Sig >',
+                currentText: 'Hoy',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+                beforeShowDay: function(date) {
+                    var day = date.getDay();
+                    let publicHolidays = [285, 305, 340, 342, 358, 365, 6];
+                    let dayDiff = ((date.getTime() - (new Date()).getTime()) / 86400000).toFixed(0);
+
+                    return [(day != 0 && day != 6 && day != 1 && dayDiff > 12), ''];
+                },
+                onSelect: function(dateText, inst) {
+                    $("input[name='fecha']").val(dateText);
+                }
+            });
 
             $('input[name=date]').change(function () {
                 let selectedDate = new Date($(this).val());
@@ -49,11 +78,24 @@
                 if (dayDiff < 13) {
                     $(this).val("");
                     alert('La fecha se debe fijar con un margen de 12 días naturales posteriores a hoy');
+                    return;
                 }
 
                 if (selectedDay === 0 || selectedDay === 6 || selectedDay === 1 || publicHolidays.includes(dayOfYear)) {
                     $(this).val("");
                     alert('No se pueden seleccionar lunes, sábado, domingo ni festivos.');
+                    return;
+                }
+            });
+
+            $('input[name=time]').on("change keyup paste", function(){
+                let timeSelected = $(this).val();
+                let hours = timeSelected.split(":")[0];
+                let minutes= timeSelected.split(":")[1];
+
+                if (hours > 12 || hours < 8) {
+                    $(this).val("");
+                    alert('La hora se debe de fijar entre las 8:00 y las 13:00');
                 }
             });
         })(jQuery);

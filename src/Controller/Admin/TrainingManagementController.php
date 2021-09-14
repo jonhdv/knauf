@@ -26,7 +26,7 @@ class TrainingManagementController extends AbstractRenderController
 
     public function list(): Response
     {
-        $trainings = $this->entityManager->getRepository(Training::class)->findAll();
+        $trainings = $this->entityManager->getRepository(Training::class)->findBy([], ['updatedAt' => 'DESC']);
 
         return $this->render('admin/users-trainings.html.twig', [
             'trainings' => $trainings

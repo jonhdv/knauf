@@ -42,6 +42,8 @@ class UserSignupType extends AbstractType
             ->add('phone', null, ['label' => 'Teléfono de la persona de contacto'])
             ->add('country', null, ['label' => 'Pais'])
             ->add('city', null, ['label' => 'Ciudad'])
+            ->add('municipality', null, ['label' => 'Municipio'])
+            ->add('address', null, ['label' => 'Dirección'])
             ->add('postalCode', null, ['label' => 'Código Postal'])
             ->add('name', null, ['label' => 'Persona de contacto'])
             ->add('companyName', null, ['label' => 'Nombre de la compañia'])
