@@ -2,6 +2,14 @@ admin_users_management:
     path: /usuarios
     controller: App\Controller\Admin\UsersManagementController::list
 
+admin_user_enable:
+    path: /usuarios/{idUser}/enable
+    controller: App\Controller\Admin\UsersManagementController::enable
+
+admin_user_disable:
+    path: /usuarios/{idUser}/disable
+    controller: App\Controller\Admin\UsersManagementController::disable
+
 admin_trainings:
     path: /formaciones
     controller: App\Controller\Admin\TrainingManagementController::list

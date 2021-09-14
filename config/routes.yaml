@@ -4,6 +4,9 @@ index:
 login:
     path: /login
     controller: App\Controller\SecurityController::login
+signin:
+    path: /signin
+    controller: App\Controller\IndexController::signin
 logout:
     path: /logout
     controller: App\Controller\SecurityController::logout

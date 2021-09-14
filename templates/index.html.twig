@@ -429,10 +429,143 @@
 
 
             <div class="col-md-10 col-md-offset-2">
-                {% form_theme form with [_self, 'bootstrap_4_layout.html.twig'] %}
-                {{ form_errors(form) }}
-                {{ form_start(form) }}
-                {{ form_end(form) }}
+                <form class="needs-validation studio-data-form" novalidate="" action="{{ path('signin') }}" method="POST">
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+
+                            <input type="text" class="form-control" id="validationCustom01" value="" name="companyName"
+                                   required="" placeholder="*NOMBRE DEL ESTUDIO">
+                            <div class="invalid-feedback">
+                                Por favor rellene este campo
+                            </div>
+                            <div class="valid-feedback">
+                                campo rellenado correctamente!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+
+                            <input type="text" class="form-control" id="validationCustom02" value="" name="address"
+                                   required="" placeholder="*DIRECCIÓN">
+                            <div class="invalid-feedback">
+                                Por favor rellene este campo
+                            </div>
+                            <div class="valid-feedback">
+                                campo rellenado correctamente!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3 mt-2">
+                            <label for="validationCustom03">PAÍS</label>
+                            <select id="A" class="custom-select mb-3" name="country" required="">
+                                <option value="España">España</option>
+                                <option value="Portugal">Portugal</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3 mt-2">
+                            <label for="validationCustom04" class="">PROVINCIA</label>
+                            <select id="B" class="custom-select mb-3" name="city" required="">
+                            </select>
+
+                            <div class="invalid-feedback">
+                                Por favor rellene este campo
+                            </div>
+                            <div class="valid-feedback">
+                                campo rellenado correctamente!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+
+                            <input type="number" class="form-control" id="validationCustom05" value="" name="postalCode" required=""
+                                   placeholder="*CP">
+                            <div class="invalid-feedback">
+                                Por favor rellene este campo
+                            </div>
+                            <div class="valid-feedback">
+                                campo rellenado correctamente!
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+
+                            <input type="text" class="form-control" id="validationCustom06" value="" name="municipality"
+                                   required="" placeholder="*MUNICIPIO">
+                            <div class="invalid-feedback">
+                                Por favor rellene este campo
+                            </div>
+                            <div class="valid-feedback">
+                                campo rellenado correctamente!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+
+                            <input type="text" class="form-control" id="validationCustom07" value="" name="name"
+                                   required="" placeholder="*PERSONA DE CONTACTO">
+                            <div class="invalid-feedback">
+                                Por favor rellene este campo
+                            </div>
+                            <div class="valid-feedback">
+                                campo rellenado correctamente!
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+
+                            <input type="text" class="form-control" id="validationCustom08" value=""
+                                   name="phone" required=""
+                                   placeholder="*TELÉFONO DE LA PERSONA DE CONTACTO">
+                            <div class="invalid-feedback">
+                                Por favor rellene este campo
+                            </div>
+                            <div class="valid-feedback">
+                                campo rellenado correctamente!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+
+                            <input type="mail" class="form-control" id="validationCustom09" value="" name="email"
+                                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required=""
+                                   placeholder="*EMAIL DE LA PERSONA DE CONTACTO">
+                            <div class="invalid-feedback">
+                                Por favor rellene este campo
+                            </div>
+                            <div class="valid-feedback">
+                                campo rellenado correctamente!
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+
+                    <textarea class="form-control" id="validationCustom10" value="" name="commentary" pattern=""
+                              rows="4" cols="50" placeholder="COMENTARIOS"></textarea>
+                            <div class="invalid-feedback">
+                                Por favor rellene este campo
+                            </div>
+                            <div class="valid-feedback">
+                                ¡Campo rellenado correctamente!
+                            </div>
+                        </div>
+                    </div>
+                    <p style="text-align: center;">
+                        <input class="btn btnsexto" value="Guardar" type="submit">
+                    </p>
+                </form>
             </div>
         </div>
     </div>
@@ -442,138 +575,41 @@
     {{ parent() }}
 
     <script>
-        // function ValidateEmail(inputText) {
-        //     var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        //     if (inputText.value.match(mailformat)) {
-        //         alert("Valid email address!");
-        //         document.form1.text1.focus();
-
-        //         return true;
-        //     } else {
-        //         alert("You have entered an invalid email address!");
-        //         document.getElementById("validationCustom02").focus();
-
-
-        //         return false;
-        //     }
-        // }
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function() {
-            //js para las valdiciones
-            'use strict';
-            window.addEventListener('load', function() {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            // var nombre = document.getElementById("validationCustom01");
-                            // var mail = document.getElementById("validationCustom02");
-                            //  alert(mail.value);
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-
-            //js para el date
-            var dtToday = new Date();
-
-            var month = dtToday.getMonth() + 1;
-            var day = dtToday.getDate();
-            var year = dtToday.getFullYear();
-            if (month < 10)
-                month = '0' + month.toString();
-            if (day < 10)
-                day = '0' + day.toString();
-
-            var maxDate = year + '-' + month + '-' + day;
-
-            // or instead:
-            // var maxDate = dtToday.toISOString().substr(0, 10);
-
-            // alert(maxDate);
-            $('#txtDate').attr('min', maxDate);
-        })();
-    </script>
-    <script>
-        //js para rellenar los campos de pais-provincia
-        var diction = {
+        var cities = {
             B: [""],
-            ES: ["Albacete", "Alicante", "Almería", "Araba", "Asturias", "Ávila", "Provincia de Badajoz", "Baleares", "Barcelona", "Bizkaia", "Burgos",
+            ES: [ "Albacete", "Alicante", "Almería", "Araba", "Asturias", "Ávila", "Provincia de Badajoz", "Baleares", "Barcelona", "Bizkaia", "Burgos",
                 "Provincia de Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "A Coruña", "Provincia de Cuenca", "Gipúzkoa", "Girona", "Granada", "Provincia de Guadalajara", "Huelva", "Huesca", "Jaén", "Provincia de León", "Lleida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Ourense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Santa Cruz de Tenerife", "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia/València", "Valladolid", "Zamora", "Zaragoza", "Ceuta", "Melilla"
             ],
-            PT: ["Santarem", "Portoalegre", "Beja", "Lisboa", "Faro", "Setúbal", "Evora", "Funchal", "Leiria", "Sao Miguel", "Viana do Castelo", "Braga", "Porto", "Vila Real", "Bragança", "Aveiro", "Viseu", "Guarda", "Coimbra", "Castelo Branco"]
+            PT: [ "Santarem", "Portoalegre", "Beja", "Lisboa", "Faro", "Setúbal", "Evora", "Funchal", "Leiria", "Sao Miguel", "Viana do Castelo", "Braga", "Porto", "Vila Real", "Bragança", "Aveiro", "Viseu", "Guarda", "Coimbra", "Castelo Branco"]
         }
 
-        // bind change event handler
-        $('#A').change(function() {
-            // get the second dropdown
-            $('#B').html(
-                // get array by the selected value
-                diction[this.value]
-                    // iterate  and generate options
-                    .map(function(v) {
-                        // generate options with the array element
-                        return $('<option/>', {
-                            value: v,
-                            text: v
-                        })
-                    })
-            )
-            // trigger change event to generate second select tag initially
-        }).change()
-        // changing progressbar when button is clicked
-        $(".button").click(function() {
-            animateProgress(parseInt($(this).data('diff')));
-        });
-
-        // animate progress by a step indicated by diff
-        function animateProgress(diff) {
-            var currValue = $("#progress").val();
-            var toValue = currValue + diff;
-
-            toValue = toValue < 0 ? 0 : toValue;
-            toValue = toValue > 100 ? 100 : toValue;
-
-            $("#progress").animate({
-                'value': toValue
-            }, 500);
-        }
-
+        let citiesSpain;
+        let citiesPortugal;
+        
+        //Cargamos paises y provincias
         $( document ).ready(function() {
-            /* cosas para el menu superior */
-            $("#menu").removeClass("colorspecial");
-            $("#menu").addClass("fixed-top");
-            $(document).scroll(function () {
-                var $nav = $(".fixed-top");
-                $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-            });
-
-            if($(window).width()<993){
-                $("#menu").addClass("colorspecial");
-
+            for (let i = 0; i < cities['ES'].length; i++) {
+                citiesSpain += '<option value="' + cities['ES'][i] + '">'+ cities['ES'][i] +'</option>';
             }
 
-            function jqueryResize() {
-                if($(window).width()<993){
-                    $("#menu").addClass("colorspecial");
-
-                }
+            for (let i = 0; i < cities['PT'].length; i++) {
+                citiesPortugal += '<option value="' + cities['PT'][i] + '">'+ cities['PT'][i] +'</option>';
             }
-            $(window).on('resize', jqueryResize);
 
+            $('select[name=city]').append(citiesSpain);
+        });
 
+        $('select[name=country]').change(function () {
+            $('select[name=city]').empty();
+
+            if ($(this).val() == 'España') {
+                $('select[name=city]').append(citiesSpain);
+            } else {
+                $('select[name=city]').append(citiesPortugal);
+            }
         });
 
 
-    </script>
-    <script type="text/javascript">
         pulsado = 0;
 
         function abrir() {
@@ -591,7 +627,6 @@
                 document.getElementById('botone').innerHTML = "QUIERO RECIBIR MÁS INFORMACIÓN";
                 pulsado = 0;
             }
-
         }
     </script>
 {% endblock %}

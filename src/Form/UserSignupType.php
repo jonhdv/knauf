@@ -8,6 +8,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -31,17 +32,13 @@ class UserSignupType extends AbstractType
                 'first_options' => ['label' => 'Email', 'empty_data' => ' '],
                 'second_options' => ['label' => 'Repite Email'],
             ])
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'Las contraseñas no coinciden.',
-                'options' => ['attr' => ['class' => 'password-field']],
-                'required' => true,
-                'first_options' => ['label' => 'Contraseña', 'empty_data' => ' '],
-                'second_options' => ['label' => 'Repite Contraseña'],
-            ])
             ->add('phone', null, ['label' => 'Teléfono de la persona de contacto'])
-            ->add('country', null, ['label' => 'Pais'])
-            ->add('city', null, ['label' => 'Ciudad'])
+            ->add('country', ChoiceType::class, ['label' => 'Pais',
+                'choices'  => [
+                    'España' => 'España',
+                    'Portugal' => 'Portugal',
+                ]])
+            ->add('city', null, ['label' => 'Provincia'])
             ->add('municipality', null, ['label' => 'Municipio'])
             ->add('address', null, ['label' => 'Dirección'])
             ->add('postalCode', null, ['label' => 'Código Postal'])

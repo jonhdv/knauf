@@ -39,11 +39,16 @@
                     <td class="enabled-user-column">
                         {% if user.enabled %}
                             <img src="{{ asset('assets/icon/ok.svg') }}">
+                        {% else %}
+                            <img src="{{ asset('assets/icon/close.svg') }}">
                         {% endif %}
                     </td>
                     <td class="edit-user-column">
-                        <a href="#">Aprobar</a> |
-                        <a href="#" class="text-danger">Borrar</a>
+                        {% if user.enabled %}
+                            <a href="{{ path('admin_user_disable', {idUser: user.id}) }}" class="text-danger">Denegar</a>
+                        {% else %}
+                            <a href="{{ path('admin_user_enable', {idUser: user.id}) }}">Aprobar</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
