@@ -38,10 +38,6 @@ users_training_cancel:
     path: /formacion/cancelar
     controller: App\Controller\Users\TrainingController::cancelTraining
 
-users_training_competitors_update:
-    path: /formacion/participantes/update
-    controller: App\Controller\Users\CompetitorsController::updateCompetitors
-
 users_training_competitors_create:
     path: /formacion/participantes/create
     controller: App\Controller\Users\CompetitorsController::createCompetitors
@@ -67,3 +63,8 @@ users_training_edit:
 users_training_new:
     path: /formacion/mis-formaciones/new
     controller: App\Controller\Users\TrainingController::new
+
+
+mail:
+    path: /formacion/mail
+    controller: App\Controller\IndexController::mail

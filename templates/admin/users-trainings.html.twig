@@ -25,7 +25,7 @@
                 <tr>
                     <td>{{ training.updatedAt|date("d-m-Y H:i") }}</td>
                     <td>{{ training.user.name }} - {{ training.user.companyName }}</td>
-                    <td>{{ training.blocks|length }} bloques</td>
+                    <td class="blocks-info" data-id="{{ training.id }}">{{ training.blocks|length }} bloques</td>
                     <td>{{ training.competitors|length }} participantes</td>
                     <td class="d-flex justify-content-center">
                         <span class="training-status {{ training.getStatus()['color'] }}">
@@ -50,4 +50,27 @@
 
 {% block javascripts %}
     {{ parent() }}
+
+    <script>
+        let totalTime = 0;
+
+        (function($) {
+            'use strict';
+
+            $('.blocks-info').click(function () {
+                $.ajax({
+                    context: this,
+                    url: 'formaciones/'+ $(this).data('id') +'/blocks-info',
+                    dataType: 'JSON',
+                    type: 'POST',
+                    success: function (data) {
+                        Swal.fire({icon: 'info', html: data});
+                    },
+                    error: function (data) {
+                        showModal('warning', data);
+                    }
+                });
+            });
+        })(jQuery);
+    </script>
 {% endblock %}

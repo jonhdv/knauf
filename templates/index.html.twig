@@ -429,7 +429,7 @@
 
 
             <div class="col-md-10 col-md-offset-2">
-                <form class="needs-validation studio-data-form" novalidate="" action="{{ path('signin') }}" method="POST">
+                <form class="needs-validation studio-data-form signin-form" novalidate="" action="{{ path('signin') }}" method="POST">
 
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -563,7 +563,7 @@
                         </div>
                     </div>
                     <p style="text-align: center;">
-                        <input class="btn btnsexto" value="Guardar" type="submit">
+                        <button type="button" class="btn btnsexto signin">Enviar</button>
                     </p>
                 </form>
             </div>
@@ -573,8 +573,47 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('assets/js/messages_es.js') }}"></script>
+    <script src="{{ asset('assets/js/additional-methods.min.js') }}"></script>
 
     <script>
+
+        $('.signin').click(function (e) {
+            jQuery.validator.addMethod("validate_email", function(value, element) {
+
+                if (/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }, "Please enter a valid Email.");
+
+            if ($('.signin-form').valid()) {
+                let formData = $('.signin-form').serialize();
+
+                $.ajax({
+                    context: this,
+                    url: '{{ path('signin') }}',
+                    dataType: 'JSON',
+                    type: 'POST',
+                    data: formData,
+                    success: function (data) {
+                        if (data === true) {
+                            Swal.fire({icon: 'success', text: 'Hemos almacenado tu petición de registro. Cuando lo revisemos, recibirá un email informando de si ha sido aceptada.'});
+                        } else {
+                            showModal('warning', data);
+                        }
+                    },
+                    error: function (data) {
+                        showModal('warning', data);
+                    }
+                });
+            }
+        });
+
+        $('form').valid();
+
         var cities = {
             B: [""],
             ES: [ "Albacete", "Alicante", "Almería", "Araba", "Asturias", "Ávila", "Provincia de Badajoz", "Baleares", "Barcelona", "Bizkaia", "Burgos",

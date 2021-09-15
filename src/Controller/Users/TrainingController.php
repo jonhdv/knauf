@@ -9,10 +9,13 @@ use App\Entity\Block;
 use App\Entity\Training;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Security;
@@ -25,6 +28,7 @@ class TrainingController extends AbstractRenderController
     private EntityManagerInterface $entityManager;
     private Security $security;
     private RouterInterface $router;
+    private MailerInterface $mailer;
 
     public function __construct(
         Environment $template,
@@ -32,8 +36,8 @@ class TrainingController extends AbstractRenderController
         UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $session,
         EntityManagerInterface $entityManager,
-        Security $security
-
+        Security $security,
+        MailerInterface $mailer
     ) {
         parent::__construct($template);
 
@@ -41,6 +45,7 @@ class TrainingController extends AbstractRenderController
         $this->session = $session;
         $this->entityManager = $entityManager;
         $this->security = $security;
+        $this->mailer = $mailer;
     }
 
     public function list(): Response
@@ -202,6 +207,17 @@ class TrainingController extends AbstractRenderController
         if ($training === null || !$training->getStudioConfirmed() || empty($training->getBlocks()) || $training->getDatetime() == null || $training->getcompetitors()->isEmpty()) {
             return new JsonResponse('Completa todos los pasos para solicitar la formación');
         }
+
+        $mailerMail = (new TemplatedEmail())
+            ->from('knaufandbreakfast@knaufandbreakfast.com')
+            ->to(new Address($this->security->getUser()->getEmail()))
+            ->subject('Solicitud de formación recibida')
+            ->htmlTemplate('email/training-request.html.twig')
+            ->context([
+                'name' => $this->security->getUser()->getName(),
+            ])
+        ;
+        $this->mailer->send($mailerMail);
 
         $training->setSent(true);
         $this->session->set('training', $training);

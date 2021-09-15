@@ -660,3 +660,11 @@ select {
     color: #009de0;
     max-width: 800px;
 }
+
+/* Formulario de registro */
+
+.signin-form .error {
+    content: 'Requerido';
+    color: #e80000;
+    font-size: 14px;
+}

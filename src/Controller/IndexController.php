@@ -7,12 +7,16 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserSignupType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Twig\Environment;
@@ -22,6 +26,7 @@ class IndexController extends AbstractRenderController
 {
     private EntityManagerInterface $entityManager;
     private UserPasswordEncoderInterface $passwordEncoder;
+    private MailerInterface $mailer;
 
     public function __construct(
         Environment $template,
@@ -29,6 +34,7 @@ class IndexController extends AbstractRenderController
         RouterInterface $router,
         UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $session,
+        MailerInterface $mailer,
         EntityManagerInterface $entityManager
     ) {
         parent::__construct($template);
@@ -36,6 +42,7 @@ class IndexController extends AbstractRenderController
         $this->formFactory = $formFactory;
         $this->passwordEncoder = $passwordEncoder;
         $this->session = $session;
+        $this->mailer = $mailer;
         $this->entityManager = $entityManager;
     }
 
@@ -64,15 +71,15 @@ class IndexController extends AbstractRenderController
        $companyName = $httpRequest->request->get('companyName');
        $commentary = $httpRequest->request->get('commentary');
 
-       if ($email == null || $name == null || $address == null || $phone == null || $country == null || $city == null || $municipality == null || $postalCode == null || $companyName == null) {
-           return new JsonResponse('Datos incorrectos', Response::HTTP_BAD_REQUEST);
+       if ($email == "" || $name == "" || $address == "" || $phone == "" || $country == "" || $city == "" || $municipality == "" || $postalCode == "" || $companyName == "") {
+           return new JsonResponse('Datos incorrectos');
        }
 
         $user = $this->entityManager->getRepository(User::class)
             ->findOneBy(['email' => $email]);
         ;
         if (!empty($user)) {
-            return new JsonResponse('Ya hya un uusario registrado con este email', Response::HTTP_BAD_REQUEST);
+            return new JsonResponse('Ya se ha realizado una petición de registro con este mail');
         }
 
         $user = new User();
@@ -83,18 +90,29 @@ class IndexController extends AbstractRenderController
         ;
 
         $user->setEmail($email);
-        $user->setName($email);
-        $user->setAddress($email);
-        $user->setPhone($email);
-        $user->setCountry($email);
-        $user->setCity($email);
-        $user->setMunicipality($email);
-        $user->setPostalCode($email);
-        $user->setCompanyName($email);
-        $user->setCommentary($email);
+        $user->setName($name);
+        $user->setAddress($address);
+        $user->setPhone($phone);
+        $user->setCountry($country);
+        $user->setCity($city);
+        $user->setMunicipality($municipality);
+        $user->setPostalCode($postalCode);
+        $user->setCompanyName($companyName);
+        $user->setCommentary($commentary);
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+
+        $mailerMail = (new TemplatedEmail())
+            ->from('knaufandbreakfast@knaufandbreakfast.com')
+            ->to(new Address($email))
+            ->subject('Solicitud de información Knauf')
+            ->htmlTemplate('email/signup-request.html.twig')
+            ->context([
+                'name' => $name,
+            ])
+        ;
+        $this->mailer->send($mailerMail);
 
         return new JsonResponse(true);
     }
