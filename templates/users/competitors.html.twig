@@ -18,32 +18,34 @@
     </div>
 
     <div class="d-flex mt-4 justify-content-center">
-        <form action="{{ path('users_training_competitors_add') }}" method="post">
-            <table class="table table-responsive competitors-list mx-auto">
-                <tr>
-                    <th></th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                    <th>Puesto</th>
-                    <th>Intolerancias</th>
-                    <th>Acciones</th>
-                </tr>
-
-                {% for competitor in competitors %}
+        <form action="{{ path('users_training_competitors_add') }}" class="w-100" method="post">
+            <div class="table-responsive">
+                <table class="table competitors-list mx-auto">
                     <tr>
-                        <td><input name="competitor[{{ competitor.id }}]" type="checkbox"{{ competitor.id in seletedcompetitorsIds ? ' checked' }}></td>
-                        <td class="competitor-name">{{ competitor.name }}</td>
-                        <td class="competitor-surname">{{ competitor.surname }}</td>
-                        <td class="competitor-email">{{ competitor.email }}</td>
-                        <td class="competitor-position">{{ competitor.position }}</td>
-                        <td class="competitor-intolerances">{{ competitor.foodIntolerances }}</td>
-                        <td>
-                            <a href="{{ path('users_training_competitors_delete', { idCompetitor : competitor.id }) }}" class="text-danger">Borrar</a>
-                        </td>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Puesto</th>
+                        <th>Intolerancias</th>
+                        <th>Acciones</th>
                     </tr>
-                {% endfor %}
-            </table>
+
+                    {% for competitor in competitors %}
+                        <tr>
+                            <td><input name="competitor[{{ competitor.id }}]" type="checkbox"{{ competitor.id in seletedcompetitorsIds ? ' checked' }}></td>
+                            <td class="competitor-name">{{ competitor.name }}</td>
+                            <td class="competitor-surname">{{ competitor.surname }}</td>
+                            <td class="competitor-email">{{ competitor.email }}</td>
+                            <td class="competitor-position">{{ competitor.position }}</td>
+                            <td class="competitor-intolerances">{{ competitor.foodIntolerances }}</td>
+                            <td>
+                                <a href="{{ path('users_training_competitors_delete', { idCompetitor : competitor.id }) }}" class="text-danger">Borrar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
 
             <div role="button" class="add-competitor mt-3 mx-auto mb-5">
                 + Nuevo participante

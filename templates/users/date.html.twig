@@ -22,8 +22,10 @@
 
     <div class="col-md-12 col-md-offset-2 d-flex justify-content-center my-5">
         <form method="post" action="{{ path('users_training_date_update') }}">
-            <input type="date" class="training-date mr-3" name="date" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("Y-m-d") }}" required>
-            <input type="time" min="08:00" max="13:00" class="training-date" name="time" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("H:i") }}" required>
+            <div class="text-center">
+                <input type="date" class="training-date mr-3 mb-4" name="date" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("Y-m-d") }}" required>
+                <input type="time" min="08:00" max="13:00" class="training-date" name="time" value="{{ app.session.get('training').blocks is defined and app.session.get('training').datetime is not empty ? app.session.get('training').datetime|date("H:i") }}" required>
+            </div>
             <div class="col-12 d-flex justify-content-center my-5">
                 <input class="block-send" type="submit" value="Guardar">
             </div>

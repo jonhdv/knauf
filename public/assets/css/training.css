@@ -167,8 +167,11 @@ footer {
 /* Steps bar */
 
 .steps-bar {
-    max-width: 800px;
-    min-width: 700px;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 0 10px;
+    max-width: 900px;
 }
 
 .step {
@@ -196,6 +199,16 @@ footer {
 
 .steps-bar a {
     text-decoration: none;
+    margin-right: 80px;
+    margin-left: 80px;
+    margin-bottom: 70px;
+}
+
+@media (max-width: 509px) {
+    .steps-bar a {
+        margin-right: 60px;
+        margin-left: 60px;
+    }
 }
 
 .step.active span {
@@ -346,7 +359,8 @@ footer {
 /* Training list */
 
 .training-list {
-    max-width: 1000px;
+    max-width: 1100px;
+    width: 1000px;
     text-align: center;
 }
 
