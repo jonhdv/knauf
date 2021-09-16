@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="text-center main-title mx-auto my-5">
-            <h3 class="text-center mt-4 mb-3">GESTIÓN DE FORMACIONES</h3>
-        </div>
+    <div class="text-center main-title mx-auto my-5">
+        <h3 class="text-center mt-4 mb-3">GESTIÓN DE FORMACIONES</h3>
+    </div>
 
+    <div class="table-responsive">
         <table class="table training-list mx-auto">
             <tr>
                 <th>Última edición</th>
@@ -17,7 +17,7 @@
                 <th>Nº bloques</th>
                 <th>Nº participantes</th>
                 <th>Estado</th>
-                <th>Fecha propuesta</th>
+                <th>Fecha</th>
                 <th>Acciones</th>
             </tr>
 
@@ -28,16 +28,17 @@
                     <td class="blocks-info" data-id="{{ training.id }}">{{ training.blocks|length }} bloques</td>
                     <td>{{ training.competitors|length }} participantes</td>
                     <td class="d-flex justify-content-center">
-                        <span class="training-status {{ training.getStatus()['color'] }}">
-                            {{ training.getStatus()['label'] }}
-                        </span>
+                    <span class="training-status {{ training.getStatus()['color'] }}">
+                        {{ training.getStatus()['label'] }}
+                    </span>
                     </td>
                     <td>{{ training.datetime is not empty ? training.datetime|date("d-m-Y H:i") }}</td>
                     <td>
                         {% if training.enabled %}
                             <a class="text-secondary" href="{{ path('admin_training_disable', {idTraining : training.id}) }}">Desaprobar</a> |
-                        {% else %}
+                        {% elseif training.sent %}
                             <a class="text-success" href="{{ path('admin_training_enable', {idTraining : training.id}) }}">Aprobar</a> |
+                            <a class="text-dark" href="{{ path('admin_training_deny', {idTraining : training.id}) }}" title="Se denegará la petición de solicitud y se notificará al usuaio por correo que cambie las condiciones.">Denegar</a> |
                         {% endif %}
 
                         <a class="text-danger" href="{{ path('admin_training_delete', {idTraining : training.id}) }}">Borrar</a>

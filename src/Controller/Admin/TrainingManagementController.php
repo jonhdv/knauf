@@ -7,11 +7,15 @@ namespace App\Controller\Admin;
 use App\Controller\AbstractRenderController;
 use App\Entity\Block;
 use App\Entity\Training;
+use App\Entity\User;
 use App\Service\BlockManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
@@ -20,12 +24,14 @@ class TrainingManagementController extends AbstractRenderController
     private EntityManagerInterface $entityManager;
     private RouterInterface $router;
     private BlockManager $blockManager;
+    private MailerInterface $mailer;
 
-    public function __construct(Environment $template, RouterInterface $router, EntityManagerInterface $entityManager, BlockManager $blockManager) {
+    public function __construct(Environment $template, RouterInterface $router, EntityManagerInterface $entityManager, BlockManager $blockManager, MailerInterface $mailer) {
         parent::__construct($template);
         $this->entityManager = $entityManager;
         $this->router = $router;
         $this->blockManager = $blockManager;
+        $this->mailer = $mailer;
     }
 
     public function list(): Response
@@ -64,6 +70,22 @@ class TrainingManagementController extends AbstractRenderController
         }
 
         $training->setEnabled(true);
+        $this->entityManager->flush();
+
+        return new RedirectResponse($this->router->generate('admin_trainings'));
+    }
+
+    public function deny(int $idTraining): Response
+    {
+        $training = $this->entityManager->getRepository(Training::class)
+            ->findOneBy(['id' => $idTraining])
+        ;
+
+        if (empty($training)) {
+            return new JsonResponse('No se pudo encontrar la formación', Response::HTTP_BAD_REQUEST);
+        }
+
+        $training->setSent(false);
         $this->entityManager->flush();
 
         return new RedirectResponse($this->router->generate('admin_trainings'));

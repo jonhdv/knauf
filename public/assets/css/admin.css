@@ -22,7 +22,8 @@
 /* Training list */
 
 .training-list {
-    max-width: 1200px;
+    max-width: 1300px;
+    min-width: 1000px;
     text-align: center;
 }
 

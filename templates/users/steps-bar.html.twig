@@ -10,7 +10,7 @@
             <div class="step-state{{ app.session.get('training') is not empty and app.session.get('training').studioConfirmed ? ' completed' }}"></div>
 
             <div class="step-info">
-                {{ app.session.get('training') is not empty and app.session.get('training').studioConfirmed ? 'Estudio: ' ~ app.user.companyName }}
+                {{ app.session.get('training') is not empty and app.session.get('training').studioConfirmed ? app.user.companyName ~ ' - ' ~ app.user.city }}
             </div>
         </div>
     </a>
@@ -21,7 +21,11 @@
 
             <div class="step-state{{ app.session.get('training') is not empty and app.session.get('training').blocks is not empty ? ' completed' }}"></div>
 
-            <div class="step-info">{{ app.session.get('training') is not empty and app.session.get('training').blocks is not empty ? app.session.get('training').blocks|length ~ ' bloques seleccionados' }}</div>
+            <div class="step-info">
+                {% if app.session.get('training') is not empty and app.session.get('training').blocks is not empty %}
+                    {{ app.session.get('training').blocks|length }} bloques seleccionados <br> {{ getTime(app.session.get('training')) }}
+                {% endif %}
+            </div>
         </div>
     </a>
 

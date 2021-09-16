@@ -42,6 +42,6 @@ class BlockManager extends AbstractRenderController
             $blocksList = '0';
         }
 
-        return $blocksList . ' minutos totales';
+        return $blocksList . ' minutos';
     }
 }

@@ -22,6 +22,10 @@ admin_training_enable:
     path: /formaciones/{idTraining}/enable
     controller: App\Controller\Admin\TrainingManagementController::enable
 
+admin_training_deny:
+    path: /formaciones/{idTraining}/deny
+    controller: App\Controller\Admin\TrainingManagementController::deny
+
 admin_training_disable:
     path: /formaciones/{idTraining}/disable
     controller: App\Controller\Admin\TrainingManagementController::disable
