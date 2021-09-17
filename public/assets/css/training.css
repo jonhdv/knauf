@@ -403,3 +403,30 @@ footer {
 .training-status.red {
     color: #e80000;
 }
+
+.trainig-info-image {
+    width: 100%;
+}
+
+.swal2-content {
+    height: 500px;
+    overflow: auto;
+}
+
+.swal2-popup {
+    width: 600px;
+}
+
+.swal2-content {
+    padding: 0 5px !important;
+}
+
+.training-list-button {
+    background-color: #009de0;
+    border-radius: 32px;
+    padding: 10px 20px 10px 20px;
+    color: white;
+    font-size: 25px;
+    width: 230px;
+    border: none;
+}

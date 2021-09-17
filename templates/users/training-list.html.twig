@@ -16,7 +16,8 @@
     </div>
 
     <div class="table-responsive px-3">
-        <table class="table training-list mx-auto ">
+        {% if trainings|length > 0 %}
+            <table class="table training-list mx-auto ">
         <tr>
             <th>Última edición</th>
             <th>Nº bloques</th>
@@ -44,9 +45,68 @@
             </tr>
         {% endfor %}
     </table>
+        {% else %}
+            <div class="text-center">
+                <h5 class="mb-3">Aun no tienes formaciones</h5>
+                <a href="{{ path('users_training_new') }}">
+                    <button class="training-list-button block-send mb-4">Nueva formacion</button>
+                </a>
+
+                <button class="training-list-button get-info">Intrucciones</button>
+            </div>
+
+        {% endif %}
+    </div>
+
+    <div class="trainig-info d-none">
+        Completa correctamente los cuatro pasos de la gestión:<br><br>
+
+        <ol>
+            <li>Confirma los datos del estudio entregados en el inicio. En esta dirección se
+                entregará el material que acompaña a la formación.</li>
+            <li>Selecciona los bloques formativos a impartir. Puedes ayudarte de la barra de
+                tiempo para estimar la duración que tendrá la formación:<br>
+                <img class="trainig-info-image" src="{{ asset('assets/img/info-training.JPG') }}"/>
+            </li>
+            <li>Selecciona una fecha. La formación puede impartirse de Martes a Viernes en
+                horario de 9.00 a 13.00h. La fecha seleccionada queda automáticamente guardada
+                en el sistema y será confirmada vía email en un máximo de dos días laborables
+                desde la solicitud.</li>
+            <li>    Dinos quién asistirá y si tiene alguna intolerancia alimentaria. Esto nos ayudará a
+                determinar la cantidad de material necesario para ese día y adecuar los desayunos
+                que acompañan a la formación.</li>
+        </ol><br><br>
+
+        Por último, guarda o entrega la solicitud. Si has terminado la gestión, pincha “Entregar” y
+        cierra la petición. Recibirás un correo de confirmación con todos los detalles de la
+        formación. Si has dejado algún paso de los anteriores sin completar, o quieres seguir
+        añadiendo participantes más adelante, pincha “Guardar”. Podrás seguir accediendo a la
+        plataforma hasta 10 días antes de la fecha propuesta. Por favor, recuerda que si no se
+        cierra el trámite a través de la opción “Entregar” antes de esta fecha, será necesario volver
+        a fijar una nueva fecha.<br><br>
+
+        Si en algún momento tienes dudas, o necesitas soporte en el proceso, no dudes en ponerte
+        en contacto con nosotros directamente a través de la dirección
+        knaufandbreakfast@knauf.com
+
+        <br><br>
+        ¡Muchas gracias por el interés depositado en estas jornadas Knauf!
     </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+
+    <script>
+        let totalTime = 0;
+
+        (function($) {
+            'use strict';
+
+            $('.get-info').click(function () {
+                Swal.fire({icon: 'info', html: $('.trainig-info').html()});
+            });
+
+        })(jQuery);
+    </script>
 {% endblock %}
