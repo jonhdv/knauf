@@ -1,10 +1,11 @@
 /* Users administration */
 
 .users-list {
-    text-align: center;
+    max-width: 1200px;
+    min-width: 900px;
 }
 
-.users-list td:not(.edit-user-column) {
+.users-list td:not(.edit-user-column, .city-column, .name-column, .email-column, .insert-column) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -49,4 +50,17 @@
 
 .training-status.red {
     color: #e80000;
+}
+
+.blocks-info {
+    width: 22px;
+    height: 22px;
+    margin-left: 5px;
+}
+
+.training-list .training-list-user  {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
 }

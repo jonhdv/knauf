@@ -5,18 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="text-center main-title mx-auto my-5">
-            <h3 class="text-center mt-4 mb-3">GESTIÓN DE USUARIOS</h3>
-        </div>
+    <div class="text-center main-title mx-auto mb-5">
+        <h3 class="text-center mt-4 mb-3">GESTIÓN DE USUARIOS</h3>
+    </div>
 
-        <table class="table table-responsive users-list">
+    <div class="table-responsive">
+        <table class="table users-list mx-auto">
             <tr>
                 <th>Estudio</th>
                 <th>Dirección</th>
                 <th>País</th>
                 <th>Ciudad</th>
-                <th>Código postal</th>
                 <th>Nombre</th>
                 <th>Teléfono</th>
                 <th>Email</th>
@@ -30,12 +29,11 @@
                     <td title="{{ user.companyName }}">{{ user.companyName }}</td>
                     <td title="{{ user.address }}">{{ user.address }}</td>
                     <td title="{{ user.country }}">{{ user.country }}</td>
-                    <td title="{{ user.city }}">{{ user.city }}</td>
-                    <td title="{{ user.postalCode }}">{{ user.postalCode }}</td>
-                    <td title="{{ user.name }}">{{ user.name }}</td>
+                    <td class="city-column" title="{{ user.city }}">{{ user.city }}</td>
+                    <td class="name-column" title="{{ user.name }}">{{ user.name }}</td>
                     <td title="{{ user.phone }}">{{ user.phone }}</td>
-                    <td title="{{ user.email }}">{{ user.email }}</td>
-                    <td title="{{ user.createdAt|date('d/m/Y') }}">{{ user.createdAt|date('d/m/Y') }}</td>
+                    <td class="email-column" title="{{ user.email }}">{{ user.email }}</td>
+                    <td class="insert-column" title="{{ user.createdAt|date('d/m/Y') }}">{{ user.createdAt|date('d/m/Y') }}</td>
                     <td class="enabled-user-column">
                         {% if user.enabled %}
                             <img src="{{ asset('assets/icon/ok.svg') }}">

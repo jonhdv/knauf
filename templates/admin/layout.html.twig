@@ -20,7 +20,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light colorspecial" id="menu">
         <a class="navbar-brand" href="{{ path('index') }}">
-            <img src="https://heyav.com/knaufcrm/img/Knauf_logo.svg" width="97" height="80" alt="">
+            <img src="https://heyav.com/knaufcrm/img/Knauf_logo.svg" width="80" height="80" alt="">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,15 +28,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item active m-1  ">
-                    <a href="{{ path('admin_trainings') }}" class="btniniciarsesion">Gestión de formaciones</a>
+                    <a href="{{ path('admin_trainings') }}" class="button-menu">Formaciones</a>
                 </li>
 
                 <li class="nav-item active m-1  ">
-                    <a href="{{ path('admin_users_management') }}" class="btniniciarsesion">Gestión de usuarios</a>
+                    <a href="{{ path('admin_users_management') }}" class="button-menu">Usuarios</a>
                 </li>
 
                 <li class="nav-item active m-1  ">
-                    <a href="{{ path('logout') }}" class="btniniciarsesion">Cerrar sesión</a>
+                    <span class="btniniciarsesion"> {{ app.user.name }}
+                        <a href="{{ path('logout') }}">
+                             <img class="logout-icon" title="Cerrar sesión" src="{{ asset('assets/icon/turn-off.svg') }}">
+                        </a>
+                    </span>
                 </li>
             </ul>
         </div>
@@ -44,7 +48,7 @@
 </header>
 
 <!-- Main -->
-<main>
+<main class="py-4 px-2">
     {% block body %}
 
     {% endblock %}

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="text-center main-title mx-auto my-5">
+    <div class="text-center main-title mx-auto mb-5">
         <h3 class="text-center mt-4 mb-3">GESTIÓN DE FORMACIONES</h3>
     </div>
 
@@ -24,8 +24,11 @@
             {% for training in trainings %}
                 <tr>
                     <td>{{ training.updatedAt|date("d-m-Y H:i") }}</td>
-                    <td>{{ training.user.name }} - {{ training.user.companyName }}</td>
-                    <td class="blocks-info" data-id="{{ training.id }}">{{ training.blocks|length }} bloques</td>
+                    <td class="training-list-user" title="{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city }})">{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city }})</td>
+                    <td>
+                        {{ training.blocks|length }} bloques
+                        <img class="blocks-info" role="button" alt="info" data-id="{{ training.id }}" src="{{ asset('assets/icon/info.svg') }}" title="Mostrar más info">
+                    </td>
                     <td>{{ training.competitors|length }} participantes</td>
                     <td class="d-flex justify-content-center">
                     <span class="training-status {{ training.getStatus()['color'] }}">

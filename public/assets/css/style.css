@@ -66,6 +66,7 @@ body {
 .btniniciarsesion {
     background-color: white;
     padding: 0.2rem 0.9rem;
+    margin: 0.4rem 0.7rem;
     border-radius: 50px;
     color: #009DE0 !important;
     font-weight: 700;
@@ -83,12 +84,6 @@ body {
 nav {
     padding: 1rem 4rem !important;
 }
-
-.nav-item a:hover {
-    color: black;
-    text-decoration: none;
-}
-
 
 /*css para el menu*/
 
@@ -626,8 +621,26 @@ select {
     max-width: 800px;
 }
 
-main {
-    padding: 0 10px;
+/* Menu */
+
+.button-menu {
+    background-color: #009de0;
+    margin: 0.4rem 0.7rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: 700;
+}
+
+.button-menu:hover, .btniniciarsesion:hover {
+    color: #eeeeee;
+    text-decoration: none;
+}
+
+.logout-icon {
+    width: 17px;
+    height: 17px;
+    margin-bottom: 3px;
+    margin-left: 3px;
 }
 
 /* Formulario de registro */

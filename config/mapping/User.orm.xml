@@ -9,7 +9,7 @@
             <generator/>
         </id>
 
-        <field name="email" length="250" unique="true" />
+        <field name="email" length="250" />
         <field name="name" length="250" />
         <field name="address" length="500" />
         <field name="phone" length="12" />

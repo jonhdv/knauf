@@ -142,7 +142,6 @@ main {
 /* Footer */
 footer {
     padding: 60px 0 60px 0;
-    margin-top: 60px;
 }
 
 .footer-content > div {
@@ -199,9 +198,7 @@ footer {
 
 .steps-bar a {
     text-decoration: none;
-    margin-right: 80px;
-    margin-left: 80px;
-    margin-bottom: 70px;
+    margin: 25px 80px 40px 80px;
 }
 
 @media (max-width: 509px) {
@@ -286,8 +283,8 @@ footer {
 /* Competitors list */
 
 .competitors-list {
-    width: fit-content;
-    width: -moz-fit-content;
+    max-width: 800px;
+    min-width: 600px;
 }
 
 .add-competitor {
