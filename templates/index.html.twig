@@ -410,6 +410,7 @@
             </div>
         </div>
     </div>
+
     <div class="container quinto">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -417,13 +418,21 @@
             </div>
         </div>
     </div>
-    <div class="container sexto">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <p style="text-align: center;"><button class="btn btnsexto" id="botone" onclick="abrir()" data-text="QUIERO RECIBIR MÁS INFORMACIÓN">QUIERO RECIBIR MÁS INFORMACIÓN</button></p>
-            </div>
+
+    <div class="row mx-0 index-video">
+        <div class="col-12 col-lg-6 index-video-info">
+            <p class="px-5 my-5">En los primeros 6 meses se han impartido más de 30 ediciones. Haz click más abajo para recibir más información.</p>
+            <p style="text-align: center;"><button class="btn btnsexto" id="botone" onclick="abrir()" data-text="QUIERO RECIBIR MÁS INFORMACIÓN">QUIERO RECIBIR MÁS INFORMACIÓN</button></p>
+        </div>
+
+        <div class="col-12 col-lg-6 index-video-mp4">
+            <video poster="{{ asset('assets/img/index-video.JPG') }}" controls>
+                <source src="{{ asset('assets/video/KNAUF_BREAK_MASTER_160921_V2.mp4') }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </div>
+
     <div class="container septimo" id="desaparecer">
         <div class="row justify-content-center">
 
@@ -658,6 +667,11 @@
                 document.getElementById('botone').setAttribute("data-text", "QUIERO RECIBIR MÁS INFORMACIÓN");
                 document.getElementById('botone').innerHTML = "QUIERO RECIBIR MÁS INFORMACIÓN";
                 pulsado = 1;
+
+                $('html, body').animate({
+                    scrollTop: $("#desaparecer").offset().top
+                }, 1000);
+
                 return;
             } else if (pulsado == 1) {
                 document.getElementById('desaparecer').classList.remove('aparece');

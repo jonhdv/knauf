@@ -621,6 +621,48 @@ select {
     max-width: 800px;
 }
 
+.index-video {
+    background-color: #cfd3d5;
+}
+
+.index-video-mp4 video {
+    width: 100%;
+    height: auto;
+}
+
+.index-video-mp4 {
+    padding: 2% 7% 2% 3%;
+}
+
+.index-video-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5%;
+}
+
+@media screen and (max-width: 992px) {
+    .index-video-mp4 {
+        padding: 2% 3% 2% 3%;
+    }
+
+    .index-video-info p:first-of-type {
+        text-align: center;
+    }
+
+    .index-video-info button {
+        font-size: 1.26rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .index-video-info button {
+        font-size: 1rem;
+    }
+}
+
+
 /* Menu */
 
 .button-menu {
