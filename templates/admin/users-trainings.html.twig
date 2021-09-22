@@ -24,7 +24,7 @@
             {% for training in trainings %}
                 <tr>
                     <td>{{ training.updatedAt|date("d-m-Y H:i") }}</td>
-                    <td class="training-list-user" title="{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city }})">{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city }})</td>
+                    <td class="training-list-user" title="{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city.getLabel() }})">{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city.getLabel() }})</td>
                     <td>
                         {{ training.blocks|length }} bloques
                         <img class="blocks-info" role="button" alt="info" data-id="{{ training.id }}" src="{{ asset('assets/icon/info.svg') }}" title="Mostrar más info">

@@ -10,7 +10,7 @@
             <div class="step-state{{ app.session.get('training') is not empty and app.session.get('training').studioConfirmed ? ' completed' }}"></div>
 
             <div class="step-info">
-                {{ app.session.get('training') is not empty and app.session.get('training').studioConfirmed ? app.user.companyName ~ ' - ' ~ app.user.city }}
+                {{ app.session.get('training') is not empty and app.session.get('training').studioConfirmed ? app.user.companyName ~ ' - ' ~ app.user.city.getLabel() }}
             </div>
         </div>
     </a>

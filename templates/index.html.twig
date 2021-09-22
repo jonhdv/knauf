@@ -621,27 +621,23 @@
             }
         });
 
-        $('form').valid();
-
-        var cities = {
-            B: [""],
-            ES: [ "Albacete", "Alicante", "Almería", "Araba", "Asturias", "Ávila", "Provincia de Badajoz", "Baleares", "Barcelona", "Bizkaia", "Burgos",
-                "Provincia de Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "A Coruña", "Provincia de Cuenca", "Gipúzkoa", "Girona", "Granada", "Provincia de Guadalajara", "Huelva", "Huesca", "Jaén", "Provincia de León", "Lleida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Ourense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Santa Cruz de Tenerife", "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia/València", "Valladolid", "Zamora", "Zaragoza", "Ceuta", "Melilla"
-            ],
-            PT: [ "Santarem", "Portoalegre", "Beja", "Lisboa", "Faro", "Setúbal", "Evora", "Funchal", "Leiria", "Sao Miguel", "Viana do Castelo", "Braga", "Porto", "Vila Real", "Bragança", "Aveiro", "Viseu", "Guarda", "Coimbra", "Castelo Branco"]
-        }
+        var cities = [
+                {% for key, city in getCitiesList() %}
+                    ["{{ key }}", "{{ city }}"],
+                {% endfor %}
+            ]
 
         let citiesSpain;
         let citiesPortugal;
         
         //Cargamos paises y provincias
         $( document ).ready(function() {
-            for (let i = 0; i < cities['ES'].length; i++) {
-                citiesSpain += '<option value="' + cities['ES'][i] + '">'+ cities['ES'][i] +'</option>';
+            for (let i = 0; i < 52; i++) {
+                citiesSpain += '<option value="' + cities[i][0] + '">'+ cities[i][1] +'</option>';
             }
 
-            for (let i = 0; i < cities['PT'].length; i++) {
-                citiesPortugal += '<option value="' + cities['PT'][i] + '">'+ cities['PT'][i] +'</option>';
+            for (let i = 52; i < cities.length; i++) {
+                citiesPortugal += '<option value="' + cities[i][0] + '">'+ cities[i][1] +'</option>';
             }
 
             $('select[name=city]').append(citiesSpain);

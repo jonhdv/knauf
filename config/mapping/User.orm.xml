@@ -16,12 +16,23 @@
         <field name="roles" type="json" />
         <field name="password" length="100" nullable="true"/>
         <field name="country" length="250" />
-        <field name="city" length="250" />
+        <field name="city" type="city_type" length="250" />
         <field name="municipality" length="250" />
         <field name="postalCode" length="250" />
         <field name="companyName" length="250" />
         <field name="commentary" type="text" length="250" nullable="true" />
         <field name="enabled" type="boolean" />
+
+        <many-to-many field="managedCities" target-entity="App\Entity\City">
+            <join-table name="user_cities">
+                <join-columns>
+                    <join-column name="userId" referenced-column-name="id" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="cityId" referenced-column-name="id" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
 
         <field name="updatedAt" type="datetime">
             <gedmo:timestampable on="update"/>

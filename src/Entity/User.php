@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 
+use App\Doctrine\Type\DoctrineCityType;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface, \Serializable
@@ -26,12 +28,13 @@ class User implements UserInterface, \Serializable
     private array $roles = [];
     private ?string $password;
     private string $country;
-    private string $city;
+    private ?CityType $city;
     private string $municipality;
     private string $postalCode;
     private string $companyName;
     private ?string $commentary;
     private bool $enabled;
+    private ?Collection $managedCities;
 
     /**
      * @return int|null
@@ -120,12 +123,12 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getCity(): string
+    public function getCity(): ?CityType
     {
         return $this->city;
     }
 
-    public function setCity(string $city): User
+    public function setCity(?CityType $city): User
     {
         $this->city = $city;
 
@@ -189,6 +192,18 @@ class User implements UserInterface, \Serializable
     public function setEnabled(bool $enabled): User
     {
         $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function getManagedCities(): ?Collection
+    {
+        return $this->managedCities;
+    }
+
+    public function setManagedCities(?Collection $managedCities): User
+    {
+        $this->managedCities = $managedCities;
 
         return $this;
     }

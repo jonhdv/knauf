@@ -29,7 +29,7 @@
                     <td title="{{ user.companyName }}">{{ user.companyName }}</td>
                     <td title="{{ user.address }}">{{ user.address }}</td>
                     <td title="{{ user.country }}">{{ user.country }}</td>
-                    <td class="city-column" title="{{ user.city }}">{{ user.city }}</td>
+                    <td class="city-column" title="{{ user.city.getLabel() }}">{{ user.city.getLabel() }}</td>
                     <td class="name-column" title="{{ user.name }}">{{ user.name }}</td>
                     <td title="{{ user.phone }}">{{ user.phone }}</td>
                     <td class="email-column" title="{{ user.email }}">{{ user.email }}</td>

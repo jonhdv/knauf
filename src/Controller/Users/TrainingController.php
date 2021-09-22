@@ -6,6 +6,7 @@ namespace App\Controller\Users;
 
 use App\Controller\AbstractRenderController;
 use App\Entity\Block;
+use App\Entity\CityType;
 use App\Entity\Training;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -93,7 +94,7 @@ class TrainingController extends AbstractRenderController
         $user->setCompanyName($httpRequest->request->get('companyName', ''));
         $user->setAddress($httpRequest->request->get('address', ''));
         $user->setCountry($httpRequest->request->get('country', ''));
-        $user->setCity($httpRequest->request->get('city', ''));
+        $user->setCity(CityType::create($httpRequest->request->get('city', '')));
         $user->setPostalCode($httpRequest->request->get('postalCode', ''));
         $user->setMunicipality($httpRequest->request->get('municipality', ''));
         $user->setName($httpRequest->request->get('name', ''));

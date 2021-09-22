@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\CityType;
 use App\Entity\User;
 use App\Form\UserSignupType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -65,7 +66,7 @@ class IndexController extends AbstractRenderController
        $address = $httpRequest->request->get('address');
        $phone = $httpRequest->request->get('phone');
        $country = $httpRequest->request->get('country');
-       $city = $httpRequest->request->get('city');
+       $city = CityType::create($httpRequest->request->get('city', ''));
        $municipality = $httpRequest->request->get('municipality');
        $postalCode = $httpRequest->request->get('postalCode');
        $companyName = $httpRequest->request->get('companyName');

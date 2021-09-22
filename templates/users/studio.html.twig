@@ -52,8 +52,8 @@
                 <div class="col-md-6 mb-3 mt-2">
                     <label for="validationCustom03">PAÍS</label>
                     <select id="A" class="custom-select mb-3" name="country" required="">
-                        <option value="ES"{{ studio.country == "España" ? ' selected' }}>España</option>
-                        <option value="PT"{{ studio.country == "Portugal" ? ' selected' }}>Portugal</option>
+                        <option value="España"{{ studio.country == "España" ? ' selected' }}>España</option>
+                        <option value="Portugal"{{ studio.country == "Portugal" ? ' selected' }}>Portugal</option>
                     </select>
                 </div>
 
@@ -220,6 +220,45 @@
 
         (function($) {
             'use strict';
+
+            let studioCity = '{{ studio.city }}';
+
+            var cities = [
+                {% for key, city in getCitiesList() %}
+                ["{{ key }}", "{{ city }}"],
+                {% endfor %}
+            ]
+
+            let citiesSpain;
+            let citiesPortugal;
+
+            function changeCitiesList() {
+                $('select[name=city]').empty();
+
+                if ($('select[name=country]').val() == 'España') {
+                    $('select[name=city]').append(citiesSpain);
+                } else {
+                    $('select[name=city]').append(citiesPortugal);
+                }
+            }
+
+            //Cargamos paises y provincias
+            $( document ).ready(function() {
+                for (let i = 0; i < 52; i++) {
+                    citiesSpain += '<option value="' + cities[i][0] + '">'+ cities[i][1] +'</option>';
+                }
+
+                for (let i = 52; i < cities.length; i++) {
+                    citiesPortugal += '<option value="' + cities[i][0] + '">'+ cities[i][1] +'</option>';
+                }
+
+                changeCitiesList();
+                $('select[name=city] option[value='+ studioCity +']').attr('selected','selected');
+            });
+
+            $('select[name=country]').change(function () {
+                changeCitiesList();
+            });
 
             //Acción cuando se pulsa para enviar los resultados
             $('.block-send').click(function (event) {
