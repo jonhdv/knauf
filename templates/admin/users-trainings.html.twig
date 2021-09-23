@@ -5,50 +5,70 @@
 {% endblock %}
 
 {% block body %}
-    <div class="text-center main-title mx-auto mb-5">
+    <div class="text-center main-title mx-auto mb-4">
         <h3 class="text-center mt-4 mb-3">GESTIÓN DE FORMACIONES</h3>
     </div>
 
     <div class="table-responsive">
-        <table class="table training-list mx-auto">
-            <tr>
-                <th>Última edición</th>
-                <th>Usuario</th>
-                <th>Nº bloques</th>
-                <th>Nº participantes</th>
-                <th>Estado</th>
-                <th>Fecha</th>
-                <th>Acciones</th>
-            </tr>
+        <div class="training-list mx-auto">
+            <div class="training-filters">
+                <form method="get" action="{{ path('admin_trainings') }}" class="d-flex my-3">
+                    <div class="training-filters-search mr-3">
+                        <input type="text" name="search" placeholder="Buscar nombre o estudio" value="{{ app.request.get('search', '') }}" class="px-3 py-2 pl-1 pr-5">
 
-            {% for training in trainings %}
+                        <a href="{{ path('admin_trainings') }}"><img src="{{ asset('assets/icon/close.svg') }}"></a>
+                    </div>
+
+                    <input type="submit" value="Buscar">
+                </form>
+            </div>
+
+            <table class="table mx-auto">
                 <tr>
-                    <td>{{ training.updatedAt|date("d-m-Y H:i") }}</td>
-                    <td class="training-list-user" title="{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city.getLabel() }})">{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city.getLabel() }})</td>
-                    <td>
-                        {{ training.blocks|length }} bloques
-                        <img class="blocks-info" role="button" alt="info" data-id="{{ training.id }}" src="{{ asset('assets/icon/info.svg') }}" title="Mostrar más info">
-                    </td>
-                    <td>{{ training.competitors|length }} participantes</td>
-                    <td class="d-flex justify-content-center">
-                    <span class="training-status {{ training.getStatus()['color'] }}">
-                        {{ training.getStatus()['label'] }}
-                    </span>
-                    </td>
-                    <td>{{ training.datetime is not empty ? training.datetime|date("d-m-Y H:i") }}</td>
-                    <td>
-                        {% if training.enabled %}
-                            <a class="text-secondary" href="{{ path('admin_training_disable', {idTraining : training.id}) }}">Desaprobar</a> |
-                        {% elseif training.sent %}
-                            <a class="text-success" href="{{ path('admin_training_enable', {idTraining : training.id}) }}">Aprobar</a> |
-                            <a class="text-dark" href="{{ path('admin_training_deny', {idTraining : training.id}) }}" title="Se denegará la petición de solicitud y se notificará al usuaio por correo que cambie las condiciones.">Denegar</a> |
-                        {% endif %}
-
-                        <a class="text-danger" href="{{ path('admin_training_delete', {idTraining : training.id}) }}">Borrar</a>
-                    </td>
+                    <th>Última edición</th>
+                    <th>Usuario</th>
+                    <th>Nº bloques</th>
+                    <th>Nº participantes</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
                 </tr>
-            {% endfor %}
-        </table>
+
+                {% for training in trainings %}
+                    <tr>
+                        <td>{{ training.updatedAt|date("d-m-Y H:i") }}</td>
+                        <td class="training-list-user" title="{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city.getLabel() }})">{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city.getLabel() }})</td>
+                        <td>
+                            <b>{{ training.blocks|length }}</b> bloques
+                            <img class="blocks-info" role="button" alt="info" data-id="{{ training.id }}" src="{{ asset('assets/icon/info.svg') }}" title="Mostrar más info">
+                        </td>
+                        <td><b>{{ training.competitors|length }}</b> participantes</td>
+                        <td>
+                            <span class="training-status {{ training.getStatus()['color'] }}">
+                                {{ training.getStatus()['label'] }}
+                            </span>
+                        </td>
+                        <td>{{ training.datetime is not empty ? training.datetime|date("d-m-Y H:i") }}</td>
+                        <td>
+                            {% if training.enabled %}
+                                <a class="text-secondary" href="{{ path('admin_training_disable', {idTraining : training.id}) }}">Desaprobar</a> |
+                            {% elseif training.sent %}
+                                <a class="text-success" href="{{ path('admin_training_enable', {idTraining : training.id}) }}">Aprobar</a> |
+                                <a class="text-dark" href="{{ path('admin_training_deny', {idTraining : training.id}) }}" title="Se denegará la petición de solicitud y se notificará al usuaio por correo que cambie las condiciones.">Denegar</a> |
+                            {% endif %}
+
+                            <a class="text-danger" href="{{ path('admin_training_delete', {idTraining : training.id}) }}">Borrar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            {% include 'pagination.html.twig' with {
+                currentFilters: app.request.query.all,
+                paginationPath: 'admin_trainings',
+                lastPage: (trainings|length / maxResults)|round(0, 'ceil')
+            } only %}
+        </div>
     </div>
 {% endblock %}
 

@@ -692,3 +692,18 @@ select {
     color: #e80000;
     font-size: 14px;
 }
+
+/* Pagination bar */
+
+.pagination-bar .page-item.active .page-link {
+    background-color: #009de0;
+    border-color: #009de0;
+}
+
+.pagination-bar .page-item .page-link {
+    font-size: 15px;
+}
+
+.pagination-bar .page-link {
+    color: #009de0;
+}

@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -34,12 +35,22 @@ class TrainingManagementController extends AbstractRenderController
         $this->mailer = $mailer;
     }
 
-    public function list(): Response
+    public function list(Request $httpRequest): Response
     {
-        $trainings = $this->entityManager->getRepository(Training::class)->findBy([], ['updatedAt' => 'DESC']);
+        $maxResults = 10;
+
+        $search = $httpRequest->query->get('search', '');
+
+        $pagination = [
+            'page' => max($httpRequest->query->getInt('page', 1), 1),
+            'maxResults' => $maxResults,
+        ];
+
+        $trainings = $this->entityManager->getRepository(Training::class)->findByCriteria($pagination, $search);
 
         return $this->render('admin/users-trainings.html.twig', [
-            'trainings' => $trainings
+            'trainings' => $trainings,
+            'maxResults' => $maxResults,
         ]);
     }
 

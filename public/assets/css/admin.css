@@ -25,7 +25,6 @@
 .training-list {
     max-width: 1300px;
     min-width: 1000px;
-    text-align: center;
 }
 
 .training-status {
@@ -37,7 +36,7 @@
 }
 
 .training-status.blue {
-    color: #0095ff;
+    color: #009de0;
 }
 
 .training-status.yellow {
@@ -58,9 +57,45 @@
     margin-left: 5px;
 }
 
-.training-list .training-list-user  {
+.training-list table .training-list-user  {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100px;
+    max-width: 140px;
+}
+
+.training-filters input[type=text] {
+    width: 100%;
+}
+
+.training-filters-search {
+    max-width: 250px;
+    width: 100%;
+}
+
+.training-filters input[type=submit] {
+    background-color: #009DE0;
+    border-radius: 50px;
+    color: white;
+    font-size: 17px;
+    padding: 8px 18px;
+    border: none;
+}
+
+.training-filters input[type=text]:focus-visible {
+    outline: none;
+}
+
+.training-filters-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.training-filters-search img {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 8px;
+    right: 10px;
 }
