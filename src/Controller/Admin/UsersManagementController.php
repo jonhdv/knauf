@@ -35,17 +35,20 @@ class UsersManagementController extends AbstractRenderController
 
     public function list(Request $httpRequest): Response
     {
-        $userRepository = $this->entityManager->getRepository(User::class);
+        $maxResults = 10;
 
-        $queryBuilder = $userRepository->createQueryBuilder('u')
-            ->select('u')
-            ->where('u.roles = :roles')
-            ->setParameter('roles', '["ROLE_USER"]');
+        $search = $httpRequest->query->get('search', '');
 
-        $users = $queryBuilder->getQuery()->getResult();
+        $pagination = [
+            'page' => max($httpRequest->query->getInt('page', 1), 1),
+            'maxResults' => $maxResults,
+        ];
+
+        $users = $this->entityManager->getRepository(User::class)->findByCriteria($pagination, $search);
 
         return $this->render('admin/users-management.html.twig', [
-            'users' => $users
+            'users' => $users,
+            'maxResults' => $maxResults
         ]);
     }
 

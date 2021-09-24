@@ -1,10 +1,5 @@
 /* Users administration */
 
-.users-list {
-    max-width: 1200px;
-    min-width: 900px;
-}
-
 .users-list td:not(.edit-user-column, .city-column, .name-column, .email-column, .insert-column) {
     white-space: nowrap;
     overflow: hidden;

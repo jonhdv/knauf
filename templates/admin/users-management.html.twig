@@ -5,52 +5,72 @@
 {% endblock %}
 
 {% block body %}
-    <div class="text-center main-title mx-auto mb-5">
+    <div class="text-center main-title mx-auto mb-4">
         <h3 class="text-center mt-4 mb-3">GESTIÓN DE USUARIOS</h3>
     </div>
 
     <div class="table-responsive">
-        <table class="table users-list mx-auto">
-            <tr>
-                <th>Estudio</th>
-                <th>Dirección</th>
-                <th>País</th>
-                <th>Ciudad</th>
-                <th>Nombre</th>
-                <th>Teléfono</th>
-                <th>Email</th>
-                <th>Alta</th>
-                <th>Habilitado</th>
-                <th>Acciones</th>
-            </tr>
+        <div class="training-list mx-auto">
+            <div class="training-filters">
+                <form method="get" action="{{ path('admin_users_management') }}" class="d-flex my-3">
+                    <div class="training-filters-search mr-3">
+                        <input type="text" name="search" placeholder="Buscar nombre o estudio" value="{{ app.request.get('search', '') }}" class="px-3 py-2 pl-1 pr-5">
 
-            {% for user in users %}
+                        <a href="{{ path('admin_users_management') }}"><img src="{{ asset('assets/icon/close.svg') }}"></a>
+                    </div>
+
+                    <input type="submit" value="Buscar">
+                </form>
+            </div>
+
+            <table class="table users-list mx-auto">
                 <tr>
-                    <td title="{{ user.companyName }}">{{ user.companyName }}</td>
-                    <td title="{{ user.address }}">{{ user.address }}</td>
-                    <td title="{{ user.country }}">{{ user.country }}</td>
-                    <td class="city-column" title="{{ user.city.getLabel() }}">{{ user.city.getLabel() }}</td>
-                    <td class="name-column" title="{{ user.name }}">{{ user.name }}</td>
-                    <td title="{{ user.phone }}">{{ user.phone }}</td>
-                    <td class="email-column" title="{{ user.email }}">{{ user.email }}</td>
-                    <td class="insert-column" title="{{ user.createdAt|date('d/m/Y') }}">{{ user.createdAt|date('d/m/Y') }}</td>
-                    <td class="enabled-user-column">
-                        {% if user.enabled %}
-                            <img src="{{ asset('assets/icon/ok.svg') }}">
-                        {% else %}
-                            <img src="{{ asset('assets/icon/close.svg') }}">
-                        {% endif %}
-                    </td>
-                    <td class="edit-user-column">
-                        {% if user.enabled %}
-                            <a href="{{ path('admin_user_disable', {idUser: user.id}) }}" class="text-danger">Denegar</a>
-                        {% else %}
-                            <a href="{{ path('admin_user_enable', {idUser: user.id}) }}">Aprobar</a>
-                        {% endif %}
-                    </td>
+                    <th>Estudio</th>
+                    <th>Dirección</th>
+                    <th>País</th>
+                    <th>Ciudad</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Alta</th>
+                    <th>Habilitado</th>
+                    <th>Acciones</th>
                 </tr>
-            {% endfor %}
-        </table>
+
+                {% for user in users %}
+                    <tr>
+                        <td title="{{ user.companyName }}">{{ user.companyName }}</td>
+                        <td title="{{ user.address }}">{{ user.address }}</td>
+                        <td title="{{ user.country }}">{{ user.country }}</td>
+                        <td class="city-column" title="{{ user.city.getLabel() }}">{{ user.city.getLabel() }}</td>
+                        <td class="name-column" title="{{ user.name }}">{{ user.name }}</td>
+                        <td title="{{ user.phone }}">{{ user.phone }}</td>
+                        <td class="email-column" title="{{ user.email }}">{{ user.email }}</td>
+                        <td class="insert-column" title="{{ user.createdAt|date('d/m/Y') }}">{{ user.createdAt|date('d/m/Y') }}</td>
+                        <td class="enabled-user-column">
+                            {% if user.enabled %}
+                                <img src="{{ asset('assets/icon/ok.svg') }}">
+                            {% else %}
+                                <img src="{{ asset('assets/icon/close.svg') }}">
+                            {% endif %}
+                        </td>
+                        <td class="edit-user-column">
+                            {% if user.enabled %}
+                                <a href="{{ path('admin_user_disable', {idUser: user.id}) }}" class="text-danger">Denegar</a>
+                            {% else %}
+                                <a href="{{ path('admin_user_enable', {idUser: user.id}) }}">Aprobar</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            {% include 'pagination.html.twig' with {
+                currentFilters: app.request.query.all,
+                paginationPath: 'admin_users_management',
+                lastPage: (users|length / maxResults)|round(0, 'ceil')
+            } only %}
+        </div>
     </div>
 {% endblock %}
 
