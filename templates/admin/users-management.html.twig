@@ -48,17 +48,20 @@
                         <td class="email-column" title="{{ user.email }}">{{ user.email }}</td>
                         <td class="insert-column" title="{{ user.createdAt|date('d/m/Y') }}">{{ user.createdAt|date('d/m/Y') }}</td>
                         <td class="enabled-user-column">
-                            {% if user.enabled %}
-                                <img src="{{ asset('assets/icon/ok.svg') }}">
-                            {% else %}
+                            {% if user.denied %}
                                 <img src="{{ asset('assets/icon/close.svg') }}">
+                            {% elseif user.enabled %}
+                                <img src="{{ asset('assets/icon/ok.svg') }}">
                             {% endif %}
                         </td>
                         <td class="edit-user-column">
                             {% if user.enabled %}
-                                <a href="{{ path('admin_user_disable', {idUser: user.id}) }}" class="text-danger">Denegar</a>
+                                <a href="{{ path('admin_user_disable', {idUser: user.id}) }}" class="text-danger">Quitar acceso</a>
                             {% else %}
                                 <a href="{{ path('admin_user_enable', {idUser: user.id}) }}">Aprobar</a>
+                                {% if user.denied == false %}
+                                    | <a href="#" class="deny-user text-danger" data-email="{{ user.email }}" data-url="{{ path('admin_user_deny', {idUser: user.id}) }}">Denegar</a>
+                                {% endif %}
                             {% endif %}
                         </td>
                     </tr>
@@ -76,4 +79,32 @@
 
 {% block javascripts %}
     {{ parent() }}
+
+    <script>
+        (function($) {
+            'use strict';
+
+            $('.deny-user').on('click',function (e) {
+                e.preventDefault();
+                let email = $(this).data('email');
+                let url = $(this).data('url');
+
+                Swal.fire({
+                    html: '<p>No se enviará email al arquitecto con la notificación de rechazo. Por favor, ponte en contacto directamente con él para gestionar su caso de manera personalizada</p>'
+                    + '<a href="mailto:' + email + '">Enviar email a '+ email +'</a>'
+                    ,
+                    showDenyButton: true,
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                    denyButtonText: `Denegar petición`,
+                    cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                    if (result.isDenied) {
+                        window.location.href = url;
+                    }
+                })
+            });
+
+        })(jQuery);
+    </script>
 {% endblock %}

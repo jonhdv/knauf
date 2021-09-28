@@ -22,6 +22,7 @@
         <field name="companyName" length="250" />
         <field name="commentary" type="text" length="250" nullable="true" />
         <field name="enabled" type="boolean" />
+        <field name="denied" type="boolean" />
 
         <many-to-many field="managedCities" target-entity="App\Entity\City">
             <join-table name="user_cities">

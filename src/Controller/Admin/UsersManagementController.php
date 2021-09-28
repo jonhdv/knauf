@@ -56,7 +56,7 @@ class UsersManagementController extends AbstractRenderController
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['id' => $idUser]);
 
         if (empty($user)) {
-            return new JsonResponse('No se pudo encontrar la formación', Response::HTTP_BAD_REQUEST);
+            return new JsonResponse('No se pudo encontrar al usuario', Response::HTTP_BAD_REQUEST);
         }
 
         $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
@@ -95,6 +95,7 @@ class UsersManagementController extends AbstractRenderController
         $this->mailer->send($mailerMail);
 
         $user->setEnabled(true);
+        $user->setDenied(false);
         $this->entityManager->flush();
 
         return new RedirectResponse($this->router->generate('admin_users_management'));
@@ -104,10 +105,23 @@ class UsersManagementController extends AbstractRenderController
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['id' => $idUser]);
 
         if (empty($user)) {
-            return new JsonResponse('No se pudo encontrar la formación', Response::HTTP_BAD_REQUEST);
+            return new JsonResponse('No se pudo encontrar al usuario', Response::HTTP_BAD_REQUEST);
         }
 
         $user->setEnabled(false);
+        $this->entityManager->flush();
+
+        return new RedirectResponse($this->router->generate('admin_users_management'));
+    }
+
+    public function deny(int $idUser): Response {
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['id' => $idUser]);
+
+        if (empty($user)) {
+            return new JsonResponse('No se pudo encontrar al usuario', Response::HTTP_BAD_REQUEST);
+        }
+
+        $user->setDenied(true);
         $this->entityManager->flush();
 
         return new RedirectResponse($this->router->generate('admin_users_management'));

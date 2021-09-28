@@ -90,7 +90,8 @@ class IndexController extends AbstractRenderController
 
         $user
             ->setInitialRole()
-            ->setEnabled(false);
+            ->setEnabled(false)
+            ->setDenied(false);
         ;
 
         $user->setEmail($email);

@@ -34,6 +34,7 @@ class User implements UserInterface, \Serializable
     private string $companyName;
     private ?string $commentary;
     private bool $enabled;
+    private bool $denied;
     private ?Collection $managedCities;
 
     /**
@@ -192,6 +193,18 @@ class User implements UserInterface, \Serializable
     public function setEnabled(bool $enabled): User
     {
         $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function isDenied(): bool
+    {
+        return $this->denied;
+    }
+
+    public function setDenied(bool $denied): User
+    {
+        $this->denied = $denied;
 
         return $this;
     }

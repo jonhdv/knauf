@@ -10,6 +10,10 @@ admin_user_disable:
     path: /usuarios/{idUser}/disable
     controller: App\Controller\Admin\UsersManagementController::disable
 
+admin_user_deny:
+    path: /usuarios/{idUser}/deny
+    controller: App\Controller\Admin\UsersManagementController::deny
+
 admin_trainings:
     path: /formaciones
     controller: App\Controller\Admin\TrainingManagementController::list
