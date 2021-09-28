@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Block;
 use App\Entity\CityType;
 use App\Entity\User;
 use App\Form\UserSignupType;
@@ -53,9 +54,11 @@ class IndexController extends AbstractRenderController
             ->add('reset', SubmitType::class, ['label' => 'Registrarse', 'attr' => ['class' => 'btn btn-primary btn-block']]);
 
         $form->handleRequest($httpRequest);
+        $blocks = $this->entityManager->getRepository(Block::class)->findAll();
 
         return $this->render('index.html.twig', [
             'form' => $form->createView(),
+            'blocks' => $blocks
         ]);
     }
 
