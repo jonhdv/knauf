@@ -19,7 +19,8 @@ class UserRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('u')
             ->select('u')
             ->where('u.roles = :roles')
-            ->setParameter('roles', '["ROLE_USER"]');
+            ->setParameter('roles', '["ROLE_USER"]')
+            ->orderBy('u.createdAt', 'DESC')
         ;
 
         if (!empty($search)) {

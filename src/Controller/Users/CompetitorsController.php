@@ -143,6 +143,12 @@ class CompetitorsController extends AbstractRenderController
         $this->entityManager->remove($competitor);
         $this->entityManager->flush();
 
+        $training = $this->entityManager->getRepository(Training::class)
+            ->findOneBy(['id' => $this->session->get('training')->getId()]);
+        ;
+
+        $this->session->set('training', $training);
+
         return new RedirectResponse($this->router->generate('users_training_competitors_list'));
     }
 }

@@ -5,9 +5,16 @@
 {% endblock %}
 
 {% block body %}
-    <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3 col-8 offset-2 external-pages py-5">
+    <div class="login-text mx-auto text-center mt-5">
+        <h2 class="text-center mb-3">Iniciar sesión</h2>
+
+        Bienvenido a la plataforma de gestión de Knauf&Breakfast. Accede con el usuario y contraseña que te ha facilitado el equipo de prescripción de Knauf.
+
+        Si aún no tienes cuenta y estás interesado en estas formaciones, <a href="{{ path('index', {'signin':'true',}) }}">pincha aquí</a> para rellenar el formulario de solicitud y, tras estudiar la petición, nos pondremos en contacto contigo para darte respuesta lo antes posible.
+    </div>
+
+    <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3 col-8 offset-2 external-pages pt-4">
         <form method="post">
-            <h2 class="text-center mb-3">Iniciar sesión</h2>
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}

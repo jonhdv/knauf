@@ -28,11 +28,18 @@
         </div>
     </div>
     <div class="container-fluid tercera">
-
         <div class="col-md-12">
-            <p style="max-width: 37.5rem;margin: auto;">Elige los módulos que mejor se adapten a la actividad del estudio</p>
-        </div>
+            <p class="px-3 px-md-5 mx-auto text-center"><b>¿Te interesa? Estos son los pasos a seguir:</b><br><br>
+                En primer lugar, <span role="button" onclick="abrir()"><u>realiza la solicitud rellenando el formulario.</u></span> Nuestro departamento de prescripción estudiará la petición y te dará respuesta lo antes posible. Si has sido seleccionado, recibirás un email de confirmación con todas las instrucciones para acceder a la plataforma y poner en marcha tu knauf&breakfast
+            </p>
 
+            <div class="col-12 index-video-mp4 mt-5">
+                <video poster="{{ asset('assets/img/index-video.JPG') }}" controls>
+                    <source src="{{ asset('assets/video/KNAUF_BREAK_MASTER_4K_160921.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
     </div>
     <div class="container-fluid cuarto">
         <div class="row justify-content-center mx-auto block-list">
@@ -64,16 +71,9 @@
     </div>
 
     <div class="row mx-0 index-video">
-        <div class="col-12 col-lg-6 index-video-info">
-            <p class="px-5 my-5">En los primeros 6 meses se han impartido más de 30 ediciones. Haz click más abajo para recibir más información.</p>
-            <p style="text-align: center;"><button class="btn btnsexto" id="botone" onclick="abrir()" data-text="QUIERO RECIBIR MÁS INFORMACIÓN">QUIERO RECIBIR MÁS INFORMACIÓN</button></p>
-        </div>
-
-        <div class="col-12 col-lg-6 index-video-mp4">
-            <video poster="{{ asset('assets/img/index-video.JPG') }}" controls>
-                <source src="{{ asset('assets/video/KNAUF_BREAK_MASTER_160921_V2.mp4') }}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <div class="col-12 index-video-info py-5">
+            <p class="px-5 my-5 text-center">En los primeros 6 meses se han impartido más de 30 ediciones. Haz click más abajo para recibir más información.</p>
+            <p style="text-align: center;"><button class="btn btnsexto" id="botone" onclick="abrir()" data-text="Quiero hacer una solicitud de K&B">Quiero hacer una solicitud de K&B</button></p>
         </div>
     </div>
 
@@ -253,7 +253,7 @@
                     data: formData,
                     success: function (data) {
                         if (data === true) {
-                            Swal.fire({icon: 'success', text: 'Hemos recibido la solicitud de información correctamente. En breve, recibirás un email de confirmación por parte del equipo de prescripción.'});
+                            Swal.fire({icon: 'success', text: 'Hemos recibido la solicitud correctamente. En breve, recibirás un email por parte del equipo de prescripción.'});
                         } else {
                             showModal('warning', data);
                         }
@@ -304,8 +304,8 @@
             if (pulsado == 0) {
                 document.getElementById('desaparecer').classList.remove('desaparece');
                 document.getElementById('desaparecer').classList.add('aparece');
-                document.getElementById('botone').setAttribute("data-text", "QUIERO RECIBIR MÁS INFORMACIÓN");
-                document.getElementById('botone').innerHTML = "QUIERO RECIBIR MÁS INFORMACIÓN";
+                document.getElementById('botone').setAttribute("data-text", "Quiero hacer una solicitud de K&B");
+                document.getElementById('botone').innerHTML = "Quiero hacer una solicitud de K&B";
                 pulsado = 1;
 
                 $('html, body').animate({
@@ -316,10 +316,16 @@
             } else if (pulsado == 1) {
                 document.getElementById('desaparecer').classList.remove('aparece');
                 document.getElementById('desaparecer').classList.add('desaparece');
-                document.getElementById('botone').setAttribute("data-text", "QUIERO RECIBIR MÁS INFORMACIÓN");
-                document.getElementById('botone').innerHTML = "QUIERO RECIBIR MÁS INFORMACIÓN";
+                document.getElementById('botone').setAttribute("data-text", "Quiero hacer una solicitud de K&B");
+                document.getElementById('botone').innerHTML = "Quiero hacer una solicitud de K&B";
                 pulsado = 0;
             }
         }
     </script>
+
+    {% if app.request.get('signin') == true %}
+        <script>
+            abrir();
+        </script>
+    {% endif %}
 {% endblock %}

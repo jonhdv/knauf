@@ -237,7 +237,7 @@ textarea.form-control {
 /*quinto*/
 
 .quinto {
-    padding: 2rem 1rem;
+    padding: 3% 3% 7% 3%;
 }
 
 .textoquinto {
@@ -627,11 +627,12 @@ select {
 
 .index-video-mp4 video {
     width: 100%;
+    max-width: 800px;
     height: auto;
 }
 
 .index-video-mp4 {
-    padding: 2% 7% 2% 3%;
+    padding: 2% 7%;
 }
 
 .index-video-info {
@@ -662,6 +663,12 @@ select {
     }
 }
 
+/* Login */
+
+.login-text {
+    max-width: 1000px;
+    font-size: 17px;
+}
 
 /* Menu */
 
@@ -709,7 +716,6 @@ select {
 }
 
 /* Index */
-
 
 .block-image {
     width: 80%;
@@ -777,4 +783,19 @@ select {
 
 .block-list {
     max-width: 1200px;
+}
+
+.tercera p {
+    font-size: 30px;
+    max-width: 1200px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .tercera p {
+        font-size: 26px;
+        max-width: 1200px;
+        line-height: 1.4;
+    }
 }

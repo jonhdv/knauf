@@ -22,7 +22,7 @@
             <div class="table-responsive mb-4">
                 <table class="table competitors-list mx-auto">
                     <tr>
-                        <th></th>
+                        <th>Añadir</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
@@ -33,7 +33,7 @@
 
                     {% for competitor in competitors %}
                         <tr>
-                            <td><input name="competitor[{{ competitor.id }}]" type="checkbox"{{ competitor.id in seletedcompetitorsIds ? ' checked' }}></td>
+                            <td class="text-center"><input name="competitor[{{ competitor.id }}]" type="checkbox"{{ competitor.id in seletedcompetitorsIds ? ' checked' }}></td>
                             <td class="competitor-name">{{ competitor.name }}</td>
                             <td class="competitor-surname">{{ competitor.surname }}</td>
                             <td class="competitor-email">{{ competitor.email }}</td>
