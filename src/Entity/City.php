@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints\Collection;
+use Doctrine\Common\Collections\Collection;;
 
 class City
 {
@@ -47,6 +47,4 @@ class City
 
         return $this;
     }
-
-
 }

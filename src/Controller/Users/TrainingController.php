@@ -6,6 +6,7 @@ namespace App\Controller\Users;
 
 use App\Controller\AbstractRenderController;
 use App\Entity\Block;
+use App\Entity\City;
 use App\Entity\CityType;
 use App\Entity\Training;
 use App\Entity\User;
@@ -209,6 +210,10 @@ class TrainingController extends AbstractRenderController
             return new JsonResponse('Completa todos los pasos para solicitar la formación');
         }
 
+        $training->setSent(true);
+        $this->session->set('training', $training);
+        $this->entityManager->flush();
+
         $mailerMail = (new TemplatedEmail())
             ->from('knaufandbreakfast@knaufandbreakfast.com')
             ->to(new Address($this->security->getUser()->getEmail()))
@@ -220,9 +225,26 @@ class TrainingController extends AbstractRenderController
         ;
         $this->mailer->send($mailerMail);
 
-        $training->setSent(true);
-        $this->session->set('training', $training);
-        $this->entityManager->flush();
+        $emailList = [new Address('knaufandbreakfast@knaufandbreakfast.com'), new Address('uaujuan128@gmail.com')];
+
+        $cityAdmins = $this->entityManager->getRepository(City::class)
+            ->findOneBy(['name' => $this->security->getUser()->getCity()->getType()]);
+        ;
+
+        foreach ($cityAdmins->getUsers() as $admin) {
+            array_push($emailList, new Address($admin->getEmail()));
+        }
+
+        $mailerMail = (new TemplatedEmail())
+            ->from('knaufandbreakfast@knaufandbreakfast.com')
+            ->to(...$emailList)
+            ->subject('Nueva solicitud de formación')
+            ->htmlTemplate('email/admin-training-request.html.twig')
+            ->context([
+                'user' => $this->security->getUser(),
+            ])
+        ;
+        $this->mailer->send($mailerMail);
 
         return new JsonResponse('Formación registrada correctamente a la espera de ser aprobada.');
     }

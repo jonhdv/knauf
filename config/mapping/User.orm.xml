@@ -24,16 +24,6 @@
         <field name="enabled" type="boolean" />
         <field name="denied" type="boolean" />
 
-        <many-to-many field="managedCities" target-entity="App\Entity\City">
-            <join-table name="user_cities">
-                <join-columns>
-                    <join-column name="userId" referenced-column-name="id" on-delete="CASCADE" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="cityId" referenced-column-name="id" on-delete="CASCADE" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
 
         <field name="updatedAt" type="datetime">
             <gedmo:timestampable on="update"/>

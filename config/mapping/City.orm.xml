@@ -11,5 +11,16 @@
 
         <field name="name" type="city_type" length="250" />
 
+        <many-to-many field="users" target-entity="App\Entity\User" fetch="EAGER">
+            <join-table name="user_cities">
+                <join-columns>
+                    <join-column name="cityId" referenced-column-name="id" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="userId" referenced-column-name="id" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
     </entity>
 </doctrine-mapping>

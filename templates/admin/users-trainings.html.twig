@@ -51,13 +51,13 @@
                         <td>{{ training.datetime is not empty ? training.datetime|date("d-m-Y H:i") }}</td>
                         <td>
                             {% if training.enabled %}
-                                <a class="text-secondary" href="{{ path('admin_training_disable', {idTraining : training.id}) }}">Desaprobar</a> |
+                                <a class="text-secondary disabled-training" href="{{ path('admin_training_disable', {idTraining : training.id}) }}">Desaprobar</a> |
                             {% elseif training.sent %}
-                                <a class="text-success" href="{{ path('admin_training_enable', {idTraining : training.id}) }}">Aprobar</a> |
-                                <a class="text-dark" href="{{ path('admin_training_deny', {idTraining : training.id}) }}" title="Se denegará la petición de solicitud y se notificará al usuaio por correo que cambie las condiciones.">Denegar</a> |
+                                <a class="text-success approve-training" href="{{ path('admin_training_enable', {idTraining : training.id}) }}">Aprobar</a> |
+                                <a class="text-dark deny-training" data-email="{{ training.user.email }}" href="{{ path('admin_training_deny', {idTraining : training.id}) }}" title="Se denegará la petición de solicitud y se notificará al usuario por correo que cambie las condiciones.">Denegar</a> |
                             {% endif %}
 
-                            <a class="text-danger" href="{{ path('admin_training_delete', {idTraining : training.id}) }}">Borrar</a>
+                            <a class="text-danger delete-training" href="{{ path('admin_training_delete', {idTraining : training.id}) }}">Borrar</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -80,6 +80,61 @@
 
         (function($) {
             'use strict';
+
+            $('.approve-training').click(function (e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    html: '¿Seguro que quieres aprobar la formación? Se enviara una notificación via mail al estudio que la solicitó y a los participantes de ésta.',
+                    icon: 'info',
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: `Aprobar formación`,
+                    cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = $(this).prop('href');
+                    }
+                })
+            });
+
+            $('.deny-training').click(function (e) {
+                e.preventDefault();
+                let email = $(this).data('email');
+
+                Swal.fire({
+                    html: '<p>Se denegará la formación notificando al estudio vía mail que establezca una nueva fecha</p>'
+                        + '<a href="mailto:' + email + '">Contactar con el estudio: '+ email +'</a>'
+                    ,
+                    icon: 'info',
+                    showConfirmButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: `Denegar formación`,
+                    cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = $(this).prop('href');
+                    }
+                })
+            });
+
+            $('.delete-training').click(function (e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    html: '¿Seguro que quieres borrar esta solicitud de formación? se borrará también para el usuario que la solicitó.',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    denyButtonText: `Eliminar solicitud`,
+                    cancelButtonText: 'Cancelar',
+                }).then((result) => {
+                    if (result.isDenied) {
+                        window.location.href = $(this).prop('href');
+                    }
+                })
+            });
 
             $('.blocks-info').click(function () {
                 $.ajax({

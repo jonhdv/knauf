@@ -25,11 +25,13 @@ class BlockManager extends AbstractRenderController
     {
         $blocksList = $this->entityManager->getRepository(Block::class)->getTrainingBlocks($training->getBlocks());
 
-        $result = "";
+        $result = "<ol>";
 
         foreach ($blocksList as $block) {
-            $result .= $block['name'] . ' - <b>' . $block['time'] . "'</b><br>";
+            $result .= '<li>' . $block['name'] . ' - <b>' . $block['time'] . "'</b></li>";
         }
+
+        $result .= "</ol>";
 
         return $result;
     }

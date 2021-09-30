@@ -1,0 +1,44 @@
+<b>
+Estimad@ {{ user.name }}
+</b>
+
+<br><br>
+La fecha solicitada para el Knauf & Breakfast en <b>{{ user.companyName }}</b> ha sido confirmada por el equipo de prescripción.
+<br><br>
+Estos son los datos de tu formación:
+<br>
+
+<ul>
+    <li>Fecha: <b>{{ training.datetime|date("d-m-Y") }}</b></li>
+
+    <li>Hora: <b>{{ training.datetime|date("H:i") }}</b></li>
+
+    <li>
+        Bloques:
+        {{ blocks|raw }}
+    </li>
+
+    <li>Duración total de la formación: <b>{{ trainingTime }}</b></li>
+
+    <li>Dirección de envío del material: <b>{{ user.address }}</b></li>
+
+    <li>
+        Participantes:<br>
+        <ol>
+            {% for competitor in training.competitors %}
+                <li>{{ competitor.name }} {{ competitor.surname }} - {{ competitor.position }} (<a href="mailto:{{ competitor.email }}">{{ competitor.email }}</a>)</li>
+            {% endfor %}
+        </ol>
+    </li>
+</ul>
+
+
+<br><br>
+Esperamos que la jornada sea vuestro agrado,
+<br><br>
+¡Nos vemos en el siguiente Knauf&Breakfast!
+<br><br><br>
+<b>
+Atentamente,<br>
+El equipo de prescripción Knauf.
+</b>

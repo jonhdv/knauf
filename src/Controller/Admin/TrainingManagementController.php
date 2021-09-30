@@ -80,8 +80,48 @@ class TrainingManagementController extends AbstractRenderController
             return new JsonResponse('No se pudo encontrar la formación', Response::HTTP_BAD_REQUEST);
         }
 
+        $user = $training->getUser();
+
         $training->setEnabled(true);
         $this->entityManager->flush();
+
+        $mailerMail = (new TemplatedEmail())
+            ->from('knaufandbreakfast@knaufandbreakfast.com')
+            ->to(new Address($user->getEmail()))
+            ->subject('Solicitud de formación Knauf & Breakfast aprobada')
+            ->htmlTemplate('email/training-enabled-studio.html.twig')
+            ->context([
+                'training' => $training,
+                'blocks' => $this->blockManager->getTrainingBlocks($training),
+                'trainingTime' => $this->blockManager->getTrainingTime($training),
+                'user' => $user
+            ])
+        ;
+
+        $this->mailer->send($mailerMail);
+
+
+        $emailList = [];
+        $competitors = $training->getCompetitors()->toArray();
+
+        foreach ($competitors as $competitor) {
+            array_push($emailList, new Address($competitor->getEmail()));
+        }
+
+        $mailerMail = (new TemplatedEmail())
+            ->from('knaufandbreakfast@knaufandbreakfast.com')
+            ->to(...$emailList)
+            ->subject('Has sido seleccionado para participar en la formación Knauf & Breakfast')
+            ->htmlTemplate('email/training-enabled-competitor.html.twig')
+            ->context([
+                'training' => $training,
+                'blocks' => $this->blockManager->getTrainingBlocks($training),
+                'trainingTime' => $this->blockManager->getTrainingTime($training),
+                'user' => $user
+            ])
+        ;
+
+        $this->mailer->send($mailerMail);
 
         return new RedirectResponse($this->router->generate('admin_trainings'));
     }

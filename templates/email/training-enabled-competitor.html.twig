@@ -1,0 +1,24 @@
+<b>
+¡Hola!
+</b>
+<br><br>
+Has sido seleccionado para participar en la formación Knauf  & Breakfast del próximo día <b>{{ training.datetime|date("d-m-Y") }}</b>, a las <b>{{ training.datetime|date("H:i") }}</b>.
+
+<br><br>
+
+Aquí tienes el listado de temas que veremos:<br>
+{{ blocks|raw }}
+
+<br>
+
+Duración total de la formación: <b>{{ trainingTime }}</b>
+
+<br><br><br>
+Esperamos que la jornada sea vuestro agrado,
+<br><br>
+¡Nos vemos en el siguiente Knauf&Breakfast!
+<br><br><br>
+<b>
+Atentamente,<br>
+El equipo de prescripción Knauf.
+</b>

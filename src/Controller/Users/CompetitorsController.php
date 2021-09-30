@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Users;
 
 use App\Controller\AbstractRenderController;
+use App\Entity\City;
 use App\Entity\Competitor;
 use App\Entity\Training;
 use App\Entity\User;

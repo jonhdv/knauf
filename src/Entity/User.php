@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-
-use App\Doctrine\Type\DoctrineCityType;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 
