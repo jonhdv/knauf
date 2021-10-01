@@ -63,8 +63,3 @@ users_training_edit:
 users_training_new:
     path: /formacion/mis-formaciones/new
     controller: App\Controller\Users\TrainingController::new
-
-
-mail:
-    path: /formacion/mail
-    controller: App\Controller\IndexController::mail

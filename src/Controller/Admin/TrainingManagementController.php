@@ -168,7 +168,51 @@ class TrainingManagementController extends AbstractRenderController
             return new JsonResponse('No se pudo encontrar la formación', Response::HTTP_BAD_REQUEST);
         }
 
-        $result = $this->blockManager->getTrainingBlocks($training) . '<br><br>' . $this->blockManager->getTrainingTime($training);
+        $result = $this->blockManager->getTrainingBlocks($training) . '<br>' . $this->blockManager->getTrainingTime($training);
+
+        return new JsonResponse($result);
+    }
+
+    public function competitorsInfo(int $idTraining): Response
+    {
+        $training = $this->entityManager->getRepository(Training::class)
+            ->findOneBy(['id' => $idTraining])
+        ;
+
+        if (empty($training)) {
+            return new JsonResponse('No se pudo encontrar la formación', Response::HTTP_BAD_REQUEST);
+        }
+
+        $result = "";
+
+        foreach ($training->getCompetitors() as $competitor) {
+            $result .= $competitor->getSurname() . ',' . $competitor->getName() . '/' . $competitor->getEmail() . '/' . $competitor->getPosition()  . '/' . $competitor->getFoodIntolerances()  . '<br>';
+        }
+
+        return new JsonResponse($result);
+    }
+
+    public function userInfo(int $idUser): Response
+    {
+        $user = $this->entityManager->getRepository(User::class)
+            ->findOneBy(['id' => $idUser])
+        ;
+
+        if (empty($user)) {
+            return new JsonResponse('No se pudo encontrar al usuario', Response::HTTP_BAD_REQUEST);
+        }
+
+        $result = $user->getCompanyName() . "<br>" .
+            $user->getAddress() . "<br>" .
+            $user->getPostalCode() . "<br>" .
+            $user->getMunicipality() . "<br>" .
+            $user->getCity()->getType() . "<br>" .
+            $user->getCountry() . "<br>" .
+            "<br>" .
+            $user->getName() . "<br>" .
+            $user->getPhone() . "<br>" .
+            $user->getEmail() . "<br>"
+        ;
 
         return new JsonResponse($result);
     }

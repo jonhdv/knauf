@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Block;
+use App\Entity\City;
 use App\Entity\CityType;
 use App\Entity\User;
 use App\Form\UserSignupType;
@@ -27,14 +28,12 @@ use Symfony\Component\HttpFoundation\Request;
 class IndexController extends AbstractRenderController
 {
     private EntityManagerInterface $entityManager;
-    private UserPasswordEncoderInterface $passwordEncoder;
     private MailerInterface $mailer;
 
     public function __construct(
         Environment $template,
         FormFactoryInterface $formFactory,
         RouterInterface $router,
-        UserPasswordEncoderInterface $passwordEncoder,
         SessionInterface $session,
         MailerInterface $mailer,
         EntityManagerInterface $entityManager
@@ -42,7 +41,6 @@ class IndexController extends AbstractRenderController
         parent::__construct($template);
         $this->router = $router;
         $this->formFactory = $formFactory;
-        $this->passwordEncoder = $passwordEncoder;
         $this->session = $session;
         $this->mailer = $mailer;
         $this->entityManager = $entityManager;
@@ -91,7 +89,7 @@ class IndexController extends AbstractRenderController
         $user
             ->setInitialRole()
             ->setEnabled(false)
-            ->setDenied(false);
+            ->setDenied(false)
         ;
 
         $user->setEmail($email);
@@ -111,10 +109,39 @@ class IndexController extends AbstractRenderController
         $mailerMail = (new TemplatedEmail())
             ->from('knaufandbreakfast@knaufandbreakfast.com')
             ->to(new Address($email))
-            ->subject('Solicitud de información Knauf')
+            ->subject('Solicitud de información Knauf&Breakfast')
             ->htmlTemplate('email/signup-request.html.twig')
             ->context([
                 'name' => $name,
+            ])
+        ;
+        $this->mailer->send($mailerMail);
+
+        $emailList = [
+            new Address('knaufandbreakfast@knaufandbreakfast.com'),
+            new Address('paloma.vera@knauf.com'),
+            new Address('pablo.maroto@knauf.com'),
+            new Address('juan@heyav.com'),
+        ];
+
+        $cityAdmins = $this->entityManager->getRepository(City::class)
+            ->findOneBy(['name' => $city->getType()]);
+        ;
+
+        foreach ($cityAdmins->getUsers() as $admin) {
+            array_push($emailList, new Address($admin->getEmail()));
+        }
+
+        $mailerMail = (new TemplatedEmail())
+            ->from('knaufandbreakfast@knaufandbreakfast.com')
+            ->to(...$emailList)
+            ->subject('Nueva solicitud de información Knauf&Breakfast')
+            ->htmlTemplate('email/admin-signup-request.html.twig')
+            ->context([
+                'name' => $name,
+                'mail' => $email,
+                'city' => $city,
+                'commentary' => $commentary
             ])
         ;
         $this->mailer->send($mailerMail);

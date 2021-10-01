@@ -1,0 +1,21 @@
+<b>
+¡Hola!
+</b>
+
+<br><br>
+Hay una nueva solicitud de información por el usuario <b>{{ name }}</b> con email <a href="emailto:{{ mail }}">{{ mail }}</a> y provincia <b>{{ city.getLabel() }}</b>
+<br>
+
+{% if commentary is not empty %}
+    <br><br>
+    Mensaje del usuario:<br><br>
+    <b>"{{ commentary }}"</b>
+{% endif %}
+<br><br>
+Accede al panel de administración de usuarios para denegar o aceptar esta solicitud:<br><br>
+{{ url('login') }}
+<br><br><br>
+<b>
+Atentamente,<br>
+El equipo de prescripción Knauf.
+</b>

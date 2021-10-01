@@ -37,3 +37,11 @@ admin_training_disable:
 admin_training_blocks_info:
     path: /formaciones/{idTraining}/blocks-info
     controller: App\Controller\Admin\TrainingManagementController::blocksInfo
+
+admin_competitors_blocks_info:
+    path: /formaciones/{idTraining}/competitors-info
+    controller: App\Controller\Admin\TrainingManagementController::competitorsInfo
+
+admin_competitors_user_info:
+    path: /formaciones/{idUser}/user-info
+    controller: App\Controller\Admin\TrainingManagementController::userInfo

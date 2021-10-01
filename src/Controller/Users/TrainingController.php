@@ -10,6 +10,7 @@ use App\Entity\City;
 use App\Entity\CityType;
 use App\Entity\Training;
 use App\Entity\User;
+use App\Service\BlockManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,6 +31,7 @@ class TrainingController extends AbstractRenderController
     private EntityManagerInterface $entityManager;
     private Security $security;
     private RouterInterface $router;
+    private BlockManager $blockManager;
     private MailerInterface $mailer;
 
     public function __construct(
@@ -39,7 +41,8 @@ class TrainingController extends AbstractRenderController
         SessionInterface $session,
         EntityManagerInterface $entityManager,
         Security $security,
-        MailerInterface $mailer
+        MailerInterface $mailer,
+        BlockManager $blockManager
     ) {
         parent::__construct($template);
 
@@ -47,6 +50,7 @@ class TrainingController extends AbstractRenderController
         $this->session = $session;
         $this->entityManager = $entityManager;
         $this->security = $security;
+        $this->blockManager = $blockManager;
         $this->mailer = $mailer;
     }
 
@@ -225,7 +229,12 @@ class TrainingController extends AbstractRenderController
         ;
         $this->mailer->send($mailerMail);
 
-        $emailList = [new Address('knaufandbreakfast@knaufandbreakfast.com'), new Address('uaujuan128@gmail.com')];
+        $emailList = [
+            new Address('knaufandbreakfast@knaufandbreakfast.com'),
+            new Address('paloma.vera@knauf.com'),
+            new Address('pablo.maroto@knauf.com'),
+            new Address('juan@heyav.com'),
+        ];
 
         $cityAdmins = $this->entityManager->getRepository(City::class)
             ->findOneBy(['name' => $this->security->getUser()->getCity()->getType()]);
@@ -241,7 +250,10 @@ class TrainingController extends AbstractRenderController
             ->subject('Nueva solicitud de formación')
             ->htmlTemplate('email/admin-training-request.html.twig')
             ->context([
-                'user' => $this->security->getUser(),
+                'training' => $training,
+                'blocks' => $this->blockManager->getTrainingBlocks($training),
+                'trainingTime' => $this->blockManager->getTrainingTime($training),
+                'user' => $this->security->getUser()
             ])
         ;
         $this->mailer->send($mailerMail);

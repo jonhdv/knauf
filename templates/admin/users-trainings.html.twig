@@ -37,12 +37,18 @@
                 {% for training in trainings %}
                     <tr>
                         <td>{{ training.updatedAt|date("d-m-Y H:i") }}</td>
-                        <td class="training-list-user" title="{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city.getLabel() }})">{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city.getLabel() }})</td>
+                        <td class="training-list-user" title="{{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city.getLabel() }})">
+                            <img class="user-info training-list-info" role="button" alt="info" data-id="{{ training.user.id }}" src="{{ asset('assets/icon/info.svg') }}" title="Mostrar más info">
+                            {{ training.user.name }} - {{ training.user.companyName }} ({{ training.user.city.getLabel() }})
+                        </td>
                         <td>
                             <b>{{ training.blocks|length }}</b> bloques
-                            <img class="blocks-info" role="button" alt="info" data-id="{{ training.id }}" src="{{ asset('assets/icon/info.svg') }}" title="Mostrar más info">
+                            <img class="blocks-info training-list-info" role="button" alt="info" data-id="{{ training.id }}" src="{{ asset('assets/icon/info.svg') }}" title="Mostrar más info">
                         </td>
-                        <td><b>{{ training.competitors|length }}</b> participantes</td>
+                        <td>
+                            <b>{{ training.competitors|length }}</b> participantes
+                            <img class="competitors-info training-list-info" role="button" alt="info" data-id="{{ training.id }}" src="{{ asset('assets/icon/info.svg') }}" title="Mostrar más info">
+                        </td>
                         <td>
                             <span class="training-status {{ training.getStatus()['color'] }}">
                                 {{ training.getStatus()['label'] }}
@@ -140,6 +146,36 @@
                 $.ajax({
                     context: this,
                     url: 'formaciones/'+ $(this).data('id') +'/blocks-info',
+                    dataType: 'JSON',
+                    type: 'POST',
+                    success: function (data) {
+                        Swal.fire({icon: 'info', html: data});
+                    },
+                    error: function (data) {
+                        showModal('warning', data);
+                    }
+                });
+            });
+
+            $('.competitors-info').click(function () {
+                $.ajax({
+                    context: this,
+                    url: 'formaciones/'+ $(this).data('id') +'/competitors-info',
+                    dataType: 'JSON',
+                    type: 'POST',
+                    success: function (data) {
+                        Swal.fire({icon: 'info', html: data});
+                    },
+                    error: function (data) {
+                        showModal('warning', data);
+                    }
+                });
+            });
+
+            $('.user-info').click(function () {
+                $.ajax({
+                    context: this,
+                    url: 'formaciones/'+ $(this).data('id') +'/user-info',
                     dataType: 'JSON',
                     type: 'POST',
                     success: function (data) {

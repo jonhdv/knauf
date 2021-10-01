@@ -5,12 +5,33 @@
 <br><br>
 Hay una nueva solicitud de formación por el usuario <b>{{ user.name }}</b> con email <a href="emailto:{{ user.email }}">{{ user.email }}</a> y provincia <b>{{ user.city.getLabel() }}</b>
 <br><br>
+Estos son los datos de la formación:
+<br>
 
-{% if user.commentary is not empty %}
-    <br><br>
-    Mensaje del usuario:<br><br>
-    <b>"{{ user.commentary }}"</b>
-{% endif %}
+<ul>
+    <li>Fecha: <b>{{ training.datetime|date("d-m-Y") }}</b></li>
+
+    <li>Hora: <b>{{ training.datetime|date("H:i") }}</b></li>
+
+    <li>
+        Bloques:
+        {{ blocks|raw }}
+    </li>
+
+    <li>Duración total de la formación: <b>{{ trainingTime }}</b></li>
+
+    <li>Dirección de envío del material: <b>{{ user.address }}</b></li>
+
+    <li>
+        Participantes:<br>
+        <ol>
+            {% for competitor in training.competitors %}
+                <li>{{ competitor.name }} {{ competitor.surname }} - {{ competitor.position }} (<a href="mailto:{{ competitor.email }}">{{ competitor.email }}</a>)</li>
+            {% endfor %}
+        </ol>
+    </li>
+</ul>
+
 
 <br><br>
 Accede al panel de adminisración de usuarios para denegar o aceptar esta solicitud:<br><br>
