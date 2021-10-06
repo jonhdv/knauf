@@ -60,7 +60,7 @@
                                 <a class="text-secondary disabled-training" href="{{ path('admin_training_disable', {idTraining : training.id}) }}">Desaprobar</a> |
                             {% elseif training.sent %}
                                 <a class="text-success approve-training" href="{{ path('admin_training_enable', {idTraining : training.id}) }}">Aprobar</a> |
-                                <a class="text-dark deny-training" data-email="{{ training.user.email }}" href="{{ path('admin_training_deny', {idTraining : training.id}) }}" title="Se denegará la petición de solicitud y se notificará al usuario por correo que cambie las condiciones.">Denegar</a> |
+                                <a class="text-dark deny-training" data-email="{{ training.user.email }}" href="{{ path('admin_training_deny', {idTraining : training.id}) }}" title="Se denegará la petición de solicitud y se notificará al usuario que no ha sido aprobada.">Denegar</a> |
                             {% endif %}
 
                             <a class="text-danger delete-training" href="{{ path('admin_training_delete', {idTraining : training.id}) }}">Borrar</a>
@@ -109,7 +109,7 @@
                 let email = $(this).data('email');
 
                 Swal.fire({
-                    html: '<p>Se denegará la formación notificando al estudio vía mail que establezca una nueva fecha</p>'
+                    html: '<p>Se denegará la formación notificando al estudio que no ha sido aprobada</p>'
                         + '<a href="mailto:' + email + '">Contactar con el estudio: '+ email +'</a>'
                     ,
                     icon: 'info',

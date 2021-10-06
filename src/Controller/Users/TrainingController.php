@@ -232,7 +232,7 @@ class TrainingController extends AbstractRenderController
         $emailList = [
             new Address('knaufandbreakfast@knaufandbreakfast.com'),
             new Address('paloma.vera@knauf.com'),
-            new Address('pablo.maroto@knauf.com'),
+            new Address('alvar.lorea@knauf.com'),
             new Address('juan@heyav.com'),
         ];
 

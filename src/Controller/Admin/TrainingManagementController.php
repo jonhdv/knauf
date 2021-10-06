@@ -136,6 +136,21 @@ class TrainingManagementController extends AbstractRenderController
             return new JsonResponse('No se pudo encontrar la formación', Response::HTTP_BAD_REQUEST);
         }
 
+        $user = $training->getUser();
+
+        $mailerMail = (new TemplatedEmail())
+            ->from('knaufandbreakfast@knaufandbreakfast.com')
+            ->to(new Address($user->getEmail()))
+            ->subject('Solicitud de formación Knauf & Breakfast rechazada')
+            ->htmlTemplate('email/training-denied-studio.html.twig')
+            ->context([
+                'training' => $training,
+                'user' => $user
+            ])
+        ;
+
+        $this->mailer->send($mailerMail);
+
         $training->setSent(false);
         $this->entityManager->flush();
 

@@ -6,7 +6,6 @@ namespace App\Entity;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Config\TwigExtra\StringConfig;
 
 class Training
 {

@@ -2,9 +2,6 @@
 
 namespace App\Entity;
 
-
-use Symfony\Component\Security\Core\User\UserInterface;
-
 class Competitor
 {
     use TimestampableTrait;

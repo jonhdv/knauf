@@ -49,23 +49,21 @@ class CompetitorsController extends AbstractRenderController
 
     public function list(Request $httpRequest): Response
     {
-        $competitors = $this->entityManager->getRepository(Competitor::class)->findBy(['user' => $this->security->getUser()->getId()]);
-
-        //En caso de que haya presentacion en la sesión, llenamos un array con los ids de los participantes que ya se habían seleccionado
-        $seletedcompetitorsIds = [];
         $training = $this->session->get('training');
 
-        if (null !== $training  && null !== $training->getCompetitors()) {
-            $seletedcompetitors = $training->getCompetitors()->toArray();
-
-            foreach ($seletedcompetitors as $seletedcompetitor) {
-                array_push($seletedcompetitorsIds, $seletedcompetitor->getId());
-            }
+        if ($training === null) {
+            $training = new Training($this->security->getUser());
+            $this->entityManager->persist($training);
+            $this->entityManager->flush();
+            $this->session->set('training', $training);
+        } else {
+            $training = $this->entityManager->getRepository(Training::class)->findOneBy(['id' => $training->getId()]);
         }
 
+        $competitors = $training->getcompetitors();
+
         return $this->render('users/competitors.html.twig', [
-            'competitors' => $competitors,
-            'seletedcompetitorsIds' => $seletedcompetitorsIds
+            'competitors' => $competitors
         ]);
     }
 
@@ -126,6 +124,19 @@ class CompetitorsController extends AbstractRenderController
         $competitor->setFoodIntolerances($httpRequest->request->get('foodIntolerances'));
 
         $this->entityManager->persist($competitor);
+        $this->entityManager->flush();
+
+        $training = $this->session->get('training');
+
+        if ($training === null) {
+            $training = new Training($user);
+            $this->entityManager->persist($training);
+        } else {
+            $training = $this->entityManager->getRepository(Training::class)->findOneBy(['id' => $training->getId()]);
+        }
+
+        $training->getCompetitors()->add($competitor);
+        $this->session->set('training', $training);
         $this->entityManager->flush();
 
         return new RedirectResponse($this->router->generate('users_training_competitors_list'));
