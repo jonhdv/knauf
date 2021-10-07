@@ -35,3 +35,4 @@ security:
     access_control:
         - { path: ^/admin, roles: [ROLE_ADMIN] }
         - { path: ^/users, roles: [ROLE_ADMIN, ROLE_USER] }
+        - { path: '^/', roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="login-text mx-auto text-center mt-5">
+    <div class="login-text mx-auto text-center mt-5 px-3">
         <h2 class="text-center mb-3">Iniciar sesión</h2>
 
         Bienvenido a la plataforma de gestión de Knauf&Breakfast. Accede con el usuario y contraseña que te ha facilitado el equipo de prescripción de Knauf.
@@ -29,5 +29,9 @@
             </div>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
         </form>
+    </div>
+
+    <div class="login-text mx-auto text-center mt-1 mb-5 font-weight-bold px-3" style="font-size: 13px">
+        Si ya tienes cuenta, pero no recuerdas la contraseña, <a href="mailto:knaufandbreakfast@knauf.com">ponte en contacto con nosotros</a> para restablecer el acceso
     </div>
 {% endblock %}

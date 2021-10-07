@@ -118,7 +118,7 @@ class IndexController extends AbstractRenderController
         $this->mailer->send($mailerMail);
 
         $emailList = [
-            new Address('knaufandbreakfast@knaufandbreakfast.com'),
+            new Address('knaufandbreakfast@knauf.com'),
             new Address('paloma.vera@knauf.com'),
             new Address('alvar.lorea@knauf.com'),
             new Address('juan@heyav.com'),
