@@ -18,6 +18,10 @@ admin_trainings:
     path: /formaciones
     controller: App\Controller\Admin\TrainingManagementController::list
 
+admin_trainings_export:
+    path: /formaciones/export
+    controller: App\Controller\Admin\TrainingManagementController::export
+
 admin_training_delete:
     path: /formaciones/{idTraining}/delete
     controller: App\Controller\Admin\TrainingManagementController::delete

@@ -175,4 +175,18 @@ class Training
             return ['label' => 'Sin estado', 'color' => 'grey'];
         }
     }
+
+    public function getCompetitorsList(): String
+    {
+        $result = "";
+
+        foreach ($this->competitors as $competitor) {
+            $result .= $competitor->getName() . "/";
+            $result .= $competitor->getSurname() . "/";
+            $result .= $competitor->getPosition() . "/";
+            $result .= $competitor->getFoodIntolerances() . "/";
+        }
+
+        return $result;
+    }
 }

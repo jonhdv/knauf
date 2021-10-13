@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\RouterInterface;
@@ -52,6 +53,51 @@ class TrainingManagementController extends AbstractRenderController
             'trainings' => $trainings,
             'maxResults' => $maxResults,
         ]);
+    }
+
+    public function export(Request $httpRequest): Response
+    {
+        $maxResults = 10;
+
+        $search = $httpRequest->query->get('search', '');
+
+        $pagination = [
+            'page' => max($httpRequest->query->getInt('page', 1), 1),
+            'maxResults' => $maxResults,
+        ];
+
+        $trainings = $this->entityManager->getRepository(Training::class)->findByCriteria($pagination, $search);
+
+        $fp = fopen('php://temp', 'w');
+        foreach ($trainings as $training) {
+            $user = $training->getUser();
+
+            $array = [
+                $user->getEmail(),
+                $user->getName(),
+                $user->getAddress(),
+                $user->getCountry(),
+                $user->getCity(),
+                $user->getMunicipality(),
+                $user->getPostalCode(),
+                $user->getCompanyName(),
+                $this->blockManager->getTrainingBlocksCsv($training),
+                $training->getCompetitorsList(),
+                $training->getDatetime() == null ? '' : $training->getDatetime()->format('Y-m-d H:i:s'),
+                $training->getStatus()['label']
+            ];
+
+            fputcsv($fp, $array,',','"','\\');
+        }
+
+        rewind($fp);
+        $response = new Response(stream_get_contents($fp));
+        fclose($fp);
+
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', 'attachment; filename="testing.csv"');
+
+        return $response;
     }
 
     public function delete(int $idTraining): Response

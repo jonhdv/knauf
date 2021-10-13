@@ -36,6 +36,19 @@ class BlockManager extends AbstractRenderController
         return $result;
     }
 
+    public function getTrainingBlocksCsv(Training $training): string
+    {
+        $blocksList = $this->entityManager->getRepository(Block::class)->getTrainingBlocks($training->getBlocks());
+
+        $result = "";
+
+        foreach ($blocksList as $block) {
+            $result .= $block['name'] . ' - ' . $block['time'] . "/";
+        }
+
+        return $result;
+    }
+
     public function getTrainingTime(Training $training): string
     {
         $blocksList = $this->entityManager->getRepository(Block::class)->getTrainingTime($training->getBlocks());
