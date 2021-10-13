@@ -57,7 +57,7 @@ class TrainingManagementController extends AbstractRenderController
 
     public function export(Request $httpRequest): Response
     {
-        $maxResults = 10;
+        $maxResults = 100;
 
         $search = $httpRequest->query->get('search', '');
 
@@ -77,7 +77,7 @@ class TrainingManagementController extends AbstractRenderController
                 $user->getName(),
                 $user->getAddress(),
                 $user->getCountry(),
-                $user->getCity(),
+                $user->getCity()->getLabel(),
                 $user->getMunicipality(),
                 $user->getPostalCode(),
                 $user->getCompanyName(),
@@ -86,8 +86,9 @@ class TrainingManagementController extends AbstractRenderController
                 $training->getDatetime() == null ? '' : $training->getDatetime()->format('Y-m-d H:i:s'),
                 $training->getStatus()['label']
             ];
+            $array = array_map("utf8_decode", $array);
 
-            fputcsv($fp, $array,',','"','\\');
+            fputcsv($fp, $array,';','"','\\');
         }
 
         rewind($fp);
@@ -95,7 +96,7 @@ class TrainingManagementController extends AbstractRenderController
         fclose($fp);
 
         $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment; filename="testing.csv"');
+        $response->headers->set('Content-Disposition', 'attachment; filename="formaciones_'. date("d-m-Y_h:i") . '.csv"');
 
         return $response;
     }
