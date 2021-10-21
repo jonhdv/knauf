@@ -172,8 +172,24 @@ textarea.form-control {
     font-size: 1.375rem;
     line-height: 2.25rem;
     color: #009DE0;
-    max-width: 415px;
-    margin: auto;
+    max-width: 550px;
+    padding-left: 100px;
+}
+
+.home-image {
+    padding-right: 100px;
+    text-align: end;
+}
+
+@media only screen and (max-width: 1250px) {
+    .segundafila p {
+        padding-left: 20px;
+    }
+
+    .home-image {
+        padding-right: 20px;
+        text-align: center;
+    }
 }
 
 
@@ -798,4 +814,11 @@ select {
         max-width: 1200px;
         line-height: 1.4;
     }
+}
+
+/* Swal popup */
+
+.swal2-popup {
+    width: auto !important;
+    max-width: 700px !important;
 }
